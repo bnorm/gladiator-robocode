@@ -49,16 +49,21 @@ abstract class AbstractRobotSnapshot implements IRobotSnapshot {
    private double              velocity_;
 
    /**
-    * The last time the information of the robot was updated.
+    * The round time the information of the robot was updated.
     */
    private long                time_;
+
+   /**
+    * The match round the information of the robot was updated.
+    */
+   private int                 round_;
 
    /**
     * Default constructor. Creates a blank snapshot that represents a dead robot
     * with no name.
     */
    protected AbstractRobotSnapshot() {
-      init(new String(), -1.0, -1.0, DEAD_ENERGY_, 0.0D, 0.0D, -1);
+      init(new String(), -1.0, -1.0, DEAD_ENERGY_, 0.0D, 0.0D, -1, -1);
    }
 
    /**
@@ -77,10 +82,12 @@ abstract class AbstractRobotSnapshot implements IRobotSnapshot {
     * @param velocity
     *           velocity of the robot.
     * @param time
-    *           time the information was retrieved.
+    *           round time the information was retrieved.
+    * @param round
+    *           match round the information was retrieved.
     */
-   protected AbstractRobotSnapshot(String name, double x, double y, double energy, double heading, double velocity, long time) {
-      init(name, x, y, energy, heading, velocity, time);
+   protected AbstractRobotSnapshot(String name, double x, double y, double energy, double heading, double velocity, long time, int round) {
+      init(name, x, y, energy, heading, velocity, time, round);
    }
 
    /**
@@ -91,7 +98,7 @@ abstract class AbstractRobotSnapshot implements IRobotSnapshot {
     */
    protected AbstractRobotSnapshot(IRobotSnapshot snapshot) {
       init(snapshot.getName(), snapshot.getX(), snapshot.getY(), snapshot.getEnergy(), snapshot.getHeading(), snapshot.getVelocity(),
-            snapshot.getTime());
+            snapshot.getTime(), snapshot.getRound());
    }
 
    /**
@@ -110,9 +117,11 @@ abstract class AbstractRobotSnapshot implements IRobotSnapshot {
     * @param v
     *           velocity of the robot.
     * @param t
-    *           time the information was retrieved.
+    *           round time the information was retrieved.
+    * @param r
+    *           match round the information was retrieved.
     */
-   protected void init(String n, double x, double y, double e, double h, double v, long t) {
+   private void init(String n, double x, double y, double e, double h, double v, long t, int r) {
       this.name_ = n;
       this.x_ = x;
       this.y_ = y;
@@ -120,6 +129,7 @@ abstract class AbstractRobotSnapshot implements IRobotSnapshot {
       this.heading_ = h;
       this.velocity_ = v;
       this.time_ = t;
+      this.round_ = r;
    }
 
    /**
@@ -182,9 +192,17 @@ abstract class AbstractRobotSnapshot implements IRobotSnapshot {
     * {@inheritDoc}
     */
    @Override
+   public int getRound() {
+      return round_;
+   }
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override
    public String toString() {
       return new String(this.getClass().getName() + "[n:" + getName() + " c:" + coordinateDec0(getX(), getY()) + " e:" + dec1(getEnergy()) + " h:"
-            + dec3(getHeading()) + " v:" + dec0(getVelocity()) + " t:" + getTime() + "]");
+            + dec3(getHeading()) + " v:" + dec0(getVelocity()) + " t:" + getTime() + " r:" + getRound() + "]");
    }
 
    /**

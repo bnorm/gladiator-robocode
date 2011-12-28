@@ -32,10 +32,12 @@ class RobotSnapshot extends AbstractRobotSnapshot {
     * @param velocity
     *           velocity of the robot.
     * @param time
-    *           time the information was retrieved.
+    *           round time the information was retrieved.
+    * @param round
+    *           match round the information was retrieved.
     */
-   public RobotSnapshot(String name, double x, double y, double energy, double heading, double velocity, long time) {
-      super(name, x, y, energy, heading, velocity, time);
+   public RobotSnapshot(String name, double x, double y, double energy, double heading, double velocity, long time, int round) {
+      super(name, x, y, energy, heading, velocity, time, round);
    }
 
    /**

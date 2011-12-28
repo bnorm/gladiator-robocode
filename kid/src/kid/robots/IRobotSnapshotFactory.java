@@ -40,11 +40,11 @@ public interface IRobotSnapshotFactory {
     * 
     * @param event
     *           a RobotDeathEvent to base the snapshot.
-    * @param last
+    * @param recent
     *           the most recent snapshot of the robot that died.
     * @return a new snapshot based on the RobotDeathEvent.
     */
-   public IRobotSnapshot createSnapshot(RobotDeathEvent event, IRobotSnapshot last);
+   public IRobotSnapshot createSnapshot(RobotDeathEvent event, IRobotSnapshot recent);
 
    /**
     * Returns a new snapshot based on the specified Robot.

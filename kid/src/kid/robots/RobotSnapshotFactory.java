@@ -50,7 +50,8 @@ public class RobotSnapshotFactory implements IRobotSnapshotFactory {
 
       double x = Utils.projectX(robot.getX(), Math.toRadians(robot.getHeading()) + event.getBearingRadians(), event.getDistance());
       double y = Utils.projectY(robot.getY(), Math.toRadians(robot.getHeading()) + event.getBearingRadians(), event.getDistance());
-      return new RobotSnapshot(event.getName(), x, y, event.getEnergy(), event.getHeadingRadians(), event.getVelocity(), event.getTime());
+      return new RobotSnapshot(event.getName(), x, y, event.getEnergy(), event.getHeadingRadians(), event.getVelocity(), event.getTime(),
+            robot.getRoundNum());
    }
 
    /**
@@ -68,18 +69,19 @@ public class RobotSnapshotFactory implements IRobotSnapshotFactory {
     *            <code>last</code>.
     */
    @Override
-   public IRobotSnapshot createSnapshot(RobotDeathEvent event, IRobotSnapshot last) {
+   public IRobotSnapshot createSnapshot(RobotDeathEvent event, IRobotSnapshot recent) {
       if (event == null) {
          throw new NullPointerException("RobotDeathEvent must not be null.");
-      } else if (last == null) {
+      } else if (recent == null) {
          throw new NullPointerException("IRobotSnapshot must not be null.");
-      } else if (!event.getName().equals(last.getName())) {
+      } else if (!event.getName().equals(recent.getName())) {
          throw new IllegalArgumentException("RobotDeathEvent name must equal IRobotSnapshot name.");
-      } else if (event.getTime() < last.getTime()) {
+      } else if (event.getTime() < recent.getTime()) {
          throw new IllegalArgumentException("RobotDeathEvent time must be greater than or equal IRobotSnapshot time.");
       }
 
-      return new RobotSnapshot(last.getName(), last.getX(), last.getY(), -1.0, last.getHeading(), last.getVelocity(), event.getTime());
+      return new RobotSnapshot(recent.getName(), recent.getX(), recent.getY(), -1.0, recent.getHeading(), recent.getVelocity(), event.getTime(),
+            recent.getRound());
    }
 
    /**
@@ -95,7 +97,7 @@ public class RobotSnapshotFactory implements IRobotSnapshotFactory {
       }
 
       return new RobotSnapshot(robot.getName(), robot.getX(), robot.getY(), robot.getEnergy(), Math.toRadians(robot.getHeading()),
-            robot.getVelocity(), robot.getTime());
+            robot.getVelocity(), robot.getTime(), robot.getRoundNum());
    }
 
    /**

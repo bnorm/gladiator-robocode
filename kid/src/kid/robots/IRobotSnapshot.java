@@ -51,10 +51,17 @@ public interface IRobotSnapshot {
    public double getVelocity();
 
    /**
-    * Returns the time at which the robot was scanned.
+    * Returns the time of the round at which the robot snapshot was taken
     * 
-    * @return the time at which the robot was scanned.
+    * @return the time of the snapshot.
     */
    public long getTime();
+
+   /**
+    * Returns the round of the match at which the robot snapshot was taken.
+    * 
+    * @return the round of the snapshot.
+    */
+   public int getRound();
 
 }
