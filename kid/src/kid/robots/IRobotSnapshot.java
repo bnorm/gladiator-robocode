@@ -4,7 +4,7 @@ package kid.robots;
  * Represents a Robocode robot at a moment in time.
  * 
  * @author Brian Norman (KID)
- * @version 1.0
+ * @version 1.1
  */
 public interface IRobotSnapshot {
 

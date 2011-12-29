@@ -9,7 +9,7 @@ import static kid.utils.Format.dec3;
  * An abstract representation of a Robocode robot at a moment in time.
  * 
  * @author Brian Norman (KID)
- * @version 1.0
+ * @version 1.1
  */
 abstract class AbstractRobotSnapshot implements IRobotSnapshot {
 
