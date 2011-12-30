@@ -9,7 +9,7 @@ import robocode.ScannedRobotEvent;
  * A factory class for creating new robot snapshots.
  * 
  * @author Brian Norman (KID)
- * @version 1.0
+ * @version 1.0b
  */
 public class RobotSnapshotFactory implements IRobotSnapshotFactory {
 
@@ -45,7 +45,7 @@ public class RobotSnapshotFactory implements IRobotSnapshotFactory {
       } else if (robot == null) {
          throw new NullPointerException("Robot must not be null.");
       } else if (event.getTime() != robot.getTime()) {
-         throw new IllegalArgumentException("ScannedRobotEvent time must equal Robot time.");
+         throw new IllegalArgumentException("ScannedRobotEvent time must equal Robot time (" + event.getTime() + " == " + robot.getTime() + ").");
       }
 
       double x = Utils.projectX(robot.getX(), Math.toRadians(robot.getHeading()) + event.getBearingRadians(), event.getDistance());
@@ -75,9 +75,11 @@ public class RobotSnapshotFactory implements IRobotSnapshotFactory {
       } else if (recent == null) {
          throw new NullPointerException("IRobotSnapshot must not be null.");
       } else if (!event.getName().equals(recent.getName())) {
-         throw new IllegalArgumentException("RobotDeathEvent name must equal IRobotSnapshot name.");
+         throw new IllegalArgumentException("RobotDeathEvent name must equal IRobotSnapshot name (" + event.getName() + " == " + recent.getName()
+               + ").");
       } else if (event.getTime() < recent.getTime()) {
-         throw new IllegalArgumentException("RobotDeathEvent time must be greater than or equal IRobotSnapshot time.");
+         throw new IllegalArgumentException("RobotDeathEvent time must be greater than or equal IRobotSnapshot time (" + event.getTime() + " < "
+               + recent.getTime() + ").");
       }
 
       return new RobotSnapshot(recent.getName(), recent.getX(), recent.getY(), -1.0, recent.getHeading(), recent.getVelocity(), event.getTime(),
