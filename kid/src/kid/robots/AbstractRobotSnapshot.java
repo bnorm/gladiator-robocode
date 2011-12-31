@@ -220,7 +220,16 @@ abstract class AbstractRobotSnapshot implements IRobotSnapshot {
    public boolean equals(Object obj) {
       if (obj instanceof IRobotSnapshot) {
          IRobotSnapshot snapshot = (IRobotSnapshot) obj;
-         return getName() != null && getName().equals(snapshot.getName()) && snapshot.getTime() == getTime();
+         /**@format:off*/
+         return getName() != null && getName().equals(snapshot.getName()) && 
+               snapshot.getTime() == getTime() &&
+               snapshot.getRound() == getRound() &&
+               snapshot.getX() == getX() &&
+               snapshot.getY() == getY() &&
+               snapshot.getEnergy() == getEnergy() &&
+               snapshot.getHeading() == getHeading() &&
+               snapshot.getVelocity() == getVelocity();
+         /**@format:on*/
       }
       return super.equals(obj);
    }
