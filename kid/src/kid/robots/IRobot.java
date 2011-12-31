@@ -39,8 +39,9 @@ public interface IRobot<S extends IRobotSnapshot> {
 
    /**
     * Returns the snapshot for the specified time in the most recent series. If
-    * the time does not exist in the series then the most recent snapshot up to
-    * that time is returned.
+    * the there is no recent snapshot, <code>null</code> is returned. If the
+    * time does not exist in the series then the most recent snapshot up to that
+    * time is returned.
     * 
     * @param time
     *           time of the snapshot to return.
@@ -50,8 +51,8 @@ public interface IRobot<S extends IRobotSnapshot> {
 
    /**
     * Returns the snapshot for the specified time and match round. If the round
-    * does not exist an error will be thrown. If the time does not exist in the
-    * series then the most recent snapshot up to that time is returned.
+    * does not exist, <code>null</code> is returned. If the time does not exist
+    * in the series then the most recent snapshot up to that time is returned.
     * 
     * @param time
     *           time of the snapshot to return.
@@ -71,8 +72,9 @@ public interface IRobot<S extends IRobotSnapshot> {
 
    /**
     * Returns an iterator of the robot starting at the specified time. The round
-    * is assumed to be the most recent. If the exact time does not exist in the
-    * series, the iterator is started where the value would exist if it did.
+    * is assumed to be the most recent. If the there are no snapshots for the
+    * robot, <code>null</code> is returned. If the exact time does not exist in
+    * the series, the iterator is started where the value would exist if it did.
     * 
     * @param time
     *           the time to start the iterator at.
@@ -82,9 +84,10 @@ public interface IRobot<S extends IRobotSnapshot> {
 
    /**
     * Returns an iterator of the robot for the specified match round and at the
-    * specified time. If the round does not exist an error will be thrown. If
-    * the exact time does not exist in the series, the iterator is started where
-    * the value would exist if it did.
+    * specified time. If the round does not exist or if there are no snapshot
+    * for the robot, <code>null</code> is returned. If the exact time does not
+    * exist in the series, the iterator is started where the value would exist
+    * if it did.
     * 
     * @param time
     *           the time to start the iterator at.

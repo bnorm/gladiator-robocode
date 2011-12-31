@@ -16,7 +16,7 @@ import java.util.Set;
  * @author Brian Norman (KID)
  * @version 1.0
  */
-class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
+abstract class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
 
    /**
     * The map of time series keyed by the match round.
@@ -39,7 +39,7 @@ class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
     */
    public AbstractRobot() {
       rounds_ = new Hashtable<>();
-      movie_ = new LinkedList<>();
+      movie_ = null;
       recent_ = null;
    }
 
@@ -63,7 +63,7 @@ class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
       }
 
       int index = getIndex(movie_, snapshot.getTime());
-      if (movie_.get(index).getTime() == snapshot.getTime()) {
+      if (index > 0 && movie_.get(index).getTime() == snapshot.getTime()) {
          return false;
       }
 
@@ -222,9 +222,9 @@ class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
 
    /**
     * Returns an iterator over the specified list starting at the specified
-    * time. If the specified list is null then an error is thrown. If the exact
-    * time does not appear in the series, then the index of the greatest time
-    * that is still less than the specified time is used.
+    * time. If the specified list is <code>null</code> then <code>null</code> is
+    * returned. If the exact time does not appear in the series, then the index
+    * of the greatest time that is still less than the specified time is used.
     * 
     * @param movie
     *           the list series to be played as a movie.
@@ -234,15 +234,13 @@ class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
     *         time.
     * 
     * @throws IllegalArgumentException
-    *            if <code>movie</code> is null.
-    * @throws IllegalArgumentException
     *            if <code>time</code> is less than zero.
     */
    protected static <T extends IRobotSnapshot> ListIterator<T> getMovie(List<T> movie, long time) {
-      if (movie == null) {
-         throw new NullPointerException("List must not be null.");
-      } else if (time < 0) {
+      if (time < 0) {
          throw new IllegalArgumentException("Time must not be less than zero (" + time + ").");
+      } else if (movie == null) {
+         return null;
       }
 
       if (time == 0) {
@@ -256,9 +254,10 @@ class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
 
    /**
     * Returns the snapshot at the specified time from the specified list. If the
-    * specified list is null then an error is thrown. If the exact time does not
-    * appear in the series, then the snapshot of the greatest time that is still
-    * less than the specified time is returned.
+    * specified list is empty or <code>null</code> then <code>null</code> is
+    * returned.If the exact time does not appear in the series, then the
+    * snapshot of the greatest time that is still less than the specified time
+    * is returned. TODO add something about beginning of series.
     * 
     * @param movie
     *           the series to search.
@@ -267,15 +266,13 @@ class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
     * @return the snapshot at the specified time from the specified list.
     * 
     * @throws IllegalArgumentException
-    *            if <code>movie</code> is null.
-    * @throws IllegalArgumentException
     *            if <code>time</code> is less than zero.
     */
    protected static <T extends IRobotSnapshot> T getSnapshot(List<T> movie, long time) {
-      if (movie == null) {
-         throw new NullPointerException("List must not be null.");
-      } else if (time < 0) {
+      if (time < 0) {
          throw new IllegalArgumentException("Time must not be less than zero (" + time + ").");
+      } else if (movie == null || movie.size() == 0) {
+         return null;
       }
 
       int index = getIndex(movie, time);
