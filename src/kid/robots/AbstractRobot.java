@@ -246,7 +246,7 @@ abstract class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
       if (time == 0) {
          return movie.listIterator();
       } else {
-         // See comment of getIndex(List<>, long) why the following works.
+         // See doc of getIndex(List, long) for why the following works.
          int index = getIndex(movie, time - 1);
          return movie.listIterator(Math.min(index + 1, movie.size()));
       }
@@ -255,9 +255,10 @@ abstract class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
    /**
     * Returns the snapshot at the specified time from the specified list. If the
     * specified list is empty or <code>null</code> then <code>null</code> is
-    * returned.If the exact time does not appear in the series, then the
+    * returned. If the exact time does not appear in the series, then the
     * snapshot of the greatest time that is still less than the specified time
-    * is returned. TODO add something about beginning of series.
+    * is returned. If a time before all snapshots in the series is specified,
+    * then the first snapshot in the series is returned.
     * 
     * @param movie
     *           the series to search.
