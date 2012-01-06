@@ -220,7 +220,7 @@ public class DrawMenu {
     * <pre>
     * ...
     * // As a robot event catcher
-    * public void onMouseEvent(MouseEvent e) {
+    * public void onMouseClicked(MouseEvent e) {
     *    DrawMenu.inMouseEvent(e);
     *    ...
     * }
