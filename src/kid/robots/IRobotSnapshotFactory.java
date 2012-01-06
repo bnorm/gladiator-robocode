@@ -18,7 +18,7 @@ public interface IRobotSnapshotFactory {
     * 
     * @return a blank snapshot.
     */
-   public IRobotSnapshot createSnapshot();
+   public IRobotSnapshot create();
 
    /**
     * Returns a new snapshot based on the specified ScannedRobotEvent. The
@@ -31,7 +31,7 @@ public interface IRobotSnapshotFactory {
     *           the Robot that received the ScannedRobotEvent.
     * @return a new snapshot based on the ScannedRobotEvent.
     */
-   public IRobotSnapshot createSnapshot(ScannedRobotEvent event, Robot robot);
+   public IRobotSnapshot create(ScannedRobotEvent event, Robot robot);
 
    /**
     * Returns a new snapshot based on the specified RobotDeathEvent. The
@@ -44,7 +44,7 @@ public interface IRobotSnapshotFactory {
     *           the most recent snapshot of the robot that died.
     * @return a new snapshot based on the RobotDeathEvent.
     */
-   public IRobotSnapshot createSnapshot(RobotDeathEvent event, IRobotSnapshot recent);
+   public IRobotSnapshot create(RobotDeathEvent event, IRobotSnapshot recent);
 
    /**
     * Returns a new snapshot based on the specified Robot.
@@ -53,7 +53,7 @@ public interface IRobotSnapshotFactory {
     *           a Robot to base the snapshot.
     * @return a new snapshot based on the Robot.
     */
-   public IRobotSnapshot createSnapshot(Robot robot);
+   public IRobotSnapshot create(Robot robot);
 
    /**
     * Returns a new snapshot based on the specified IRobotSnapshot. This new
@@ -63,6 +63,6 @@ public interface IRobotSnapshotFactory {
     *           a IRobotSnapshot to base the snapshot.
     * @return a copy snapshot of the IRobotSnapshot.
     */
-   public IRobotSnapshot createSnapshot(IRobotSnapshot snapshot);
+   public IRobotSnapshot create(IRobotSnapshot snapshot);
 
 }

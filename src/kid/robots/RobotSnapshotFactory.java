@@ -23,7 +23,7 @@ public class RobotSnapshotFactory implements IRobotSnapshotFactory {
     * {@inheritDoc}
     */
    @Override
-   public IRobotSnapshot createSnapshot() {
+   public IRobotSnapshot create() {
       return new RobotSnapshot();
    }
 
@@ -39,7 +39,7 @@ public class RobotSnapshotFactory implements IRobotSnapshotFactory {
     *            not equal.
     */
    @Override
-   public IRobotSnapshot createSnapshot(ScannedRobotEvent event, Robot robot) {
+   public IRobotSnapshot create(ScannedRobotEvent event, Robot robot) {
       if (event == null) {
          throw new NullPointerException("ScannedRobotEvent must not be null.");
       } else if (robot == null) {
@@ -69,7 +69,7 @@ public class RobotSnapshotFactory implements IRobotSnapshotFactory {
     *            <code>last</code>.
     */
    @Override
-   public IRobotSnapshot createSnapshot(RobotDeathEvent event, IRobotSnapshot recent) {
+   public IRobotSnapshot create(RobotDeathEvent event, IRobotSnapshot recent) {
       if (event == null) {
          throw new NullPointerException("RobotDeathEvent must not be null.");
       } else if (recent == null) {
@@ -93,7 +93,7 @@ public class RobotSnapshotFactory implements IRobotSnapshotFactory {
     *            if <code>robot</code> is null.
     */
    @Override
-   public IRobotSnapshot createSnapshot(Robot robot) {
+   public IRobotSnapshot create(Robot robot) {
       if (robot == null) {
          throw new NullPointerException("Robot must not be null.");
       }
@@ -109,7 +109,7 @@ public class RobotSnapshotFactory implements IRobotSnapshotFactory {
     *            if <code>snapshot</code> is null.
     */
    @Override
-   public IRobotSnapshot createSnapshot(IRobotSnapshot snapshot) {
+   public IRobotSnapshot create(IRobotSnapshot snapshot) {
       if (snapshot == null) {
          throw new NullPointerException("IRobotSnapshot must not be null.");
       }
