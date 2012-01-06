@@ -5,12 +5,12 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * TODO
+ * Test suite for the package <code>kid.robots</code>.
  * 
  * @author Brian Norman
- * @version 1.0
+ * @version 1.1
  */
 @RunWith(Suite.class)
-@SuiteClasses({ AbstractRobotTest.class })
+@SuiteClasses({ AbstractRobotSnapshotTest.class, AbstractRobotTest.class })
 public class KidRobots_AllTests {
 }

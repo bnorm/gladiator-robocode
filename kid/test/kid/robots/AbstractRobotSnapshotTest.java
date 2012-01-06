@@ -7,10 +7,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
- * TODO assert messages
+ * Test class for {@link AbstractRobotSnapshotTest}.
  * 
  * @author Brian Norman
- * @version 1.0
+ * @version 1.1
  */
 public class AbstractRobotSnapshotTest {
 
@@ -22,14 +22,14 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot() {
       };
 
-      assertEquals("", new String(), s.getName());
-      assertEquals("", -1.0, s.getX(), 0.0);
-      assertEquals("", -1.0, s.getY(), 0.0);
-      assertEquals("", -1.0, s.getEnergy(), 0.0);
-      assertEquals("", 0.0, s.getHeading(), 0.0);
-      assertEquals("", 0.0, s.getVelocity(), 0.0);
-      assertEquals("", -1, s.getTime());
-      assertEquals("", -1, s.getRound());
+      assertEquals("Name for snapshot should be an empty string.", new String(), s.getName());
+      assertEquals("X coordinate for snapshot should be -1.0.", -1.0, s.getX(), 0.0);
+      assertEquals("Y coordinate for snapshot should be -1.0.", -1.0, s.getY(), 0.0);
+      assertEquals("Energy for snapshot should be -1.0.", -1.0, s.getEnergy(), 0.0);
+      assertEquals("Heading for snapshot should be 0.0.", 0.0, s.getHeading(), 0.0);
+      assertEquals("Velocity for snapshot should be 0.0.", 0.0, s.getVelocity(), 0.0);
+      assertEquals("Time for snapshot should be -1.", -1, s.getTime());
+      assertEquals("Round for snapshot should be -1.", -1, s.getRound());
    }
 
    /**
@@ -42,26 +42,26 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", "test", s.getName());
-      assertEquals("", 0.0, s.getX(), 0.0);
-      assertEquals("", 0.0, s.getY(), 0.0);
-      assertEquals("", 0.0, s.getEnergy(), 0.0);
-      assertEquals("", 0.0, s.getHeading(), 0.0);
-      assertEquals("", 0.0, s.getVelocity(), 0.0);
-      assertEquals("", 0, s.getTime());
-      assertEquals("", 0, s.getRound());
+      assertEquals("Name for snapshot should be \'test\'.", "test", s.getName());
+      assertEquals("X coordinate for snapshot should be 0.0.", 0.0, s.getX(), 0.0);
+      assertEquals("Y coordinate for snapshot should be 0.0.", 0.0, s.getY(), 0.0);
+      assertEquals("Energy for snapshot should be 0.0.", 0.0, s.getEnergy(), 0.0);
+      assertEquals("Heading for snapshot should be 0.0.", 0.0, s.getHeading(), 0.0);
+      assertEquals("Velocity for snapshot should be 0.0.", 0.0, s.getVelocity(), 0.0);
+      assertEquals("Time for snapshot should be 0.", 0, s.getTime());
+      assertEquals("Round for snapshot should be 0.", 0, s.getRound());
 
       s = new AbstractRobotSnapshot("TEST", 5.0, 3.0, 200.0, -70.0, 23.0, 34, 42) {
       };
 
-      assertEquals("", "TEST", s.getName());
-      assertEquals("", 5.0, s.getX(), 0.0);
-      assertEquals("", 3.0, s.getY(), 0.0);
-      assertEquals("", 200.0, s.getEnergy(), 0.0);
-      assertEquals("", -70.0, s.getHeading(), 0.0);
-      assertEquals("", 23.0, s.getVelocity(), 0.0);
-      assertEquals("", 34, s.getTime());
-      assertEquals("", 42, s.getRound());
+      assertEquals("Name for snapshot should be \'TEST\'.", "TEST", s.getName());
+      assertEquals("X coordinate for snapshot should be 5.0.", 5.0, s.getX(), 0.0);
+      assertEquals("Y coordinate for snapshot should be 3.0.", 3.0, s.getY(), 0.0);
+      assertEquals("Energy for snapshot should be 200.0.", 200.0, s.getEnergy(), 0.0);
+      assertEquals("Heading for snapshot should be -70.0.", -70.0, s.getHeading(), 0.0);
+      assertEquals("Velocity for snapshot should be 23.0.", 23.0, s.getVelocity(), 0.0);
+      assertEquals("Time for snapshot should be 34.", 34, s.getTime());
+      assertEquals("Round for snapshot should be 42.", 42, s.getRound());
    }
 
    /**
@@ -74,26 +74,26 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("TEST", 5.0, 3.0, 200.0, -70.0, 23.0, 34, 42) {
       };
 
-      assertEquals("", "TEST", s.getName());
-      assertEquals("", 5.0, s.getX(), 0.0);
-      assertEquals("", 3.0, s.getY(), 0.0);
-      assertEquals("", 200.0, s.getEnergy(), 0.0);
-      assertEquals("", -70.0, s.getHeading(), 0.0);
-      assertEquals("", 23.0, s.getVelocity(), 0.0);
-      assertEquals("", 34, s.getTime());
-      assertEquals("", 42, s.getRound());
+      assertEquals("Name for snapshot should be \'TEST\'.", "TEST", s.getName());
+      assertEquals("X coordinate for snapshot should be 5.0.", 5.0, s.getX(), 0.0);
+      assertEquals("Y coordinate for snapshot should be 3.0.", 3.0, s.getY(), 0.0);
+      assertEquals("Energy for snapshot should be 200.0.", 200.0, s.getEnergy(), 0.0);
+      assertEquals("Heading for snapshot should be -70.0.", -70.0, s.getHeading(), 0.0);
+      assertEquals("Velocity for snapshot should be 23.0.", 23.0, s.getVelocity(), 0.0);
+      assertEquals("Time for snapshot should be 34.", 34, s.getTime());
+      assertEquals("Round for snapshot should be 42.", 42, s.getRound());
 
       AbstractRobotSnapshot copy = new AbstractRobotSnapshot(s) {
       };
 
-      assertEquals("", "TEST", copy.getName());
-      assertEquals("", 5.0, copy.getX(), 0.0);
-      assertEquals("", 3.0, copy.getY(), 0.0);
-      assertEquals("", 200.0, copy.getEnergy(), 0.0);
-      assertEquals("", -70.0, copy.getHeading(), 0.0);
-      assertEquals("", 23.0, copy.getVelocity(), 0.0);
-      assertEquals("", 34, copy.getTime());
-      assertEquals("", 42, copy.getRound());
+      assertEquals("Name for snapshot should be \'TEST\'.", "TEST", copy.getName());
+      assertEquals("X coordinate for snapshot should be 5.0.", 5.0, copy.getX(), 0.0);
+      assertEquals("Y coordinate for snapshot should be 3.0.", 3.0, copy.getY(), 0.0);
+      assertEquals("Energy for snapshot should be 200.0.", 200.0, copy.getEnergy(), 0.0);
+      assertEquals("Heading for snapshot should be -70.0.", -70.0, copy.getHeading(), 0.0);
+      assertEquals("Velocity for snapshot should be 23.0.", 23.0, copy.getVelocity(), 0.0);
+      assertEquals("Time for snapshot should be 34.", 34, copy.getTime());
+      assertEquals("Round for snapshot should be 42.", 42, copy.getRound());
    }
 
    /**
@@ -104,12 +104,12 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", "test", s.getName());
+      assertEquals("Name for snapshot should be \'test\'.", "test", s.getName());
 
       s = new AbstractRobotSnapshot("test.-#;lkasd39uvn2", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", "test.-#;lkasd39uvn2", s.getName());
+      assertEquals("Name for snapshot should be \'test.-#;lkasd39uvn2\'.", "test.-#;lkasd39uvn2", s.getName());
    }
 
    /**
@@ -120,17 +120,17 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", 0.0, s.getX(), 0.0);
+      assertEquals("X coordinate for snapshot should be 0.0.", 0.0, s.getX(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 2951.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", 2951.0, s.getX(), 0.0);
+      assertEquals("X coordinate for snapshot should be 2951.0.", 2951.0, s.getX(), 0.0);
 
       s = new AbstractRobotSnapshot("test", -2951.92765283975256, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", -2951.92765283975256, s.getX(), 0.0);
+      assertEquals("X coordinate for snapshot should be -2951.92765283975256.", -2951.92765283975256, s.getX(), 0.0);
    }
 
    /**
@@ -141,17 +141,17 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", 0.0, s.getY(), 0.0);
+      assertEquals("Y coordinate for snapshot should be 0.0.", 0.0, s.getY(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 2951.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", 2951.0, s.getY(), 0.0);
+      assertEquals("Y coordinate for snapshot should be 2951.0.", 2951.0, s.getY(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, -2951.92765283975256, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", -2951.92765283975256, s.getY(), 0.0);
+      assertEquals("Y coordinate for snapshot should be -2951.92765283975256.", -2951.92765283975256, s.getY(), 0.0);
    }
 
    /**
@@ -162,17 +162,17 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", 0.0, s.getEnergy(), 0.0);
+      assertEquals("Energy for snapshot should be 0.0.", 0.0, s.getEnergy(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 2951.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", 2951.0, s.getEnergy(), 0.0);
+      assertEquals("Energy for snapshot should be 2951.0.", 2951.0, s.getEnergy(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, -2951.92765283975256, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", -2951.92765283975256, s.getEnergy(), 0.0);
+      assertEquals("Energy for snapshot should be -2951.92765283975256.", -2951.92765283975256, s.getEnergy(), 0.0);
    }
 
    /**
@@ -183,17 +183,17 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", 0.0, s.getHeading(), 0.0);
+      assertEquals("Heading for snapshot should be 0.0.", 0.0, s.getHeading(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 2951.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", 2951.0, s.getHeading(), 0.0);
+      assertEquals("Heading for snapshot should be -2951.0.", 2951.0, s.getHeading(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, -2951.92765283975256, 0.0, 0, 0) {
       };
 
-      assertEquals("", -2951.92765283975256, s.getHeading(), 0.0);
+      assertEquals("Heading for snapshot should be -2951.92765283975256.", -2951.92765283975256, s.getHeading(), 0.0);
    }
 
    /**
@@ -204,17 +204,17 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", 0.0, s.getVelocity(), 0.0);
+      assertEquals("Velocity for snapshot should be 0.0.", 0.0, s.getVelocity(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 2951.0, 0, 0) {
       };
 
-      assertEquals("", 2951.0, s.getVelocity(), 0.0);
+      assertEquals("Velocity for snapshot should be -2951.0.", 2951.0, s.getVelocity(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, -2951.92765283975256, 0, 0) {
       };
 
-      assertEquals("", -2951.92765283975256, s.getVelocity(), 0.0);
+      assertEquals("Velocity for snapshot should be -2951.92765283975256.", -2951.92765283975256, s.getVelocity(), 0.0);
    }
 
    /**
@@ -225,17 +225,17 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", 0, s.getTime());
+      assertEquals("Time for snapshot should be 0.", 0, s.getTime());
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 2951, 0) {
       };
 
-      assertEquals("", 2951, s.getTime());
+      assertEquals("Time for snapshot should be 2951.", 2951, s.getTime());
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, -2951, 0) {
       };
 
-      assertEquals("", -2951, s.getTime());
+      assertEquals("Time for snapshot should be -2951.", -2951, s.getTime());
    }
 
    /**
@@ -246,17 +246,17 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", 0, s.getRound());
+      assertEquals("Round for snapshot should be 0.", 0, s.getRound());
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 2951) {
       };
 
-      assertEquals("", 2951, s.getRound());
+      assertEquals("Round for snapshot should be 2951.", 2951, s.getRound());
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, -2951) {
       };
 
-      assertEquals("", -2951, s.getRound());
+      assertEquals("Round for snapshot should be -2951.", -2951, s.getRound());
    }
 
    /**
@@ -275,12 +275,13 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", "test".hashCode(), s.hashCode());
+      assertEquals("Hash code for snapshot should be " + "test".hashCode() + ".", "test".hashCode(), s.hashCode());
 
       s = new AbstractRobotSnapshot("test.-#;lkasd39uvn2", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
       };
 
-      assertEquals("", "test.-#;lkasd39uvn2".hashCode(), s.hashCode());
+      assertEquals("Hash code for snapshot should be " + "test.-#;lkasd39uvn2".hashCode() + ".",
+            "test.-#;lkasd39uvn2".hashCode(), s.hashCode());
    }
 
    /**
@@ -293,8 +294,8 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s2 = new AbstractRobotSnapshot("TEST", 5.0, 3.0, 200.0, -70.0, 23.0, 34, 42) {
       };
 
-      assertFalse("", (s1 == s2));
-      assertTrue("", s1.equals(s2));
+      assertFalse("Snapshots s1 and s2 should not be the same object.", (s1 == s2));
+      assertTrue("Snapshots s1 and s2 should be equal.", s1.equals(s2));
    }
 
 }

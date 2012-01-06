@@ -12,7 +12,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-// TODO assert messages
 /**
  * Test class for {@link AbstractRobot}.
  * 
