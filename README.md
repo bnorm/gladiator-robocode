@@ -22,11 +22,3 @@ Under Construction
 
     This area will be used for a detailed description of work and ideas done in
     Robocode.
-
-Virtual Combat
---------------
-
-Under Construction
-
-    This area will be used for a detailed description of work and ideas done in
-    [Virtual Combat](http://www.itbhu.ac.in/codefest/event.php?name=virtual%20combat).
