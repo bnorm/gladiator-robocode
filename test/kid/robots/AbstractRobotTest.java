@@ -25,7 +25,7 @@ public class AbstractRobotTest {
     */
    @Test
    public void testAbstractRobot() {
-      AbstractRobot<RobotSnapshot> r = new AbstractRobot<RobotSnapshot>() {
+      AbstractRobot r = new AbstractRobot() {
       };
 
       // Testing snapshot assumptions
@@ -66,7 +66,7 @@ public class AbstractRobotTest {
       }
 
       // Testing movie assumptions
-      ListIterator<RobotSnapshot> iter = r.getMovie();
+      ListIterator<IRobotSnapshot> iter = r.getMovie();
       assertNull("ListIterator should be null.", iter);
 
       iter = r.getMovie(0);
@@ -131,7 +131,7 @@ public class AbstractRobotTest {
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
       RobotSnapshot s8 = new RobotSnapshot("", 0, 0, 0, 0, 0, 8, 0);
 
-      AbstractRobot<RobotSnapshot> r = new AbstractRobot<RobotSnapshot>() {
+      AbstractRobot r = new AbstractRobot() {
       };
       r.add(s4);
       r.add(s1);
@@ -139,7 +139,7 @@ public class AbstractRobotTest {
       r.add(s2);
       r.add(s5);
 
-      ListIterator<RobotSnapshot> iter = r.getMovie();
+      ListIterator<IRobotSnapshot> iter = r.getMovie();
       assertTrue("Movie should contain 5 elements.", iter.hasNext());
       assertEquals("First element should be s1.", s1, iter.next());
       assertTrue("Movie should contain 5 elements.", iter.hasNext());
@@ -163,7 +163,7 @@ public class AbstractRobotTest {
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
       RobotSnapshot s8 = new RobotSnapshot("", 0, 0, 0, 0, 0, 8, 0);
 
-      AbstractRobot<RobotSnapshot> r = new AbstractRobot<RobotSnapshot>() {
+      AbstractRobot r = new AbstractRobot() {
       };
 
       r.add(s4);
@@ -193,7 +193,7 @@ public class AbstractRobotTest {
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
       RobotSnapshot s8 = new RobotSnapshot("", 0, 0, 0, 0, 0, 8, 0);
 
-      AbstractRobot<RobotSnapshot> r = new AbstractRobot<RobotSnapshot>() {
+      AbstractRobot r = new AbstractRobot() {
       };
       r.add(s1);
       r.add(s2);
@@ -227,7 +227,7 @@ public class AbstractRobotTest {
 
       RobotSnapshot s3 = new RobotSnapshot("", 0, 0, 0, 0, 0, 3, 2);
 
-      AbstractRobot<RobotSnapshot> r = new AbstractRobot<RobotSnapshot>() {
+      AbstractRobot r = new AbstractRobot() {
       };
       r.add(s1);
       r.add(s2);
@@ -274,7 +274,7 @@ public class AbstractRobotTest {
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
       RobotSnapshot s8 = new RobotSnapshot("", 0, 0, 0, 0, 0, 8, 0);
 
-      AbstractRobot<RobotSnapshot> r = new AbstractRobot<RobotSnapshot>() {
+      AbstractRobot r = new AbstractRobot() {
       };
 
       r.add(s1);
@@ -283,7 +283,7 @@ public class AbstractRobotTest {
       r.add(s5);
       r.add(s8);
 
-      ListIterator<RobotSnapshot> iter = r.getMovie();
+      ListIterator<IRobotSnapshot> iter = r.getMovie();
       assertTrue("Movie should contain 5 elements.", iter.hasNext());
       assertEquals("First element should be s1.", s1, iter.next());
       assertTrue("Movie should contain 5 elements.", iter.hasNext());
@@ -306,7 +306,7 @@ public class AbstractRobotTest {
       RobotSnapshot s4 = new RobotSnapshot("", 0, 0, 0, 0, 0, 4, 0);
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
 
-      AbstractRobot<RobotSnapshot> r = new AbstractRobot<RobotSnapshot>() {
+      AbstractRobot r = new AbstractRobot() {
       };
 
       r.add(s1);
@@ -314,7 +314,7 @@ public class AbstractRobotTest {
       r.add(s4);
       r.add(s5);
 
-      ListIterator<RobotSnapshot> iter;
+      ListIterator<IRobotSnapshot> iter;
 
       iter = r.getMovie(0);
       assertTrue("Movie should contain 4 elements after start.", iter.hasNext());
@@ -415,7 +415,7 @@ public class AbstractRobotTest {
       RobotSnapshot s2 = new RobotSnapshot("", 0, 0, 0, 0, 0, 2, 1);
       RobotSnapshot s4 = new RobotSnapshot("", 0, 0, 0, 0, 0, 4, 1);
 
-      AbstractRobot<RobotSnapshot> r = new AbstractRobot<RobotSnapshot>() {
+      AbstractRobot r = new AbstractRobot() {
       };
 
       r.add(s1);
@@ -423,7 +423,7 @@ public class AbstractRobotTest {
       r.add(s2);
       r.add(s4);
 
-      ListIterator<RobotSnapshot> iter;
+      ListIterator<IRobotSnapshot> iter;
 
       // Test round 0
       iter = r.getMovie(0, 0);
@@ -552,7 +552,7 @@ public class AbstractRobotTest {
 
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 3);
 
-      AbstractRobot<RobotSnapshot> r = new AbstractRobot<RobotSnapshot>() {
+      AbstractRobot r = new AbstractRobot() {
       };
 
       r.add(s1);

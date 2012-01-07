@@ -16,23 +16,23 @@ import java.util.Set;
  * @author Brian Norman (KID)
  * @version 1.0
  */
-abstract class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
+abstract class AbstractRobot implements IRobot {
 
    /**
     * The map of time series keyed by the match round.
     */
-   private Map<Integer, List<S>> rounds_;
+   private Map<Integer, List<IRobotSnapshot>> rounds_;
 
    /**
     * The round time series that was most recently added to.
     */
-   private List<S>               movie_;
+   private List<IRobotSnapshot>               movie_;
 
    /**
     * The most recent snapshot of the current match round. I.e., the last
     * snapshot of the current match round series.
     */
-   private S                     recent_;
+   private IRobotSnapshot                     recent_;
 
    /**
     * Creates a new robot.
@@ -44,6 +44,29 @@ abstract class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
    }
 
    /**
+    * Creates a new robot that is a copy of the specified robot.
+    * 
+    * @param robot
+    *           the robot to copy.
+    */
+   protected AbstractRobot(IRobot robot) {
+      this();
+
+      for (Integer i : robot.getRounds()) {
+         ListIterator<IRobotSnapshot> movie = robot.getMovie(0, i);
+         rounds_.put(i, movie_ = new LinkedList<>());
+         while (movie.hasNext()) {
+            movie_.add(movie.next());
+         }
+      }
+
+      recent_ = robot.getSnapshot();
+      if (recent_ != null) {
+         movie_ = rounds_.get(recent_.getRound());
+      }
+   }
+
+   /**
     * {@inheritDoc}
     * 
     * Returns null if there have been no snapshots added to the robot.
@@ -52,7 +75,7 @@ abstract class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
     *            if <code>snapshot</code> is null.
     */
    @Override
-   public boolean add(S snapshot) {
+   public boolean add(IRobotSnapshot snapshot) {
       if (snapshot == null) {
          throw new NullPointerException("IRobotSnapshot must not be null.");
       }
@@ -76,7 +99,7 @@ abstract class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
     * {@inheritDoc}
     */
    @Override
-   public S getSnapshot() {
+   public IRobotSnapshot getSnapshot() {
       return recent_;
    }
 
@@ -87,7 +110,7 @@ abstract class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
     *            if <code>time</code> is less than zero.
     */
    @Override
-   public S getSnapshot(long time) {
+   public IRobotSnapshot getSnapshot(long time) {
       if (time < 0) {
          throw new IllegalArgumentException("Time must not be less than zero (" + time + ").");
       }
@@ -104,7 +127,7 @@ abstract class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
     *            if <code>round</code> is less than zero.
     */
    @Override
-   public S getSnapshot(long time, int round) {
+   public IRobotSnapshot getSnapshot(long time, int round) {
       if (time < 0) {
          throw new IllegalArgumentException("Time must not be less than zero (" + time + ").");
       } else if (round < 0) {
@@ -118,7 +141,7 @@ abstract class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
     * {@inheritDoc}
     */
    @Override
-   public ListIterator<S> getMovie() {
+   public ListIterator<IRobotSnapshot> getMovie() {
       return getMovie(movie_, 0);
    }
 
@@ -129,7 +152,7 @@ abstract class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
     *            if <code>time</code> is less than zero.
     */
    @Override
-   public ListIterator<S> getMovie(long time) {
+   public ListIterator<IRobotSnapshot> getMovie(long time) {
       if (time < 0) {
          throw new IllegalArgumentException("Time must not be less than zero (" + time + ").");
       }
@@ -146,7 +169,7 @@ abstract class AbstractRobot<S extends IRobotSnapshot> implements IRobot<S> {
     *            if <code>round</code> is less than zero.
     */
    @Override
-   public ListIterator<S> getMovie(long time, int round) {
+   public ListIterator<IRobotSnapshot> getMovie(long time, int round) {
       if (time < 0) {
          throw new IllegalArgumentException("Time must not be less than zero (" + time + ").");
       } else if (round < 0) {

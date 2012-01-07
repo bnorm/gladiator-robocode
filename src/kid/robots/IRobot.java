@@ -15,7 +15,7 @@ import java.util.Set;
  * @author Brian Norman (KID)
  * @version 1.0
  */
-public interface IRobot<S extends IRobotSnapshot> {
+public interface IRobot {
 
    /**
     * Adds snapshot too the robot. Returns false if the robot already contains a
@@ -26,7 +26,7 @@ public interface IRobot<S extends IRobotSnapshot> {
     *           the robot snapshot to add.
     * @return if the robot snapshot was added properly.
     */
-   public boolean add(S snapshot);
+   public boolean add(IRobotSnapshot snapshot);
 
    /**
     * Returns the most recent snapshot of the robot. That is, the last element
@@ -35,7 +35,7 @@ public interface IRobot<S extends IRobotSnapshot> {
     * 
     * @return the most recent snapshot of the robot.
     */
-   public S getSnapshot();
+   public IRobotSnapshot getSnapshot();
 
    /**
     * Returns the snapshot for the specified time in the most recent series. If
@@ -47,7 +47,7 @@ public interface IRobot<S extends IRobotSnapshot> {
     *           time of the snapshot to return.
     * @return the snapshot for the specified time.
     */
-   public S getSnapshot(long time);
+   public IRobotSnapshot getSnapshot(long time);
 
    /**
     * Returns the snapshot for the specified time and match round. If the round
@@ -60,7 +60,7 @@ public interface IRobot<S extends IRobotSnapshot> {
     *           the match round series to search in.
     * @return the snapshot for the specified time and match round.
     */
-   public S getSnapshot(long time, int round);
+   public IRobotSnapshot getSnapshot(long time, int round);
 
    /**
     * Returns an iterator of the robot for the most recent series. This iterator
@@ -68,7 +68,7 @@ public interface IRobot<S extends IRobotSnapshot> {
     * 
     * @return the match round movie of the robot.
     */
-   public ListIterator<S> getMovie();
+   public ListIterator<IRobotSnapshot> getMovie();
 
    /**
     * Returns an iterator of the robot starting at the specified time. The round
@@ -80,7 +80,7 @@ public interface IRobot<S extends IRobotSnapshot> {
     *           the time to start the iterator at.
     * @return the match round movie of the robot starting at the specified time.
     */
-   public ListIterator<S> getMovie(long time);
+   public ListIterator<IRobotSnapshot> getMovie(long time);
 
    /**
     * Returns an iterator of the robot for the specified match round and at the
@@ -95,7 +95,7 @@ public interface IRobot<S extends IRobotSnapshot> {
     *           the match round of the iterator.
     * @return the movie of the robot for the specified match round and time.
     */
-   public ListIterator<S> getMovie(long time, int round);
+   public ListIterator<IRobotSnapshot> getMovie(long time, int round);
 
    /**
     * Returns a set of all the match round values that are mapped to a series.
