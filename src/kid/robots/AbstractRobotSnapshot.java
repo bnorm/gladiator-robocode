@@ -9,61 +9,63 @@ import static kid.utils.Format.dec3;
  * An abstract representation of a Robocode robot at a moment in time.
  * 
  * @author Brian Norman (KID)
- * @version 1.1
+ * @version 1.2
  */
 abstract class AbstractRobotSnapshot implements IRobotSnapshot {
 
    /**
-    * The energy that a robot has when it is destroyed.
+    * Determines if a deserialized file is compatible with this class.
+    * Maintainers must change this value if and only if the new version of this
+    * class is not compatible with old versions.
     */
-   private static final double DEAD_ENERGY_ = -1.0D;
+   private static final long serialVersionUID = -71766535645624169L;
 
    /**
     * The name of the robot.
     */
-   private String              name_;
+   private String            name_;
 
    /**
     * The x coordinate of the robot.
     */
-   private double              x_;
+   private double            x_;
 
    /**
     * The y coordinate of the robot.
     */
-   private double              y_;
+   private double            y_;
 
    /**
     * The energy of the robot.
     */
-   private double              energy_;
+   private double            energy_;
 
    /**
     * The heading in radians of the robot.
     */
-   private double              heading_;
+   private double            heading_;
 
    /**
     * The speed in pixels per tick of the robot.
     */
-   private double              velocity_;
+   private double            velocity_;
 
    /**
     * The round time the information of the robot was updated.
     */
-   private long                time_;
+   private long              time_;
 
    /**
     * The match round the information of the robot was updated.
     */
-   private int                 round_;
+   private int               round_;
 
    /**
     * Default constructor. Creates a blank snapshot that represents a dead robot
     * with no name.
     */
    protected AbstractRobotSnapshot() {
-      init(new String(), -1.0, -1.0, DEAD_ENERGY_, 0.0D, 0.0D, -1, -1);
+      init(new String(), -1.0, -1.0, -1.0, 0.0, 0.0, -1, -1);
    }
 
    /**
@@ -86,7 +88,8 @@ abstract class AbstractRobotSnapshot implements IRobotSnapshot {
     * @param round
     *           match round the information was retrieved.
     */
-   protected AbstractRobotSnapshot(String name, double x, double y, double energy, double heading, double velocity, long time, int round) {
+   protected AbstractRobotSnapshot(String name, double x, double y, double energy, double heading, double velocity,
+         long time, int round) {
       init(name, x, y, energy, heading, velocity, time, round);
    }
 
@@ -97,8 +100,8 @@ abstract class AbstractRobotSnapshot implements IRobotSnapshot {
     *           the snapshot to copy.
     */
    protected AbstractRobotSnapshot(IRobotSnapshot snapshot) {
-      init(snapshot.getName(), snapshot.getX(), snapshot.getY(), snapshot.getEnergy(), snapshot.getHeading(), snapshot.getVelocity(),
-            snapshot.getTime(), snapshot.getRound());
+      init(snapshot.getName(), snapshot.getX(), snapshot.getY(), snapshot.getEnergy(), snapshot.getHeading(),
+            snapshot.getVelocity(), snapshot.getTime(), snapshot.getRound());
    }
 
    /**
@@ -201,8 +204,9 @@ abstract class AbstractRobotSnapshot implements IRobotSnapshot {
     */
    @Override
    public String toString() {
-      return new String(this.getClass().getName() + "[n:" + getName() + " c:" + coordinateDec0(getX(), getY()) + " e:" + dec1(getEnergy()) + " h:"
-            + dec3(getHeading()) + " v:" + dec0(getVelocity()) + " t:" + getTime() + " r:" + getRound() + "]");
+      return new String(this.getClass().getName() + "[n:" + getName() + " c:" + coordinateDec0(getX(), getY()) + " e:"
+            + dec1(getEnergy()) + " h:" + dec3(getHeading()) + " v:" + dec0(getVelocity()) + " t:" + getTime() + " r:"
+            + getRound() + "]");
    }
 
    /**
@@ -221,7 +225,7 @@ abstract class AbstractRobotSnapshot implements IRobotSnapshot {
       if (obj instanceof IRobotSnapshot) {
          IRobotSnapshot snapshot = (IRobotSnapshot) obj;
          /**@format:off*/
-         return getName() != null && getName().equals(snapshot.getName()) && 
+         return getName() != null && getName().equals(snapshot.getName()) &&
                snapshot.getTime() == getTime() &&
                snapshot.getRound() == getRound() &&
                snapshot.getX() == getX() &&

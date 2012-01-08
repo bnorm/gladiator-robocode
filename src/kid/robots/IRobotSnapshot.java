@@ -1,12 +1,14 @@
 package kid.robots;
 
+import java.io.Serializable;
+
 /**
  * Represents a Robocode robot at a moment in time.
  * 
  * @author Brian Norman (KID)
- * @version 1.1
+ * @version 1.2
  */
-public interface IRobotSnapshot {
+public interface IRobotSnapshot extends Serializable {
 
    /**
     * Returns the name of the robot.

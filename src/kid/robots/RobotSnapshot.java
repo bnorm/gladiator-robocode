@@ -4,9 +4,16 @@ package kid.robots;
  * The concrete representation of a Robocode robot at a moment in time.
  * 
  * @author Brian Norman (KID)
- * @version 1.0
+ * @version 1.1
  */
 class RobotSnapshot extends AbstractRobotSnapshot {
+
+   /**
+    * Determines if a deserialized file is compatible with this class.
+    * Maintainers must change this value if and only if the new version of this
+    * class is not compatible with old versions.
+    */
+   private static final long serialVersionUID = 7048121228516395553L;
 
    /**
     * Default constructor. Creates a blank snapshot that represents a dead robot
@@ -36,7 +43,8 @@ class RobotSnapshot extends AbstractRobotSnapshot {
     * @param round
     *           match round the information was retrieved.
     */
-   public RobotSnapshot(String name, double x, double y, double energy, double heading, double velocity, long time, int round) {
+   public RobotSnapshot(String name, double x, double y, double energy, double heading, double velocity, long time,
+         int round) {
       super(name, x, y, energy, heading, velocity, time, round);
    }
 
