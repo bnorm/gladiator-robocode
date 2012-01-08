@@ -13,9 +13,16 @@ import java.util.Set;
  * robots changes through each round.
  * 
  * @author Brian Norman (KID)
- * @version 1.0
+ * @version 1.1
  */
 public interface IRobot {
+
+   /**
+    * Returns the name of the robot.
+    * 
+    * @return the name of the robot.
+    */
+   public String getName();
 
    /**
     * Adds snapshot too the robot. Returns false if the robot already contains a

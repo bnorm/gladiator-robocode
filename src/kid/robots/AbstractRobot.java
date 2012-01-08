@@ -14,9 +14,14 @@ import java.util.Set;
  * See {@link IRobot} for details of the requirements of a robot.
  * 
  * @author Brian Norman (KID)
- * @version 1.0
+ * @version 1.1
  */
 abstract class AbstractRobot implements IRobot {
+
+   /**
+    * The name of the robot.
+    */
+   private String                             name_;
 
    /**
     * The map of time series keyed by the match round.
@@ -38,9 +43,23 @@ abstract class AbstractRobot implements IRobot {
     * Creates a new robot.
     */
    public AbstractRobot() {
-      rounds_ = new Hashtable<>();
-      movie_ = null;
-      recent_ = null;
+      this.name_ = new String();
+      this.rounds_ = new Hashtable<>();
+      this.movie_ = null;
+      this.recent_ = null;
+   }
+
+   /**
+    * Creates a new robot with the specified name.
+    * 
+    * @param name
+    *           the name of the robot.
+    */
+   public AbstractRobot(String name) {
+      this.name_ = name;
+      this.rounds_ = new Hashtable<>();
+      this.movie_ = null;
+      this.recent_ = null;
    }
 
    /**
@@ -50,7 +69,7 @@ abstract class AbstractRobot implements IRobot {
     *           the robot to copy.
     */
    protected AbstractRobot(IRobot robot) {
-      this();
+      this(robot.getName());
 
       for (Integer i : robot.getRounds()) {
          ListIterator<IRobotSnapshot> movie = robot.getMovie(0, i);
@@ -68,16 +87,28 @@ abstract class AbstractRobot implements IRobot {
 
    /**
     * {@inheritDoc}
-    * 
-    * Returns null if there have been no snapshots added to the robot.
+    */
+   @Override
+   public String getName() {
+      return name_;
+   }
+
+   /**
+    * {@inheritDoc}
     * 
     * @throws NullPointerException
     *            if <code>snapshot</code> is null.
+    * @throws IllegalArgumentException
+    *            if the name of <code>snapshot</code> does not match the name of
+    *            the robot.
     */
    @Override
    public boolean add(IRobotSnapshot snapshot) {
       if (snapshot == null) {
          throw new NullPointerException("IRobotSnapshot must not be null.");
+      } else if (!snapshot.getName().equals(name_)) {
+         throw new IllegalArgumentException("Name of snapshot must match the name of the robot (" + recent_.getName()
+               + " != " + snapshot.getName() + ").");
       }
 
       movie_ = rounds_.get(snapshot.getRound());

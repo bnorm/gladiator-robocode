@@ -8,7 +8,7 @@ import robocode.TeamRobot;
  * A factory class for creating new robots.
  * 
  * @author Brian Norman (KID)
- * @version 1.0
+ * @version 1.1
  */
 public class RobotFactory implements IRobotFactory {
 
@@ -62,9 +62,9 @@ public class RobotFactory implements IRobotFactory {
 
       IRobot r = null;
       if (robot instanceof TeamRobot && ((TeamRobot) robot).isTeammate(event.getName())) {
-         r = createTeammate();
+         r = new Teammate(event.getName());
       } else {
-         r = createEnemy();
+         r = new Enemy(event.getName());
       }
       r.add(snapshots_.create(event, robot));
 
@@ -89,9 +89,9 @@ public class RobotFactory implements IRobotFactory {
 
       IRobot r = null;
       if (robot instanceof TeamRobot && ((TeamRobot) robot).isTeammate(snapshot.getName())) {
-         r = createTeammate();
+         r = new Teammate(snapshot.getName());
       } else {
-         r = createEnemy();
+         r = new Enemy(snapshot.getName());
       }
       r.add(snapshot);
 
@@ -110,7 +110,7 @@ public class RobotFactory implements IRobotFactory {
          throw new NullPointerException("Robot must not be null.");
       }
 
-      IRobot r = new Teammate();
+      IRobot r = new Teammate(robot.getName());
       r.add(snapshots_.create(robot));
       return r;
    }

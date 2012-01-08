@@ -5,7 +5,7 @@ package kid.robots;
  * represents a teammate robot.
  * 
  * @author Brian Norman (KID)
- * @version 1.0
+ * @version 1.1
  */
 public class Teammate extends AbstractRobot {
 
@@ -14,6 +14,16 @@ public class Teammate extends AbstractRobot {
     */
    protected Teammate() {
       super();
+   }
+
+   /**
+    * Creates a new teammate robot with the specified name.
+    * 
+    * @param name
+    *           the name of the teammate.
+    */
+   public Teammate(String name) {
+      super(name);
    }
 
    /**

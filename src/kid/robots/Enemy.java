@@ -5,7 +5,7 @@ package kid.robots;
  * represents an enemy robot.
  * 
  * @author Brian Norman (KID)
- * @version 1.0
+ * @version 1.1
  */
 public class Enemy extends AbstractRobot {
 
@@ -14,6 +14,16 @@ public class Enemy extends AbstractRobot {
     */
    protected Enemy() {
       super();
+   }
+
+   /**
+    * Creates a new enemy robot with the specified name.
+    * 
+    * @param name
+    *           the name of the enemy.
+    */
+   public Enemy(String name) {
+      super(name);
    }
 
    /**
