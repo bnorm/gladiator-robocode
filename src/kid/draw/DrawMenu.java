@@ -99,15 +99,15 @@ public class DrawMenu {
     * <code>false</code>. See {@link #getValue(String, String, boolean)} for a
     * usage example.
     * 
-    * @param item
-    *           the title of the item
     * @param menu
     *           the title of the sub-menu.
+    * @param item
+    *           the title of the item
     * @return the current value of the item.
     * @see #getValue(String, String, boolean)
     */
-   public static boolean getValue(String item, String menu) {
-      return getValue(item, menu, false);
+   public static boolean getValue(String menu, String item) {
+      return getValue(menu, item, false);
    }
 
    /**
@@ -126,15 +126,15 @@ public class DrawMenu {
     * ...
     * </pre>
     * 
-    * @param item
-    *           the title of the item
     * @param menu
     *           the title of the sub-menu.
+    * @param item
+    *           the title of the item
     * @param def
     *           the default value for the item.
     * @return the current value of the item.
     */
-   public static boolean getValue(String item, String menu, boolean def) {
+   public static boolean getValue(String menu, String item, boolean def) {
       Menu m = menus.get(menu);
       if (m == null) {
          menus.put(menu, m = new Menu());
