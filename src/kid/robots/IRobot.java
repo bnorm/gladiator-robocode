@@ -39,6 +39,10 @@ public interface IRobot {
     * Returns the most recent snapshot of the robot. That is, the last element
     * of the series that was most recently added to. This series is assumed to
     * be the current series for the match round.
+    * <p>
+    * If no snapshot has been added to the robot then a blank snapshot is
+    * return. See {@link IRobotSnapshot} for what is considered a blank
+    * snapshot.
     * 
     * @return the most recent snapshot of the robot.
     */
@@ -46,9 +50,12 @@ public interface IRobot {
 
    /**
     * Returns the snapshot for the specified time in the most recent series. If
-    * the there is no recent snapshot, <code>null</code> is returned. If the
-    * time does not exist in the series then the most recent snapshot up to that
-    * time is returned.
+    * the time does not exist in the series then the most recent snapshot up to
+    * that time is returned.
+    * <p>
+    * If no snapshot has been added to the robot then a blank snapshot is
+    * return. See {@link IRobotSnapshot} for what is considered a blank
+    * snapshot.
     * 
     * @param time
     *           time of the snapshot to return.
@@ -57,9 +64,13 @@ public interface IRobot {
    public IRobotSnapshot getSnapshot(long time);
 
    /**
-    * Returns the snapshot for the specified time and match round. If the round
-    * does not exist, <code>null</code> is returned. If the time does not exist
-    * in the series then the most recent snapshot up to that time is returned.
+    * Returns the snapshot for the specified time and match round. If the time
+    * does not exist in the series then the most recent snapshot up to that time
+    * is returned.
+    * <p>
+    * If no snapshot has been added to the robot or a snapshot for the specified
+    * round does not exist then a blank snapshot is return. See
+    * {@link IRobotSnapshot} for what is considered a blank snapshot.
     * 
     * @param time
     *           time of the snapshot to return.
@@ -79,9 +90,9 @@ public interface IRobot {
 
    /**
     * Returns an iterator of the robot starting at the specified time. The round
-    * is assumed to be the most recent. If the there are no snapshots for the
-    * robot, <code>null</code> is returned. If the exact time does not exist in
-    * the series, the iterator is started where the value would exist if it did.
+    * is assumed to be the most recent. If the exact time does not exist in the
+    * series, the iterator is started where the value would be located in the
+    * series.
     * 
     * @param time
     *           the time to start the iterator at.
@@ -91,10 +102,8 @@ public interface IRobot {
 
    /**
     * Returns an iterator of the robot for the specified match round and at the
-    * specified time. If the round does not exist or if there are no snapshot
-    * for the robot, <code>null</code> is returned. If the exact time does not
-    * exist in the series, the iterator is started where the value would exist
-    * if it did.
+    * specified time. If the exact time does not exist in the series, the
+    * iterator is started where the value would be located in the series.
     * 
     * @param time
     *           the time to start the iterator at.

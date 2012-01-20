@@ -2,7 +2,7 @@ package kid.robots;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -29,13 +29,13 @@ public class AbstractRobotTest {
       };
 
       // Testing snapshot assumptions
-      assertNull("Snapshot should be null.", r.getSnapshot());
-      assertNull("Snapshot should be null.", r.getSnapshot(0));
-      assertNull("Snapshot should be null.", r.getSnapshot(3));
-      assertNull("Snapshot should be null.", r.getSnapshot(0, 0));
-      assertNull("Snapshot should be null.", r.getSnapshot(3, 0));
-      assertNull("Snapshot should be null.", r.getSnapshot(0, 3));
-      assertNull("Snapshot should be null.", r.getSnapshot(3, 3));
+      assertNotNull("Snapshot should not be null.", r.getSnapshot());
+      assertNotNull("Snapshot should not be null.", r.getSnapshot(0));
+      assertNotNull("Snapshot should not be null.", r.getSnapshot(3));
+      assertNotNull("Snapshot should not be null.", r.getSnapshot(0, 0));
+      assertNotNull("Snapshot should not be null.", r.getSnapshot(3, 0));
+      assertNotNull("Snapshot should not be null.", r.getSnapshot(0, 3));
+      assertNotNull("Snapshot should not be null.", r.getSnapshot(3, 3));
 
       try {
          r.getSnapshot(-1);
@@ -67,25 +67,25 @@ public class AbstractRobotTest {
 
       // Testing movie assumptions
       ListIterator<IRobotSnapshot> iter = r.getMovie();
-      assertNull("ListIterator should be null.", iter);
+      assertNotNull("ListIterator should not be null.", iter);
 
       iter = r.getMovie(0);
-      assertNull("ListIterator should be null.", iter);
+      assertNotNull("ListIterator should not be null.", iter);
 
       iter = r.getMovie(3);
-      assertNull("ListIterator should be null.", iter);
+      assertNotNull("ListIterator should not be null.", iter);
 
       iter = r.getMovie(0, 0);
-      assertNull("ListIterator should be null.", iter);
+      assertNotNull("ListIterator should not be null.", iter);
 
       iter = r.getMovie(3, 0);
-      assertNull("ListIterator should be null.", iter);
+      assertNotNull("ListIterator should not be null.", iter);
 
       iter = r.getMovie(0, 3);
-      assertNull("ListIterator should be null.", iter);
+      assertNotNull("ListIterator should not be null.", iter);
 
       iter = r.getMovie(3, 3);
-      assertNull("ListIterator should be null.", iter);
+      assertNotNull("ListIterator should not be null.", iter);
 
       try {
          iter = r.getMovie(-1);
@@ -259,8 +259,13 @@ public class AbstractRobotTest {
       assertEquals("Snapshot at time=0 in round 2 should be s3", s3, r.getSnapshot(5, 2));
       assertEquals("Snapshot at time=0 in round 2 should be s3", s3, r.getSnapshot(6, 2));
 
-      assertNull("Snapshot at time=0 in round 3 should be null", r.getSnapshot(0, 3));
-      assertNull("Snapshot at time=5 in round 3 should be null", r.getSnapshot(5, 3));
+      assertNotNull("Snapshot at time=0 in round 3 should not be null", r.getSnapshot(0, 3));
+      assertEquals("Snapshot at time=0 in round 3 should be blank", "", r.getSnapshot(0, 3).getName());
+      assertTrue("Snapshot at time=0 in round 3 should be blank", r.getSnapshot(0, 3).getEnergy() < 0);
+
+      assertNotNull("Snapshot at time=5 in round 3 should not be null", r.getSnapshot(5, 3));
+      assertEquals("Snapshot at time=5 in round 3 should be blank", "", r.getSnapshot(5, 3).getName());
+      assertTrue("Snapshot at time=5 in round 3 should be blank", r.getSnapshot(5, 3).getEnergy() < 0);
    }
 
    /**
@@ -533,10 +538,14 @@ public class AbstractRobotTest {
 
       // Test round 2
       iter = r.getMovie(0, 2);
-      assertNull("Movie for round 2 should be null.", iter);
+      assertNotNull("Movie for round 2 should not be null.", iter);
+      assertFalse("Movie for round 2 should not have next.", iter.hasNext());
+      assertFalse("Movie for round 2 should not have previous.", iter.hasPrevious());
 
       iter = r.getMovie(3, 2);
-      assertNull("Movie for round 2 should be null.", iter);
+      assertNotNull("Movie for round 2 should not be null.", iter);
+      assertFalse("Movie for round 2 should not have next.", iter.hasNext());
+      assertFalse("Movie for round 2 should not have previous.", iter.hasPrevious());
    }
 
    /**
@@ -606,7 +615,7 @@ public class AbstractRobotTest {
     */
    @Test
    public void testGetIndex() {
-      LinkedList<RobotSnapshot> list = new LinkedList<>();
+      LinkedList<IRobotSnapshot> list = new LinkedList<>();
       list.add(new RobotSnapshot("", 0, 0, 0, 0, 0, 1, 0));
       list.add(new RobotSnapshot("", 0, 0, 0, 0, 0, 2, 0));
       list.add(new RobotSnapshot("", 0, 0, 0, 0, 0, 4, 0));
@@ -642,7 +651,7 @@ public class AbstractRobotTest {
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
       RobotSnapshot s8 = new RobotSnapshot("", 0, 0, 0, 0, 0, 8, 0);
 
-      LinkedList<RobotSnapshot> list = new LinkedList<>();
+      LinkedList<IRobotSnapshot> list = new LinkedList<>();
       list.add(s1);
       list.add(s2);
       list.add(s4);
@@ -679,14 +688,14 @@ public class AbstractRobotTest {
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
       RobotSnapshot s8 = new RobotSnapshot("", 0, 0, 0, 0, 0, 8, 0);
 
-      LinkedList<RobotSnapshot> list = new LinkedList<>();
+      LinkedList<IRobotSnapshot> list = new LinkedList<>();
       list.add(s1);
       list.add(s2);
       list.add(s4);
       list.add(s5);
       list.add(s8);
 
-      RobotSnapshot[] snaps = new RobotSnapshot[11];
+      IRobotSnapshot[] snaps = new RobotSnapshot[11];
       for (int i = 0; i < snaps.length; i++) {
          snaps[i] = AbstractRobot.getSnapshot(list, i);
       }
