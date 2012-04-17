@@ -72,4 +72,9 @@ public final class Utils {
       return l * Trig.cos(a);
    }
 
+   // TODO document
+   public static double sign(double n) {
+      return (n < 0.0 ? -1 : 1);
+   }
+
 }
