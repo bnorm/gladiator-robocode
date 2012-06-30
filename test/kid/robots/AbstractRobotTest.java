@@ -615,7 +615,7 @@ public class AbstractRobotTest {
     */
    @Test
    public void testGetIndex() {
-      LinkedList<IRobotSnapshot> list = new LinkedList<>();
+      LinkedList<IRobotSnapshot> list = new LinkedList<IRobotSnapshot>();
       list.add(new RobotSnapshot("", 0, 0, 0, 0, 0, 1, 0));
       list.add(new RobotSnapshot("", 0, 0, 0, 0, 0, 2, 0));
       list.add(new RobotSnapshot("", 0, 0, 0, 0, 0, 4, 0));
@@ -651,7 +651,7 @@ public class AbstractRobotTest {
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
       RobotSnapshot s8 = new RobotSnapshot("", 0, 0, 0, 0, 0, 8, 0);
 
-      LinkedList<IRobotSnapshot> list = new LinkedList<>();
+      LinkedList<IRobotSnapshot> list = new LinkedList<IRobotSnapshot>();
       list.add(s1);
       list.add(s2);
       list.add(s4);
@@ -688,7 +688,7 @@ public class AbstractRobotTest {
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
       RobotSnapshot s8 = new RobotSnapshot("", 0, 0, 0, 0, 0, 8, 0);
 
-      LinkedList<IRobotSnapshot> list = new LinkedList<>();
+      LinkedList<IRobotSnapshot> list = new LinkedList<IRobotSnapshot>();
       list.add(s1);
       list.add(s2);
       list.add(s4);
@@ -712,5 +712,4 @@ public class AbstractRobotTest {
       assertEquals("Snapshot returned for time=9 should be s8.", s8, snaps[9]);
       assertEquals("Snapshot returned for time=10 should be s8.", s8, snaps[10]);
    }
-
 }

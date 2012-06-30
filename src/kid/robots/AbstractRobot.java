@@ -54,8 +54,8 @@ abstract class AbstractRobot implements IRobot {
     */
    public AbstractRobot(String name) {
       this.name_ = name;
-      this.rounds_ = new Hashtable<>();
-      this.movie_ = new LinkedList<>();
+      this.rounds_ = new Hashtable<Integer, List<IRobotSnapshot>>();
+      this.movie_ = new LinkedList<IRobotSnapshot>();
       this.recent_ = new RobotSnapshot();
    }
 
@@ -70,7 +70,7 @@ abstract class AbstractRobot implements IRobot {
 
       for (Integer i : robot.getRounds()) {
          ListIterator<IRobotSnapshot> movie = robot.getMovie(0, i);
-         rounds_.put(i, movie_ = new LinkedList<>());
+         rounds_.put(i, movie_ = new LinkedList<IRobotSnapshot>());
          while (movie.hasNext()) {
             movie_.add(movie.next());
          }
@@ -110,7 +110,7 @@ abstract class AbstractRobot implements IRobot {
 
       movie_ = rounds_.get(snapshot.getRound());
       if (movie_ == null) {
-         rounds_.put(snapshot.getRound(), movie_ = new LinkedList<>());
+         rounds_.put(snapshot.getRound(), movie_ = new LinkedList<IRobotSnapshot>());
       }
 
       int index = getIndex(movie_, snapshot.getTime());
