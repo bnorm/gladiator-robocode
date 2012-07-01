@@ -20,6 +20,7 @@ public class AbstractRobotSnapshotTest {
    @Test
    public void testAbstractRobotSnapshot() {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot() {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Name for snapshot should be an empty string.", new String(), s.getName());
@@ -40,6 +41,7 @@ public class AbstractRobotSnapshotTest {
    @Test
    public void testAbstractRobotSnapshotStringDoubleDoubleDoubleDoubleDoubleLongInt() {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Name for snapshot should be \'test\'.", "test", s.getName());
@@ -52,6 +54,7 @@ public class AbstractRobotSnapshotTest {
       assertEquals("Round for snapshot should be 0.", 0, s.getRound());
 
       s = new AbstractRobotSnapshot("TEST", 5.0, 3.0, 200.0, -70.0, 23.0, 34, 42) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Name for snapshot should be \'TEST\'.", "TEST", s.getName());
@@ -72,6 +75,7 @@ public class AbstractRobotSnapshotTest {
    @Test
    public void testAbstractRobotSnapshotIRobotSnapshot() {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("TEST", 5.0, 3.0, 200.0, -70.0, 23.0, 34, 42) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Name for snapshot should be \'TEST\'.", "TEST", s.getName());
@@ -84,6 +88,7 @@ public class AbstractRobotSnapshotTest {
       assertEquals("Round for snapshot should be 42.", 42, s.getRound());
 
       AbstractRobotSnapshot copy = new AbstractRobotSnapshot(s) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Name for snapshot should be \'TEST\'.", "TEST", copy.getName());
@@ -102,11 +107,13 @@ public class AbstractRobotSnapshotTest {
    @Test
    public void testGetName() {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Name for snapshot should be \'test\'.", "test", s.getName());
 
       s = new AbstractRobotSnapshot("test.-#;lkasd39uvn2", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Name for snapshot should be \'test.-#;lkasd39uvn2\'.", "test.-#;lkasd39uvn2", s.getName());
@@ -118,16 +125,19 @@ public class AbstractRobotSnapshotTest {
    @Test
    public void testGetX() {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("X coordinate for snapshot should be 0.0.", 0.0, s.getX(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 2951.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("X coordinate for snapshot should be 2951.0.", 2951.0, s.getX(), 0.0);
 
       s = new AbstractRobotSnapshot("test", -2951.92765283975256, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("X coordinate for snapshot should be -2951.92765283975256.", -2951.92765283975256, s.getX(), 0.0);
@@ -139,16 +149,19 @@ public class AbstractRobotSnapshotTest {
    @Test
    public void testGetY() {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Y coordinate for snapshot should be 0.0.", 0.0, s.getY(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 2951.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Y coordinate for snapshot should be 2951.0.", 2951.0, s.getY(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, -2951.92765283975256, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Y coordinate for snapshot should be -2951.92765283975256.", -2951.92765283975256, s.getY(), 0.0);
@@ -160,16 +173,19 @@ public class AbstractRobotSnapshotTest {
    @Test
    public void testGetEnergy() {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Energy for snapshot should be 0.0.", 0.0, s.getEnergy(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 2951.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Energy for snapshot should be 2951.0.", 2951.0, s.getEnergy(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, -2951.92765283975256, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Energy for snapshot should be -2951.92765283975256.", -2951.92765283975256, s.getEnergy(), 0.0);
@@ -181,16 +197,19 @@ public class AbstractRobotSnapshotTest {
    @Test
    public void testGetHeading() {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Heading for snapshot should be 0.0.", 0.0, s.getHeading(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 2951.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Heading for snapshot should be -2951.0.", 2951.0, s.getHeading(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, -2951.92765283975256, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Heading for snapshot should be -2951.92765283975256.", -2951.92765283975256, s.getHeading(), 0.0);
@@ -202,16 +221,19 @@ public class AbstractRobotSnapshotTest {
    @Test
    public void testGetVelocity() {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Velocity for snapshot should be 0.0.", 0.0, s.getVelocity(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 2951.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Velocity for snapshot should be -2951.0.", 2951.0, s.getVelocity(), 0.0);
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, -2951.92765283975256, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Velocity for snapshot should be -2951.92765283975256.", -2951.92765283975256, s.getVelocity(), 0.0);
@@ -223,16 +245,19 @@ public class AbstractRobotSnapshotTest {
    @Test
    public void testGetTime() {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Time for snapshot should be 0.", 0, s.getTime());
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 2951, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Time for snapshot should be 2951.", 2951, s.getTime());
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, -2951, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Time for snapshot should be -2951.", -2951, s.getTime());
@@ -244,16 +269,19 @@ public class AbstractRobotSnapshotTest {
    @Test
    public void testGetRound() {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Round for snapshot should be 0.", 0, s.getRound());
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 2951) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Round for snapshot should be 2951.", 2951, s.getRound());
 
       s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, -2951) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Round for snapshot should be -2951.", -2951, s.getRound());
@@ -273,11 +301,13 @@ public class AbstractRobotSnapshotTest {
    @Test
    public void testHashCode() {
       AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Hash code for snapshot should be " + "test".hashCode() + ".", "test".hashCode(), s.hashCode());
 
       s = new AbstractRobotSnapshot("test.-#;lkasd39uvn2", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertEquals("Hash code for snapshot should be " + "test.-#;lkasd39uvn2".hashCode() + ".",
@@ -290,8 +320,10 @@ public class AbstractRobotSnapshotTest {
    @Test
    public void testEqualsObject() {
       AbstractRobotSnapshot s1 = new AbstractRobotSnapshot("TEST", 5.0, 3.0, 200.0, -70.0, 23.0, 34, 42) {
+         private static final long serialVersionUID = 1L;
       };
       AbstractRobotSnapshot s2 = new AbstractRobotSnapshot("TEST", 5.0, 3.0, 200.0, -70.0, 23.0, 34, 42) {
+         private static final long serialVersionUID = 1L;
       };
 
       assertFalse("Snapshots s1 and s2 should not be the same object.", (s1 == s2));
