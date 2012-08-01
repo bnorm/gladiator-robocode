@@ -15,8 +15,8 @@ import org.junit.Test;
 /**
  * Test class for {@link AbstractRobot}.
  * 
- * @author Brian Norman (KID)
- * @version 1.0
+ * @author Brian Norman
+ * @version 1.1
  */
 public class AbstractRobotTest {
 
@@ -121,6 +121,176 @@ public class AbstractRobotTest {
    }
 
    /**
+    * Test method for {@link AbstractRobot#AbstractRobot(String)}.
+    */
+   @Test
+   public void testAbstractRobotString() {
+      AbstractRobot r = new AbstractRobot("Name") {
+      };
+
+      // Testing snapshot assumptions
+      assertNotNull("Snapshot should not be null.", r.getSnapshot());
+      assertNotNull("Snapshot should not be null.", r.getSnapshot(0));
+      assertNotNull("Snapshot should not be null.", r.getSnapshot(3));
+      assertNotNull("Snapshot should not be null.", r.getSnapshot(0, 0));
+      assertNotNull("Snapshot should not be null.", r.getSnapshot(3, 0));
+      assertNotNull("Snapshot should not be null.", r.getSnapshot(0, 3));
+      assertNotNull("Snapshot should not be null.", r.getSnapshot(3, 3));
+
+      try {
+         r.getSnapshot(-1);
+         fail("Method should throw an error.");
+      } catch (Exception e) {
+         assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
+      }
+
+      try {
+         r.getSnapshot(-1, 0);
+         fail("Method should throw an error.");
+      } catch (Exception e) {
+         assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
+      }
+
+      try {
+         r.getSnapshot(0, -1);
+         fail("Method should throw an error.");
+      } catch (Exception e) {
+         assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
+      }
+
+      try {
+         r.getSnapshot(-1, -1);
+         fail("Method should throw an error.");
+      } catch (Exception e) {
+         assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
+      }
+
+      // Testing movie assumptions
+      ListIterator<IRobotSnapshot> iter = r.getMovie();
+      assertNotNull("ListIterator should not be null.", iter);
+
+      iter = r.getMovie(0);
+      assertNotNull("ListIterator should not be null.", iter);
+
+      iter = r.getMovie(3);
+      assertNotNull("ListIterator should not be null.", iter);
+
+      iter = r.getMovie(0, 0);
+      assertNotNull("ListIterator should not be null.", iter);
+
+      iter = r.getMovie(3, 0);
+      assertNotNull("ListIterator should not be null.", iter);
+
+      iter = r.getMovie(0, 3);
+      assertNotNull("ListIterator should not be null.", iter);
+
+      iter = r.getMovie(3, 3);
+      assertNotNull("ListIterator should not be null.", iter);
+
+      try {
+         iter = r.getMovie(-1);
+         fail("Method should throw an error.");
+      } catch (Exception e) {
+         assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
+      }
+
+      try {
+         iter = r.getMovie(-1, 0);
+         fail("Method should throw an error.");
+      } catch (Exception e) {
+         assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
+      }
+
+      try {
+         iter = r.getMovie(0, -1);
+         fail("Method should throw an error.");
+      } catch (Exception e) {
+         assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
+      }
+
+      try {
+         iter = r.getMovie(-1, -1);
+         fail("Method should throw an error.");
+      } catch (Exception e) {
+         assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
+      }
+
+      // Testing round set assumptions
+      Set<Integer> set = r.getRounds();
+      assertEquals("Set should be of size zero.", 0, set.size());
+   }
+
+   /**
+    * Test method for {@link AbstractRobot#AbstractRobot(IRobot)}.
+    */
+   @Test
+   public void testAbstractRobotIRobot() {
+      String name = "Name";
+      AbstractRobot r = new AbstractRobot(name) {
+      };
+
+      RobotSnapshot s1 = new RobotSnapshot(name, 0, 0, 0, 0, 0, 1, 0);
+      RobotSnapshot s4 = new RobotSnapshot(name, 0, 0, 0, 0, 0, 4, 0);
+      RobotSnapshot s2 = new RobotSnapshot(name, 0, 0, 0, 0, 0, 2, 1);
+      RobotSnapshot s5 = new RobotSnapshot(name, 0, 0, 0, 0, 0, 5, 1);
+      RobotSnapshot s3 = new RobotSnapshot(name, 0, 0, 0, 0, 0, 3, 2);
+
+      r.add(s1);
+      r.add(s2);
+      r.add(s5);
+      r.add(s4);
+      r.add(s3);
+
+      AbstractRobot copy = new AbstractRobot(r) {
+      };
+
+      assertEquals("The name of the robot should be " + name + ".", name, r.getName());
+
+      assertEquals("Snapshot at time=0 in round 0 should be s1", s1, copy.getSnapshot(0, 0));
+      assertEquals("Snapshot at time=1 in round 0 should be s1", s1, copy.getSnapshot(1, 0));
+      assertEquals("Snapshot at time=2 in round 0 should be s1", s1, copy.getSnapshot(2, 0));
+      assertEquals("Snapshot at time=3 in round 0 should be s1", s1, copy.getSnapshot(3, 0));
+      assertEquals("Snapshot at time=4 in round 0 should be s4", s4, copy.getSnapshot(4, 0));
+      assertEquals("Snapshot at time=5 in round 0 should be s4", s4, copy.getSnapshot(5, 0));
+      assertEquals("Snapshot at time=6 in round 0 should be s4", s4, copy.getSnapshot(6, 0));
+
+      assertEquals("Snapshot at time=0 in round 1 should be s2", s2, copy.getSnapshot(0, 1));
+      assertEquals("Snapshot at time=1 in round 1 should be s2", s2, copy.getSnapshot(1, 1));
+      assertEquals("Snapshot at time=2 in round 1 should be s2", s2, copy.getSnapshot(2, 1));
+      assertEquals("Snapshot at time=3 in round 1 should be s2", s2, copy.getSnapshot(3, 1));
+      assertEquals("Snapshot at time=4 in round 1 should be s2", s2, copy.getSnapshot(4, 1));
+      assertEquals("Snapshot at time=5 in round 1 should be s5", s5, copy.getSnapshot(5, 1));
+      assertEquals("Snapshot at time=6 in round 1 should be s5", s5, copy.getSnapshot(6, 1));
+
+      assertEquals("Snapshot at time=0 in round 2 should be s3", s3, copy.getSnapshot(0, 2));
+      assertEquals("Snapshot at time=0 in round 2 should be s3", s3, copy.getSnapshot(1, 2));
+      assertEquals("Snapshot at time=0 in round 2 should be s3", s3, copy.getSnapshot(2, 2));
+      assertEquals("Snapshot at time=0 in round 2 should be s3", s3, copy.getSnapshot(3, 2));
+      assertEquals("Snapshot at time=0 in round 2 should be s3", s3, copy.getSnapshot(4, 2));
+      assertEquals("Snapshot at time=0 in round 2 should be s3", s3, copy.getSnapshot(5, 2));
+      assertEquals("Snapshot at time=0 in round 2 should be s3", s3, copy.getSnapshot(6, 2));
+
+      assertNotNull("Snapshot at time=0 in round 3 should not be null", copy.getSnapshot(0, 3));
+      assertEquals("Snapshot at time=0 in round 3 should be blank", "", copy.getSnapshot(0, 3).getName());
+      assertTrue("Snapshot at time=0 in round 3 should be blank", copy.getSnapshot(0, 3).getEnergy() < 0);
+
+      assertNotNull("Snapshot at time=5 in round 3 should not be null", copy.getSnapshot(5, 3));
+      assertEquals("Snapshot at time=5 in round 3 should be blank", "", copy.getSnapshot(5, 3).getName());
+      assertTrue("Snapshot at time=5 in round 3 should be blank", copy.getSnapshot(5, 3).getEnergy() < 0);
+   }
+
+   /**
+    * Test method for {@link AbstractRobot#getName()}.
+    */
+   @Test
+   public void testGetName() {
+      AbstractRobot r = new AbstractRobot("Name") {
+      };
+
+      assertEquals("The name of the robot should be Name.", "Name", r.getName());
+   }
+
+   /**
     * Test method for {@link AbstractRobot#add(IRobotSnapshot)}.
     */
    @Test
@@ -150,6 +320,28 @@ public class AbstractRobotTest {
       assertEquals("Fourth element should be s5.", s5, iter.next());
       assertTrue("Movie should contain 5 elements.", iter.hasNext());
       assertEquals("Fifth element should be s8.", s8, iter.next());
+
+      assertFalse("Adding the same snapshot again should fail.", r.add(s1));
+      assertFalse("Adding the same snapshot again should fail.", r.add(s2));
+      assertFalse("Adding the same snapshot again should fail.", r.add(s4));
+      assertFalse("Adding the same snapshot again should fail.", r.add(s5));
+      assertFalse("Adding the same snapshot again should fail.", r.add(s8));
+
+      RobotSnapshot s_other = new RobotSnapshot("Name", 0, 0, 0, 0, 0, 8, 0);
+
+      try {
+         r.add(s_other);
+         fail("Add should throw an error.");
+      } catch (Exception e) {
+         assertTrue("Add should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
+      }
+
+      try {
+         r.add(null);
+         fail("Add should throw an error.");
+      } catch (Exception e) {
+         assertTrue("Add should throw an NullPointerException.", e instanceof NullPointerException);
+      }
    }
 
    /**
@@ -638,6 +830,27 @@ public class AbstractRobotTest {
       assertEquals("Index returned for time=8 should be 4.", 4, indexes[8]);
       assertEquals("Index returned for time=9 should be 4.", 4, indexes[9]);
       assertEquals("Index returned for time=10 should be 4.", 4, indexes[10]);
+
+      try {
+         AbstractRobot.getIndex(null, 0);
+         fail("getIndex should throw an error.");
+      } catch (Exception e) {
+         assertTrue("getIndex should throw an NullPointerException.", e instanceof NullPointerException);
+      }
+
+      try {
+         AbstractRobot.getIndex(null, -1);
+         fail("getIndex should throw an error.");
+      } catch (Exception e) {
+         assertTrue("getIndex should throw an NullPointerException.", e instanceof NullPointerException);
+      }
+
+      try {
+         AbstractRobot.getIndex(list, -1);
+         fail("getIndex should throw an error.");
+      } catch (Exception e) {
+         assertTrue("getIndex should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
+      }
    }
 
    /**
@@ -675,6 +888,13 @@ public class AbstractRobotTest {
       assertEquals("ListIterator returned for time=8 should start at s8.", s8, iters[8].next());
       assertFalse("ListIterator returned for time=9 should start at the end.", iters[9].hasNext());
       assertFalse("ListIterator returned for time=10 should start at the end.", iters[10].hasNext());
+
+      try {
+         AbstractRobot.getMovie(null, -1);
+         fail("getMovie should throw an error.");
+      } catch (Exception e) {
+         assertTrue("getMovie should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
+      }
    }
 
    /**
@@ -711,5 +931,12 @@ public class AbstractRobotTest {
       assertEquals("Snapshot returned for time=8 should be s8.", s8, snaps[8]);
       assertEquals("Snapshot returned for time=9 should be s8.", s8, snaps[9]);
       assertEquals("Snapshot returned for time=10 should be s8.", s8, snaps[10]);
+
+      try {
+         AbstractRobot.getSnapshot(null, -1);
+         fail("getSnapshot should throw an error.");
+      } catch (Exception e) {
+         assertTrue("getSnapshot should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
+      }
    }
 }

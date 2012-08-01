@@ -1,5 +1,9 @@
 package kid.robots;
 
+import static kid.utils.Format.coordinateDec0;
+import static kid.utils.Format.dec0;
+import static kid.utils.Format.dec1;
+import static kid.utils.Format.dec3;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -10,7 +14,7 @@ import org.junit.Test;
  * Test class for {@link AbstractRobotSnapshotTest}.
  * 
  * @author Brian Norman
- * @version 1.1
+ * @version 1.2
  */
 public class AbstractRobotSnapshotTest {
 
@@ -68,8 +72,7 @@ public class AbstractRobotSnapshotTest {
    }
 
    /**
-    * Test method for
-    * {@link AbstractRobotSnapshot#AbstractRobotSnapshot(kid.robots.IRobotSnapshot)}
+    * Test method for {@link AbstractRobotSnapshot#AbstractRobotSnapshot(kid.robots.IRobotSnapshot)}
     * .
     */
    @Test
@@ -292,7 +295,19 @@ public class AbstractRobotSnapshotTest {
     */
    @Test
    public void testToString() {
-      // TODO decide how to test this
+      AbstractRobotSnapshot s = new AbstractRobotSnapshot("test", 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0) {
+         private static final long serialVersionUID = 1L;
+      };
+
+      String str1 = this.getClass().getName() + "[n:" + s.getName() + " c:" + coordinateDec0(s.getX(), s.getY())
+            + " e:" + dec1(s.getEnergy()) + " h:" + dec3(s.getHeading()) + " v:" + dec0(s.getVelocity()) + " t:"
+            + s.getTime() + " r:" + s.getRound() + "]";
+
+      assertEquals("String for s should be " + str1, str1, s.toString());
+
+      String str2 = this.getClass().getName();
+
+      assertFalse("String for s should not be " + str2, str2.equals(s.toString()));
    }
 
    /**
@@ -322,12 +337,30 @@ public class AbstractRobotSnapshotTest {
       AbstractRobotSnapshot s1 = new AbstractRobotSnapshot("TEST", 5.0, 3.0, 200.0, -70.0, 23.0, 34, 42) {
          private static final long serialVersionUID = 1L;
       };
+
+      assertTrue("Snapshot s1 should be equal to itself.", s1.equals(s1));
+
       AbstractRobotSnapshot s2 = new AbstractRobotSnapshot("TEST", 5.0, 3.0, 200.0, -70.0, 23.0, 34, 42) {
          private static final long serialVersionUID = 1L;
       };
 
       assertFalse("Snapshots s1 and s2 should not be the same object.", (s1 == s2));
       assertTrue("Snapshots s1 and s2 should be equal.", s1.equals(s2));
+
+      AbstractRobotSnapshot s3 = new AbstractRobotSnapshot("TEST", 5.0, 3.0, 200.0, -70.0, 23.0, 34, 43) {
+         private static final long serialVersionUID = 1L;
+      };
+
+      assertFalse("Snapshots s1 and s3 should not be the same object.", (s1 == s3));
+      assertFalse("Snapshots s1 and s3 should not be equal.", s1.equals(s3));
+
+      assertFalse("Snapshots s2 and s3 should not be the same object.", (s2 == s3));
+      assertFalse("Snapshots s2 and s3 should not be equal.", s2.equals(s3));
+
+      Object o = new Object();
+
+      assertFalse("Snapshot s1 should not be equal to object o.", s1.equals(o));
+      assertFalse("Snapshot s2 should not be equal to object o.", s2.equals(o));
    }
 
 }

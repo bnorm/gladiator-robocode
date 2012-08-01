@@ -13,8 +13,8 @@ import java.util.Set;
  * <p>
  * See {@link IRobot} for details of the requirements of a robot.
  * 
- * @author Brian Norman (KID)
- * @version 1.1
+ * @author Brian Norman
+ * @version 1.1_01
  */
 abstract class AbstractRobot implements IRobot {
 
@@ -114,7 +114,7 @@ abstract class AbstractRobot implements IRobot {
       }
 
       int index = getIndex(movie_, snapshot.getTime());
-      if (index > 0 && movie_.get(index).getTime() == snapshot.getTime()) {
+      if (index >= 0 && movie_.get(index).getTime() == snapshot.getTime()) {
          return false;
       }
 
