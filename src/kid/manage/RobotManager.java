@@ -1,7 +1,9 @@
 package kid.manage;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import kid.events.EventHandler;
 import kid.messages.Message;
@@ -25,7 +27,7 @@ import robocode.ScannedRobotEvent;
  * collection of all the robots can also be returned.
  * 
  * @author Brian Norman
- * @version 1.0
+ * @version 1.1
  */
 public class RobotManager implements EventHandler, MessageHandler {
 
@@ -236,6 +238,32 @@ public class RobotManager implements EventHandler, MessageHandler {
     */
    public Collection<IRobot> getRobots() {
       return allRobots_.values();
+   }
+
+   /**
+    * Returns the the robot that is the least of all the robots using the comparator. The comparator
+    * should be designed to provide some tolerance towards the robot that was chosen last time.
+    * <p>
+    * Note: If two robots are equal, the robot that is earlier in the list is chosen.
+    * 
+    * @param comparator
+    *           the comparator used to find the "smallest" robot.
+    * @return the "smallest" robot.
+    */
+   public IRobot getRobot(Comparator<IRobot> comparator) {
+      if (allRobots_.isEmpty()) {
+         return robotFactory_.createEnemy();
+      }
+
+      Iterator<IRobot> iter = getRobots().iterator();
+      IRobot r = iter.next();
+      while (iter.hasNext()) {
+         IRobot temp = iter.next();
+         if (comparator.compare(r, temp) > 0) {
+            r = temp;
+         }
+      }
+      return r;
    }
 
 }
