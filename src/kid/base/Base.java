@@ -1,7 +1,5 @@
 package kid.base;
 
-import java.awt.geom.Point2D;
-
 import kid.robots.IRobotSnapshot;
 import kid.utils.Trig;
 import kid.utils.Utils;
@@ -13,7 +11,7 @@ import robocode.Robot;
  * use this class as a base to define movement methods.
  * 
  * @author Brian Norman
- * @version 1.0
+ * @version 1.1
  */
 public abstract class Base {
 
@@ -70,22 +68,6 @@ public abstract class Base {
    }
 
    /**
-    * Returns the angle to the specified point.
-    * <p />
-    * If the point is <code>null</code>, {@link Double#POSITIVE_INFINITY} will be returned.
-    * 
-    * @param point
-    *           the specified point.
-    * @return the angle to the point.
-    */
-   public final double angle(Point2D point) {
-      if (point == null) {
-         return Double.POSITIVE_INFINITY;
-      }
-      return angle(point.getX(), point.getY());
-   }
-
-   /**
     * Returns the angle to the specified robot snapshot.
     * <p />
     * If the robot is <code>null</code> or dead, {@link Double#POSITIVE_INFINITY} will be returned.
@@ -111,7 +93,9 @@ public abstract class Base {
     * @return the distance squared to the specified coordinates.
     */
    public final double distSq(double x, double y) {
-      return Point2D.distanceSq(robot_.getX(), robot_.getY(), x, y);
+      x -= robot_.getX();
+      y -= robot_.getY();
+      return x * x + y * y;
    }
 
    /**
@@ -124,39 +108,7 @@ public abstract class Base {
     * @return the distance to the specified coordinates.
     */
    public final double dist(double x, double y) {
-      return Point2D.distance(robot_.getX(), robot_.getY(), x, y);
-   }
-
-   /**
-    * Returns the distance squared to the specified point.
-    * <p />
-    * If the point is <code>null</code>, {@link Double#POSITIVE_INFINITY} will be returned.
-    * 
-    * @param point
-    *           the specified point.
-    * @return the distance squared to the specified point.
-    */
-   public final double distSq(Point2D point) {
-      if (point == null) {
-         return Double.POSITIVE_INFINITY;
-      }
-      return distSq(point.getX(), point.getY());
-   }
-
-   /**
-    * Returns the distance to the specified point.
-    * <p />
-    * If the point is <code>null</code>, {@link Double#POSITIVE_INFINITY} will be returned.
-    * 
-    * @param point
-    *           the specified point.
-    * @return the distance to the specified point.
-    */
-   public final double dist(Point2D point) {
-      if (point == null) {
-         return Double.POSITIVE_INFINITY;
-      }
-      return distSq(point.getX(), point.getY());
+      return Math.sqrt(distSq(x, y));
    }
 
    /**
@@ -188,7 +140,7 @@ public abstract class Base {
       if (robot == null || robot.getEnergy() < 0.0) {
          return Double.POSITIVE_INFINITY;
       }
-      return distSq(robot.getX(), robot.getY());
+      return dist(robot.getX(), robot.getY());
    }
 
 }
