@@ -14,9 +14,8 @@ import static kid.utils.Format.dec3;
 abstract class AbstractRobotSnapshot implements IRobotSnapshot {
 
    /**
-    * Determines if a deserialized file is compatible with this class.
-    * Maintainers must change this value if and only if the new version of this
-    * class is not compatible with old versions.
+    * Determines if a deserialized file is compatible with this class. Maintainers must change this
+    * value if and only if the new version of this class is not compatible with old versions.
     */
    private static final long serialVersionUID = -71766535645624169L;
 
@@ -61,8 +60,7 @@ abstract class AbstractRobotSnapshot implements IRobotSnapshot {
    private int               round_;
 
    /**
-    * Default constructor. Creates a blank snapshot that represents a dead robot
-    * with no name.
+    * Default constructor. Creates a blank snapshot that represents a dead robot with no name.
     */
    protected AbstractRobotSnapshot() {
       init(new String(), -1.0, -1.0, -1.0, 0.0, 0.0, -1, -1);
@@ -234,6 +232,12 @@ abstract class AbstractRobotSnapshot implements IRobotSnapshot {
                snapshot.getHeading() == getHeading() &&
                snapshot.getVelocity() == getVelocity();
          /**@format:on*/
+      } else if (obj instanceof IRobot) {
+         IRobot robot = (IRobot) obj;
+         return getName().equals(robot.getName());
+      } else if (obj instanceof String) {
+         String name = (String) obj;
+         return getName().equals(name);
       }
       return super.equals(obj);
    }

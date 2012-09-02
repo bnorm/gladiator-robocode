@@ -357,6 +357,26 @@ public class AbstractRobotSnapshotTest {
       assertFalse("Snapshots s2 and s3 should not be the same object.", (s2 == s3));
       assertFalse("Snapshots s2 and s3 should not be equal.", s2.equals(s3));
 
+      IRobot r1 = new AbstractRobot("TEST") {
+      };
+      IRobot r2 = new AbstractRobot("Not Equal") {
+      };
+
+      assertTrue("Snapshots s1 and r1 should be equal.", s1.equals(r1));
+      assertFalse("Snapshots s1 and r2 should not be equal.", s1.equals(r2));
+
+      assertTrue("Snapshots s2 and r1 should be equal.", s2.equals(r1));
+      assertFalse("Snapshots s2 and r2 should not be equal.", s2.equals(r2));
+
+      String str1 = "TEST";
+      String str2 = "Not Equal";
+
+      assertTrue("Snapshots s1 and str1 should be equal.", s1.equals(str1));
+      assertFalse("Snapshots s1 and str2 should not be equal.", s1.equals(str2));
+
+      assertTrue("Snapshots s2 and str1 should be equal.", s2.equals(str1));
+      assertFalse("Snapshots s2 and str2 should not be equal.", s2.equals(str2));
+
       Object o = new Object();
 
       assertFalse("Snapshot s1 should not be equal to object o.", s1.equals(o));
