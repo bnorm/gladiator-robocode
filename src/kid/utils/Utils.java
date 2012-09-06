@@ -3,8 +3,8 @@ package kid.utils;
 /**
  * A utility class for common Robocode functions.
  * 
- * @author Brian Norman (KID)
- * @version 1.0
+ * @author Brian Norman
+ * @version 1.1
  */
 public final class Utils {
 
@@ -15,8 +15,32 @@ public final class Utils {
    }
 
    /**
-    * Returns the x coordinate of a point projected at a specified angle and
-    * distance with a specified starting coordinate.
+    * Normalizes an angle to an absolute angle. The normalized angle will be in the range from
+    * <code>0</code> to <code>2*PI</code>, where <code>2*PI</code> itself is not included.
+    * 
+    * @param angle
+    *           the angle to normalize
+    * @return the normalized angle that will be in the range of <code>[0, 2*PI)</code>
+    */
+   public static final double absolute(double angle) {
+      return robocode.util.Utils.normalAbsoluteAngle(angle);
+   }
+
+   /**
+    * Normalizes an angle to a relative angle. The normalized angle will be in the range from
+    * <code>-PI</code> to <code>PI</code>, where <code>PI</code> itself is not included.
+    * 
+    * @param angle
+    *           the angle to normalize
+    * @return the normalized angle that will be in the range of <code>[-PI, PI)</code>
+    */
+   public static final double relative(double angle) {
+      return robocode.util.Utils.normalRelativeAngle(angle);
+   }
+
+   /**
+    * Returns the x coordinate of a point projected at a specified angle and distance with a
+    * specified starting coordinate.
     * 
     * @param x
     *           the starting x coordinate.
@@ -44,8 +68,8 @@ public final class Utils {
    }
 
    /**
-    * Returns the y coordinate of a point projected at a specified angle and
-    * distance with a specified starting coordinate.
+    * Returns the y coordinate of a point projected at a specified angle and distance with a
+    * specified starting coordinate.
     * 
     * @param y
     *           the starting y coordinate.
@@ -72,9 +96,28 @@ public final class Utils {
       return l * Trig.cos(a);
    }
 
-   // TODO document
-   public static double sign(double n) {
+   /**
+    * Returns the sign of the specified number. This simplifies to returning a -1 if the number is
+    * strictly less than 0 and returning a 1 otherwise.
+    * 
+    * @param n
+    *           the number in question.
+    * @return a -1 if the number is negative or 1 otherwise.
+    */
+   public static int sign(double n) {
       return (n < 0.0 ? -1 : 1);
+   }
+
+   /**
+    * Returns the sign of the specified number or zero if it is such. This simplifies to returning 0
+    * if the number is such, -1 if the number is less than 0, or 1 otherwise.
+    * 
+    * @param n
+    *           the number in question.
+    * @return a 0 if the number is such, -1 if the number is negative, or 1 otherwise.
+    */
+   public static int signZ(double n) {
+      return (n == 0.0 ? 0 : sign(n));
    }
 
 }
