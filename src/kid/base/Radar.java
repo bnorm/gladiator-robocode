@@ -193,7 +193,9 @@ public class Radar extends Base {
     *           the snapshot for the radar to turn to.
     */
    public final void turnTo(IRobotSnapshot robot) {
-      turnTo(angle(robot));
+      if (robot != null && robot.getEnergy() >= 0.0) {
+         turnTo(angle(robot));
+      }
    }
 
    /**
@@ -208,7 +210,9 @@ public class Radar extends Base {
     *           the angle past which to sweep.
     */
    public final void sweep(IRobotSnapshot robot, double sweep) {
-      sweep(angle(robot), sweep);
+      if (robot != null && robot.getEnergy() >= 0.0) {
+         sweep(angle(robot), sweep);
+      }
    }
 
    /**
