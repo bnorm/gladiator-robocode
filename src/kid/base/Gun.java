@@ -171,7 +171,9 @@ public class Gun extends Base {
     *           the snapshot for the gun to turn to.
     */
    public final void turnTo(IRobotSnapshot robot) {
-      turnTo(angle(robot));
+      if (robot != null && robot.getEnergy() >= 0.0) {
+         turnTo(angle(robot));
+      }
    }
 
    // --------------
