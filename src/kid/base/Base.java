@@ -50,7 +50,7 @@ public abstract class Base {
     *           target angle.
     * @return the bearing to the angle.
     */
-   public final double getBearing(double angle) {
+   public double getBearing(double angle) {
       return Utils.relative(angle - getHeading());
    }
 
@@ -63,7 +63,7 @@ public abstract class Base {
     *           the abscissa coordinate.
     * @return the angle to the specified coordinates.
     */
-   public final double angle(double x, double y) {
+   public double angle(double x, double y) {
       return Trig.angle(x - robot_.getX(), y - robot_.getY());
    }
 
@@ -76,7 +76,7 @@ public abstract class Base {
     *           the specified robot snapshot.
     * @return the angle to the robot snapshot.
     */
-   public final double angle(IRobotSnapshot robot) {
+   public double angle(IRobotSnapshot robot) {
       if (robot == null || robot.getEnergy() < 0.0) {
          return Double.POSITIVE_INFINITY;
       }
@@ -92,7 +92,7 @@ public abstract class Base {
     *           the abscissa coordinate.
     * @return the distance squared to the specified coordinates.
     */
-   public final double distSq(double x, double y) {
+   public double distSq(double x, double y) {
       x -= robot_.getX();
       y -= robot_.getY();
       return x * x + y * y;
@@ -107,7 +107,7 @@ public abstract class Base {
     *           the abscissa coordinate.
     * @return the distance to the specified coordinates.
     */
-   public final double dist(double x, double y) {
+   public double dist(double x, double y) {
       return Math.sqrt(distSq(x, y));
    }
 
@@ -120,7 +120,7 @@ public abstract class Base {
     *           the specified robot snapshot.
     * @return the distance squared to the specified robot snapshot.
     */
-   public final double distSq(IRobotSnapshot robot) {
+   public double distSq(IRobotSnapshot robot) {
       if (robot == null || robot.getEnergy() < 0.0) {
          return Double.POSITIVE_INFINITY;
       }
@@ -136,7 +136,7 @@ public abstract class Base {
     *           the specified robot snapshot.
     * @return the distance to the specified robot snapshot.
     */
-   public final double dist(IRobotSnapshot robot) {
+   public double dist(IRobotSnapshot robot) {
       if (robot == null || robot.getEnergy() < 0.0) {
          return Double.POSITIVE_INFINITY;
       }
