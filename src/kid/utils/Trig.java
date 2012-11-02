@@ -9,6 +9,21 @@ package kid.utils;
 public final class Trig {
 
    /**
+    * The {@link Double} representation of a complete circle in radians, which is 2*PI.
+    */
+   public static final double CIRCLE         = 2.0 * Math.PI;
+
+   /**
+    * The {@link Double} representation of half of a complete circle in radians, which is PI.
+    */
+   public static final double HALF_CIRCLE    = Math.PI;
+
+   /**
+    * The {@link Double} representation of quarter of a complete circle in radians, which is PI/2.
+    */
+   public static final double QUARTER_CIRCLE = Math.PI / 2.0;
+
+   /**
     * Don't let anyone instantiate this class.
     */
    private Trig() {
