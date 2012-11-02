@@ -1,6 +1,7 @@
 package kid.base;
 
 import kid.robots.IRobotSnapshot;
+import kid.utils.Trig;
 import robocode.Robot;
 import robocode.Rules;
 
@@ -40,6 +41,16 @@ public class Tank extends Base {
    public static final double MAX_VELOCITY  = Rules.MAX_VELOCITY;
 
    /**
+    * The {@link Integer} representation of forwards, which is 1.
+    */
+   public static final int    FORWARD       = 1;
+
+   /**
+    * The {@link Integer} representation of backwards, which is -1.
+    */
+   public static final int    BACKWARD      = -1;
+
+   /**
     * Constructs a new {@link Tank} class that gives the {@link Robot} some convince functions for
     * moving and turning.
     * 
@@ -69,6 +80,18 @@ public class Tank extends Base {
    }
 
    /**
+    * Returns the velocity of the robot measured in pixels/turn.
+    * <p/>
+    * The maximum velocity of a robot is defined by {@link #MAX_VELOCITY} (8 pixels / turn).
+    * 
+    * @return the velocity of the robot measured in pixels/turn.
+    * @see #MAX_VELOCITY
+    */
+   public double getVelocity() {
+      return robot_.getVelocity();
+   }
+
+   /**
     * Returns the turn rate of a robot given a specific velocity measured in radians/turn.
     * 
     * @param velocity
@@ -77,6 +100,15 @@ public class Tank extends Base {
     */
    public static double getTurnRate(double velocity) {
       return Rules.getTurnRateRadians(velocity);
+   }
+
+   /**
+    * Returns the turn rate of the robot measured in radians/turn.
+    * 
+    * @return turn rate in radians/turn.
+    */
+   public double getTurnRate() {
+      return getTurnRate(robot_.getVelocity());
    }
 
    // ----------------
@@ -140,6 +172,27 @@ public class Tank extends Base {
    }
 
    /**
+    * Makes the {@link Robot} turn so it is in line with the specified angle and returns a value
+    * corresponding to which direction the robot would need to move to follow the line.
+    * <p/>
+    * This call executes immediately, and does not return until it is complete, i.e. when the
+    * remaining angle to turn is 0.
+    * 
+    * @param angle
+    *           the line for the robot to turn to.
+    * @return the direction the robot would need to move to follow the line.
+    */
+   public int turnToLine(double angle) {
+      if (Math.abs(getBearing(angle)) <= Trig.QUARTER_CIRCLE) {
+         turnTo(angle);
+         return 1;
+      } else {
+         turnTo(angle + Trig.HALF_CIRCLE);
+         return -1;
+      }
+   }
+
+   /**
     * Makes the {@link Robot} turn to a specified coordinates, <code>(x, y)</code>.
     * <p/>
     * This call executes immediately, and does not return until it is complete, i.e. when the
@@ -155,6 +208,24 @@ public class Tank extends Base {
    }
 
    /**
+    * Makes the {@link Robot} turn so it is in line with the specified coordinates,
+    * <code>(x, y)</code>, and returns a value corresponding to which direction the robot would need
+    * to move to follow the line.
+    * <p/>
+    * This call executes immediately, and does not return until it is complete, i.e. when the
+    * remaining angle to turn is 0.
+    * 
+    * @param x
+    *           the ordinate coordinate of the line for the robot to turn to.
+    * @param y
+    *           the abscissa coordinate of the line for the robot to turn to.
+    * @return the direction the robot would need to move to follow the line.
+    */
+   public int turnToLine(double x, double y) {
+      return turnToLine(angle(x, y));
+   }
+
+   /**
     * Makes the {@link Robot} turn to a specified robot snapshot.
     * <p/>
     * This call executes immediately, and does not return until it is complete, i.e. when the
@@ -167,6 +238,24 @@ public class Tank extends Base {
       if (robot != null && robot.getEnergy() >= 0.0) {
          turnTo(angle(robot));
       }
+   }
+
+   /**
+    * Makes the {@link Robot} turn so it is in line with the specified robot snapshot and returns a
+    * value corresponding to which direction the robot would need to move to follow the line.
+    * <p/>
+    * This call executes immediately, and does not return until it is complete, i.e. when the
+    * remaining angle to turn is 0.
+    * 
+    * @param robot
+    *           the snapshot of the line for the robot to turn to.
+    * @return the direction the robot would need to move to follow the line.
+    */
+   public int turnToLine(IRobotSnapshot robot) {
+      if (robot != null && robot.getEnergy() >= 0.0) {
+         return turnToLine(angle(robot));
+      }
+      return 0;
    }
 
    // -----------------
