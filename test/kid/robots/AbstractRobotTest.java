@@ -1,22 +1,18 @@
 package kid.robots;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Set;
 
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * Test class for {@link AbstractRobot}.
- * 
+ *
  * @author Brian Norman
- * @version 1.1
+ * @version 1.2
  */
 public class AbstractRobotTest {
 
@@ -88,28 +84,28 @@ public class AbstractRobotTest {
       assertNotNull("ListIterator should not be null.", iter);
 
       try {
-         iter = r.getMovie(-1);
+         r.getMovie(-1);
          fail("Method should throw an error.");
       } catch (Exception e) {
          assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
       }
 
       try {
-         iter = r.getMovie(-1, 0);
+         r.getMovie(-1, 0);
          fail("Method should throw an error.");
       } catch (Exception e) {
          assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
       }
 
       try {
-         iter = r.getMovie(0, -1);
+         r.getMovie(0, -1);
          fail("Method should throw an error.");
       } catch (Exception e) {
          assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
       }
 
       try {
-         iter = r.getMovie(-1, -1);
+         r.getMovie(-1, -1);
          fail("Method should throw an error.");
       } catch (Exception e) {
          assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
@@ -188,28 +184,28 @@ public class AbstractRobotTest {
       assertNotNull("ListIterator should not be null.", iter);
 
       try {
-         iter = r.getMovie(-1);
+         r.getMovie(-1);
          fail("Method should throw an error.");
       } catch (Exception e) {
          assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
       }
 
       try {
-         iter = r.getMovie(-1, 0);
+         r.getMovie(-1, 0);
          fail("Method should throw an error.");
       } catch (Exception e) {
          assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
       }
 
       try {
-         iter = r.getMovie(0, -1);
+         r.getMovie(0, -1);
          fail("Method should throw an error.");
       } catch (Exception e) {
          assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
       }
 
       try {
-         iter = r.getMovie(-1, -1);
+         r.getMovie(-1, -1);
          fail("Method should throw an error.");
       } catch (Exception e) {
          assertTrue("Method should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);

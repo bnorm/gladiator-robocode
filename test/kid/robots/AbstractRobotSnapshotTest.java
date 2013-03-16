@@ -1,20 +1,15 @@
 package kid.robots;
 
-import static kid.utils.Format.coordinateDec0;
-import static kid.utils.Format.dec0;
-import static kid.utils.Format.dec1;
-import static kid.utils.Format.dec3;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
+
+import static kid.utils.Format.*;
+import static org.junit.Assert.*;
 
 /**
  * Test class for {@link AbstractRobotSnapshotTest}.
- * 
+ *
  * @author Brian Norman
- * @version 1.2
+ * @version 1.3
  */
 public class AbstractRobotSnapshotTest {
 
@@ -27,7 +22,7 @@ public class AbstractRobotSnapshotTest {
          private static final long serialVersionUID = 1L;
       };
 
-      assertEquals("Name for snapshot should be an empty string.", new String(), s.getName());
+      assertEquals("Name for snapshot should be an empty string.", "", s.getName());
       assertEquals("X coordinate for snapshot should be -1.0.", -1.0, s.getX(), 0.0);
       assertEquals("Y coordinate for snapshot should be -1.0.", -1.0, s.getY(), 0.0);
       assertEquals("Energy for snapshot should be -1.0.", -1.0, s.getEnergy(), 0.0);
@@ -299,13 +294,13 @@ public class AbstractRobotSnapshotTest {
          private static final long serialVersionUID = 1L;
       };
 
-      String str1 = this.getClass().getName() + "[n:" + s.getName() + " c:" + coordinateDec0(s.getX(), s.getY())
-            + " e:" + dec1(s.getEnergy()) + " h:" + dec3(s.getHeading()) + " v:" + dec0(s.getVelocity()) + " t:"
-            + s.getTime() + " r:" + s.getRound() + "]";
+      String str1 = s.getClass().getName() + "[n:" + s.getName() + " c:" + coordinateDec0(s.getX(), s.getY())
+              + " e:" + dec1(s.getEnergy()) + " h:" + dec3(s.getHeading()) + " v:" + dec0(s.getVelocity()) + " t:"
+              + s.getTime() + " r:" + s.getRound() + "]";
 
       assertEquals("String for s should be " + str1, str1, s.toString());
 
-      String str2 = this.getClass().getName();
+      String str2 = s.getClass().getName();
 
       assertFalse("String for s should not be " + str2, str2.equals(s.toString()));
    }
