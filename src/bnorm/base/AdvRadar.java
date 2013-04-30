@@ -65,7 +65,7 @@ public class AdvRadar extends Radar {
     * @return the sign of the turn remaining.
     */
    public int getTurningSign() {
-      return (getTurnRemaining() == 0.0 ? 0 : Utils.sign(getTurnRemaining()));
+      return Utils.signZ(getTurnRemaining());
    }
 
    // -----------------
