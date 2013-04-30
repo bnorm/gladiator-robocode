@@ -44,7 +44,7 @@ public class Format {
     *           the double value to format.
     * @return the formatted string of the specified value.
     */
-   public static final String dec0(double n) {
+   public static String dec0(double n) {
       return NO_DEC.format(n);
    }
 
@@ -55,7 +55,7 @@ public class Format {
     *           the double value to format.
     * @return the formatted string of the specified value.
     */
-   public static final String dec1(double n) {
+   public static String dec1(double n) {
       return ONE_DEC.format(n);
    }
 
@@ -66,7 +66,7 @@ public class Format {
     *           the double value to format.
     * @return the formatted string of the specified value.
     */
-   public static final String dec2(double n) {
+   public static String dec2(double n) {
       return TWO_DEC.format(n);
    }
 
@@ -77,7 +77,7 @@ public class Format {
     *           the double value to format.
     * @return the formatted string of the specified value.
     */
-   public static final String dec3(double n) {
+   public static String dec3(double n) {
       return THREE_DEC.format(n);
    }
 
@@ -91,21 +91,21 @@ public class Format {
     *           the double value of the y coordinate.
     * @return the formatted string of the specified coordinate.
     */
-   public static final String coordinateDec0(double x, double y) {
+   public static String coordinateDec0(double x, double y) {
       return "(" + dec0(x) + ", " + dec0(y) + ")";
    }
 
    /**
     * Returns the specified double values formatted as a coordinate with one
     * decimal.
-    * 
+    *
     * @param x
     *           the double value of the x coordinate.
     * @param y
     *           the double value of the y coordinate.
     * @return the formatted string of the specified coordinate.
     */
-   public static final String coordinateDec1(double x, double y) {
+   public static String coordinateDec1(double x, double y) {
       return "(" + dec1(x) + ", " + dec1(y) + ")";
    }
 
@@ -119,7 +119,7 @@ public class Format {
     *           the double value of the y coordinate.
     * @return the formatted string of the specified coordinate.
     */
-   public static final String coordinateDec2(double x, double y) {
+   public static String coordinateDec2(double x, double y) {
       return "(" + dec2(x) + ", " + dec2(y) + ")";
    }
 
@@ -133,7 +133,7 @@ public class Format {
     *           the double value of the y coordinate.
     * @return the formatted string of the specified coordinate.
     */
-   public static final String coordinateDec3(double x, double y) {
+   public static String coordinateDec3(double x, double y) {
       return "(" + dec3(x) + ", " + dec3(y) + ")";
    }
 

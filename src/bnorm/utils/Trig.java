@@ -38,7 +38,7 @@ public final class Trig {
     *           the abscissa coordinate.
     * @return the angle to the specified coordinates.
     */
-   public static final double angle(double x, double y) {
+   public static double angle(double x, double y) {
       return StrictMath.atan2(x, y);
    }
 
@@ -49,7 +49,7 @@ public final class Trig {
     *           an angle in radians.
     * @return the sine of the argument.
     */
-   public static final double sin(double radians) {
+   public static double sin(double radians) {
       return StrictMath.sin(radians);
    }
 
@@ -60,7 +60,7 @@ public final class Trig {
     *           an angle in radians.
     * @return the cosine of the argument.
     */
-   public static final double cos(double radians) {
+   public static double cos(double radians) {
       return StrictMath.cos(radians);
    }
 
@@ -71,7 +71,7 @@ public final class Trig {
     *           an angle in radians.
     * @return the tangent of the argument.
     */
-   public static final double tan(double radians) {
+   public static double tan(double radians) {
       return StrictMath.tan(radians);
    }
 
@@ -82,7 +82,7 @@ public final class Trig {
     *           the ratio between sides.
     * @return the arc sine of the argument.
     */
-   public static final double asin(double ratio) {
+   public static double asin(double ratio) {
       return StrictMath.asin(ratio);
    }
 
@@ -93,7 +93,7 @@ public final class Trig {
     *           the ratio between sides.
     * @return the arc cosine of the argument.
     */
-   public static final double acos(double ratio) {
+   public static double acos(double ratio) {
       return StrictMath.acos(ratio);
    }
 
@@ -104,7 +104,7 @@ public final class Trig {
     *           the ratio between sides.
     * @return the arc tangent of the argument.
     */
-   public static final double atan(double ratio) {
+   public static double atan(double ratio) {
       return StrictMath.atan(ratio);
    }
 
@@ -120,7 +120,7 @@ public final class Trig {
     *         polar coordinates that corresponds to the point (<code>x</code>,&nbsp;<code>y</code>)
     *         in Cartesian coordinates.
     */
-   public static final double atan2(double x, double y) {
+   public static double atan2(double x, double y) {
       return StrictMath.atan2(x, y);
    }
 
