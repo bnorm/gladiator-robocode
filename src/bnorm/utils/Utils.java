@@ -4,7 +4,7 @@ package bnorm.utils;
  * A utility class for common Robocode functions.
  *
  * @author Brian Norman
- * @version 1.1
+ * @version 1.2
  */
 public final class Utils {
 
@@ -120,4 +120,13 @@ public final class Utils {
       return (n == 0.0 ? 0 : sign(n));
    }
 
+   /**
+    * Returns the square of the specified number.
+    *
+    * @param n the number to square.
+    * @return the square of the specified number.
+    */
+   public static double sqr(double n) {
+      return n * n;
+   }
 }
