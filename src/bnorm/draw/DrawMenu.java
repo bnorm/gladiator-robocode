@@ -22,9 +22,12 @@ import robocode.RobocodeFileWriter;
  * control what a robot draws to the screen.
  * 
  * @author Brian Norman
- * @version 1.1
+ * @version 1.2
  */
 public class DrawMenu {
+
+   private DrawMenu() {
+   }
 
    /**
     * The x-coordinate for the starting location of the menu.
