@@ -21,29 +21,29 @@ abstract class AbstractRobot implements IRobot {
    /**
     * The name of the robot.
     */
-   private String                             name_;
+   private String name;
 
    /**
     * The map of time series keyed by the match round.
     */
-   private Map<Integer, List<IRobotSnapshot>> rounds_;
+   private Map<Integer, List<IRobotSnapshot>> rounds;
 
    /**
     * The round time series that was most recently added to.
     */
-   private List<IRobotSnapshot>               movie_;
+   private List<IRobotSnapshot> movie;
 
    /**
     * The most recent snapshot of the current match round. I.e., the last
     * snapshot of the current match round series.
     */
-   private IRobotSnapshot                     recent_;
+   private IRobotSnapshot recent;
 
    /**
     * Creates a new robot.
     */
    public AbstractRobot() {
-      this(new String());
+      this("");
    }
 
    /**
@@ -53,10 +53,10 @@ abstract class AbstractRobot implements IRobot {
     *           the name of the robot.
     */
    public AbstractRobot(String name) {
-      this.name_ = name;
-      this.rounds_ = new Hashtable<Integer, List<IRobotSnapshot>>();
-      this.movie_ = new LinkedList<IRobotSnapshot>();
-      this.recent_ = new RobotSnapshot();
+      this.name = name;
+      this.rounds = new Hashtable<Integer, List<IRobotSnapshot>>();
+      this.movie = new LinkedList<IRobotSnapshot>();
+      this.recent = new RobotSnapshot();
    }
 
    /**
@@ -70,15 +70,15 @@ abstract class AbstractRobot implements IRobot {
 
       for (Integer i : robot.getRounds()) {
          ListIterator<IRobotSnapshot> movie = robot.getMovie(0, i);
-         rounds_.put(i, movie_ = new LinkedList<IRobotSnapshot>());
+         rounds.put(i, this.movie = new LinkedList<IRobotSnapshot>());
          while (movie.hasNext()) {
-            movie_.add(movie.next());
+            this.movie.add(movie.next());
          }
       }
 
-      recent_ = robot.getSnapshot();
-      if (recent_ != null) {
-         movie_ = rounds_.get(recent_.getRound());
+      recent = robot.getSnapshot();
+      if (recent != null) {
+         movie = rounds.get(recent.getRound());
       }
    }
 
@@ -87,7 +87,7 @@ abstract class AbstractRobot implements IRobot {
     */
    @Override
    public String getName() {
-      return name_;
+      return name;
    }
 
    /**
@@ -103,23 +103,23 @@ abstract class AbstractRobot implements IRobot {
    public boolean add(IRobotSnapshot snapshot) {
       if (snapshot == null) {
          throw new NullPointerException("IRobotSnapshot must not be null.");
-      } else if (!snapshot.getName().equals(name_)) {
-         throw new IllegalArgumentException("Name of snapshot must match the name of the robot (" + recent_.getName()
+      } else if (!snapshot.getName().equals(name)) {
+         throw new IllegalArgumentException("Name of snapshot must match the name of the robot (" + recent.getName()
                + " != " + snapshot.getName() + ").");
       }
 
-      movie_ = rounds_.get(snapshot.getRound());
-      if (movie_ == null) {
-         rounds_.put(snapshot.getRound(), movie_ = new LinkedList<IRobotSnapshot>());
+      movie = rounds.get(snapshot.getRound());
+      if (movie == null) {
+         rounds.put(snapshot.getRound(), movie = new LinkedList<IRobotSnapshot>());
       }
 
-      int index = getIndex(movie_, snapshot.getTime());
-      if (index >= 0 && movie_.get(index).getTime() == snapshot.getTime()) {
+      int index = getIndex(movie, snapshot.getTime());
+      if (index >= 0 && movie.get(index).getTime() == snapshot.getTime()) {
          return false;
       }
 
-      movie_.add(index + 1, snapshot);
-      recent_ = movie_.get(movie_.size() - 1);
+      movie.add(index + 1, snapshot);
+      recent = movie.get(movie.size() - 1);
       return true;
    }
 
@@ -128,7 +128,7 @@ abstract class AbstractRobot implements IRobot {
     */
    @Override
    public IRobotSnapshot getSnapshot() {
-      return recent_;
+      return recent;
    }
 
    /**
@@ -143,7 +143,7 @@ abstract class AbstractRobot implements IRobot {
          throw new IllegalArgumentException("Time must not be less than zero (" + time + ").");
       }
 
-      return getSnapshot(movie_, time);
+      return getSnapshot(movie, time);
    }
 
    /**
@@ -162,7 +162,7 @@ abstract class AbstractRobot implements IRobot {
          throw new IllegalArgumentException("Round must not be less than zero (" + round + ").");
       }
 
-      return getSnapshot(rounds_.get(round), time);
+      return getSnapshot(rounds.get(round), time);
    }
 
    /**
@@ -170,7 +170,7 @@ abstract class AbstractRobot implements IRobot {
     */
    @Override
    public ListIterator<IRobotSnapshot> getMovie() {
-      return getMovie(movie_, 0);
+      return getMovie(movie, 0);
    }
 
    /**
@@ -185,7 +185,7 @@ abstract class AbstractRobot implements IRobot {
          throw new IllegalArgumentException("Time must not be less than zero (" + time + ").");
       }
 
-      return getMovie(movie_, time);
+      return getMovie(movie, time);
    }
 
    /**
@@ -204,7 +204,7 @@ abstract class AbstractRobot implements IRobot {
          throw new IllegalArgumentException("Round must not be less than zero (" + round + ").");
       }
 
-      return getMovie(rounds_.get(round), time);
+      return getMovie(rounds.get(round), time);
    }
 
    /**
@@ -212,7 +212,7 @@ abstract class AbstractRobot implements IRobot {
     */
    @Override
    public Set<Integer> getRounds() {
-      return rounds_.keySet();
+      return rounds.keySet();
    }
 
    /**
