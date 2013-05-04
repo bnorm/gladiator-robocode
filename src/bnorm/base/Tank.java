@@ -15,6 +15,22 @@ import robocode.Rules;
 public class Tank extends Base {
 
    /**
+    * The maximum width of the battlefield.
+    */
+   public static final double MAX_BATTLEFIELD_WIDTH = 5000;
+
+   /**
+    * The maximum height of the battlefield.
+    */
+   public static final double MAX_BATTLEFIELD_HEIGHT = 5000;
+
+   /**
+    * The maximum diagonal of the battlefield.
+    */
+   public static final double MAX_BATTLEFIELD_DIAGONAL =
+           MAX_BATTLEFIELD_WIDTH * MAX_BATTLEFIELD_WIDTH + MAX_BATTLEFIELD_HEIGHT * MAX_BATTLEFIELD_HEIGHT;
+
+   /**
     * The maximum turning rate of the robot measured in radians which is 1/18 * PI radians/turn.
     * <p/>
     * Note, that the turn rate of the robot depends on it's velocity.
