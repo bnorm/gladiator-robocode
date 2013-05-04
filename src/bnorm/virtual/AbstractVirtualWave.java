@@ -1,6 +1,8 @@
 package bnorm.virtual;
 
 import bnorm.base.Tank;
+import bnorm.robots.IRobot;
+import bnorm.robots.RobotSnapshots;
 import bnorm.utils.Utils;
 
 /**
@@ -105,6 +107,14 @@ public abstract class AbstractVirtualWave implements IVirtualWave {
    public boolean isActive(long currentTime) {
       return x >= 0 && y >= 0 && x <= Tank.MAX_BATTLEFIELD_WIDTH && y <= Tank.MAX_BATTLEFIELD_HEIGHT &&
               distSq(currentTime) <= Tank.MAX_BATTLEFIELD_DIAGONAL;
+   }
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override
+   public boolean isActive(long currentTime, IRobot target) {
+      return isActive(currentTime) && distSq(currentTime) < RobotSnapshots.distSq(target.getSnapshot(), getX(), getY());
    }
 
    /**
