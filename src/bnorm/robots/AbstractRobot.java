@@ -7,14 +7,18 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
+import bnorm.events.RobotFiredEvent;
+import bnorm.events.RobotFiredEventListener;
+import robocode.Rules;
+
 /**
  * An abstract representation of a Robocode robot. Provides base functionality
  * to build upon.
  * <p>
  * See {@link IRobot} for details of the requirements of a robot.
- * 
+ *
  * @author Brian Norman
- * @version 1.1_01
+ * @version 1.2_01
  */
 abstract class AbstractRobot implements IRobot {
 
@@ -40,6 +44,11 @@ abstract class AbstractRobot implements IRobot {
    private IRobotSnapshot recent;
 
    /**
+    * All the listeners to {@link RobotFiredEvent}s.
+    */
+   private List<RobotFiredEventListener> robotFiredEventListeners;
+
+   /**
     * Creates a new robot.
     */
    public AbstractRobot() {
@@ -48,7 +57,7 @@ abstract class AbstractRobot implements IRobot {
 
    /**
     * Creates a new robot with the specified name.
-    * 
+    *
     * @param name
     *           the name of the robot.
     */
@@ -57,11 +66,13 @@ abstract class AbstractRobot implements IRobot {
       this.rounds = new Hashtable<Integer, List<IRobotSnapshot>>();
       this.movie = new LinkedList<IRobotSnapshot>();
       this.recent = new RobotSnapshot();
+
+      this.robotFiredEventListeners = new LinkedList<RobotFiredEventListener>();
    }
 
    /**
     * Creates a new robot that is a copy of the specified robot.
-    * 
+    *
     * @param robot
     *           the robot to copy.
     */
@@ -92,7 +103,7 @@ abstract class AbstractRobot implements IRobot {
 
    /**
     * {@inheritDoc}
-    * 
+    *
     * @throws NullPointerException
     *            if <code>snapshot</code> is null.
     * @throws IllegalArgumentException
@@ -120,6 +131,19 @@ abstract class AbstractRobot implements IRobot {
 
       movie.add(index + 1, snapshot);
       recent = movie.get(movie.size() - 1);
+
+      // Did the robot fire a bullet?
+      if (index > 0) {
+         IRobotSnapshot prev = movie.get(index);
+         double timeDiff = snapshot.getTime() - prev.getTime();
+         double energyDiff = snapshot.getEnergy() - prev.getEnergy();
+         double velocityDiff = snapshot.getVelocity() - prev.getVelocity();
+         if (timeDiff == 1 && energyDiff <= -Rules.MIN_BULLET_POWER && energyDiff >= -Rules.MAX_BULLET_POWER
+                 && velocityDiff >= -Rules.DECELERATION) {
+            notify(new RobotFiredEvent(getName(), snapshot.getTime() - 1, Math.abs(energyDiff)));
+         }
+      }
+
       return true;
    }
 
@@ -133,7 +157,7 @@ abstract class AbstractRobot implements IRobot {
 
    /**
     * {@inheritDoc}
-    * 
+    *
     * @throws IllegalArgumentException
     *            if <code>time</code> is less than zero.
     */
@@ -148,7 +172,7 @@ abstract class AbstractRobot implements IRobot {
 
    /**
     * {@inheritDoc}
-    * 
+    *
     * @throws IllegalArgumentException
     *            if <code>time</code> is less than zero.
     * @throws IllegalArgumentException
@@ -175,7 +199,7 @@ abstract class AbstractRobot implements IRobot {
 
    /**
     * {@inheritDoc}
-    * 
+    *
     * @throws IllegalArgumentException
     *            if <code>time</code> is less than zero.
     */
@@ -190,7 +214,7 @@ abstract class AbstractRobot implements IRobot {
 
    /**
     * {@inheritDoc}
-    * 
+    *
     * @throws IllegalArgumentException
     *            if <code>time</code> is less than zero.
     * @throws IllegalArgumentException
@@ -216,6 +240,33 @@ abstract class AbstractRobot implements IRobot {
    }
 
    /**
+    * {@inheritDoc}
+    */
+   @Override
+   public void addListener(RobotFiredEventListener listener) {
+      robotFiredEventListeners.add(listener);
+   }
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override
+   public void removeListener(RobotFiredEventListener listener) {
+      robotFiredEventListeners.remove(listener);
+   }
+
+   /**
+    * Notifies all the RobotFiredEvent listeners.
+    *
+    * @param event the RobotFiredEvent.
+    */
+   protected void notify(RobotFiredEvent event) {
+      for (RobotFiredEventListener l : robotFiredEventListeners) {
+         l.handle(event);
+      }
+   }
+
+   /**
     * Returns the index of the snapshot that matches the specified time in the
     * specified series. The series is assumed to be sorted. If the exact time
     * does not appear in the series, then the index of the greatest time that is
@@ -229,13 +280,13 @@ abstract class AbstractRobot implements IRobot {
     * time is less than <code>t</code>, then the snapshot at index
     * <code>getIndex(movie,time=t-1)+1</code> will be the snapshot with the
     * smallest time that is still greater than the time <code>t</code>.
-    * 
+    *
     * @param movie
     *           the series to search.
     * @param time
     *           the time to search for.
     * @return the index of the time, rounding down.
-    * 
+    *
     * @throws IllegalArgumentException
     *            if <code>movie</code> is null.
     * @throws IllegalArgumentException
@@ -276,14 +327,14 @@ abstract class AbstractRobot implements IRobot {
     * time. If the specified list is <code>null</code> then an empty iterator is
     * returned. If the exact time does not appear in the series, then the index
     * of the greatest time that is still less than the specified time is used.
-    * 
+    *
     * @param movie
     *           the list series to be played as a movie.
     * @param time
     *           the time when the movie starts.
     * @return an iterator over the specified list starting at the specified
     *         time.
-    * 
+    *
     * @throws IllegalArgumentException
     *            if <code>time</code> is less than zero.
     */
@@ -310,13 +361,13 @@ abstract class AbstractRobot implements IRobot {
     * snapshot of the greatest time that is still less than the specified time
     * is returned. If a time before all snapshots in the series is specified,
     * then the first snapshot in the series is returned.
-    * 
+    *
     * @param movie
     *           the series to search.
     * @param time
     *           the time to search for.
     * @return the snapshot at the specified time from the specified list.
-    * 
+    *
     * @throws IllegalArgumentException
     *            if <code>time</code> is less than zero.
     */

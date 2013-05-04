@@ -3,6 +3,8 @@ package bnorm.robots;
 import java.util.ListIterator;
 import java.util.Set;
 
+import bnorm.events.RobotFiredEventSender;
+
 /**
  * Represents a Robocode robot. The basic representation of a robot is a map of
  * series. Each series is of robot snapshots representing the robot for a
@@ -13,9 +15,9 @@ import java.util.Set;
  * robots changes through each round.
  * 
  * @author Brian Norman (KID)
- * @version 1.1
+ * @version 1.2
  */
-public interface IRobot {
+public interface IRobot extends RobotFiredEventSender {
 
    /**
     * Returns the name of the robot.
