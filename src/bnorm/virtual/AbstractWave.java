@@ -68,74 +68,47 @@ public abstract class AbstractWave implements IWave {
       this(wave.getX(), wave.getY(), wave.getVelocity(), wave.getTime());
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public double getX() {
       return x;
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public double getY() {
       return y;
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public double getVelocity() {
       return velocity;
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public long getTime() {
       return time;
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public boolean isActive(long currentTime) {
       return x >= 0 && y >= 0 && x <= Tank.MAX_BATTLEFIELD_WIDTH && y <= Tank.MAX_BATTLEFIELD_HEIGHT &&
               distSq(currentTime) <= Tank.MAX_BATTLEFIELD_DIAGONAL;
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public boolean isActive(long currentTime, IRobot target) {
       return isActive(currentTime) && distSq(currentTime) < Robots.distSq(target.getSnapshot(), getX(), getY());
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public double dist(long currentTime) {
       return velocity * (currentTime - time);
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public double distSq(long currentTime) {
       return Utils.sqr(dist(currentTime));
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public boolean equals(Object obj) {
       if (obj instanceof IWave) {
@@ -145,9 +118,6 @@ public abstract class AbstractWave implements IWave {
       return super.equals(obj);
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public String toString() {
       return this.getClass() + "[x=" + x + ", y=" + y + ", velocity=" + velocity + ", time" + time + "]";
