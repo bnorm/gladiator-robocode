@@ -14,7 +14,7 @@ import bnorm.utils.Utils;
  * @author Brian Norman
  * @version 1.0
  */
-public abstract class AbstractVirtualWave implements IVirtualWave {
+public abstract class AbstractWave implements IWave {
 
    /**
     * The starting x coordinate of the wave.
@@ -40,7 +40,7 @@ public abstract class AbstractVirtualWave implements IVirtualWave {
     * Creates a new blank wave. This wave is centered at negative infinity and has no speed and was created at time
     * <code>0</code>.
     */
-   public AbstractVirtualWave() {
+   public AbstractWave() {
       this(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, 0.0, 0);
    }
 
@@ -52,7 +52,7 @@ public abstract class AbstractVirtualWave implements IVirtualWave {
     * @param velocity the speed of the wave in pixels/tick.
     * @param time the time the wave started.
     */
-   public AbstractVirtualWave(double x, double y, double velocity, long time) {
+   public AbstractWave(double x, double y, double velocity, long time) {
       this.x = x;
       this.y = y;
       this.velocity = velocity;
@@ -64,7 +64,7 @@ public abstract class AbstractVirtualWave implements IVirtualWave {
     *
     * @param wave the wave to copy.
     */
-   protected AbstractVirtualWave(IVirtualWave wave) {
+   protected AbstractWave(IWave wave) {
       this(wave.getX(), wave.getY(), wave.getVelocity(), wave.getTime());
    }
 
@@ -138,8 +138,8 @@ public abstract class AbstractVirtualWave implements IVirtualWave {
     */
    @Override
    public boolean equals(Object obj) {
-      if (obj instanceof IVirtualWave) {
-         IVirtualWave wave = (IVirtualWave) obj;
+      if (obj instanceof IWave) {
+         IWave wave = (IWave) obj;
          return wave.getX() == x && wave.getY() == y && wave.getVelocity() == velocity && wave.getTime() == time;
       }
       return super.equals(obj);

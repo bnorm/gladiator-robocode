@@ -11,7 +11,7 @@ import bnorm.robots.IRobot;
  * @author Brian Norman
  * @version 1.0
  */
-public interface IVirtualWave {
+public interface IWave {
 
    /**
     * Returns the starting x coordinate of the wave.
