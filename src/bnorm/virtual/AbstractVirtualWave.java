@@ -2,7 +2,7 @@ package bnorm.virtual;
 
 import bnorm.base.Tank;
 import bnorm.robots.IRobot;
-import bnorm.robots.RobotSnapshots;
+import bnorm.utils.Robots;
 import bnorm.utils.Utils;
 
 /**
@@ -114,7 +114,7 @@ public abstract class AbstractVirtualWave implements IVirtualWave {
     */
    @Override
    public boolean isActive(long currentTime, IRobot target) {
-      return isActive(currentTime) && distSq(currentTime) < RobotSnapshots.distSq(target.getSnapshot(), getX(), getY());
+      return isActive(currentTime) && distSq(currentTime) < Robots.distSq(target.getSnapshot(), getX(), getY());
    }
 
    /**
