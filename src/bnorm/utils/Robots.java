@@ -10,7 +10,7 @@ import bnorm.robots.IRobotSnapshot;
  * @author Brian Norman
  * @version 1.0
  */
-public class Robots {
+public final class Robots {
 
    /**
     * Private constructor.

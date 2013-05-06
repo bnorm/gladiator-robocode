@@ -5,26 +5,26 @@ import java.text.DecimalFormat;
 /**
  * A utility class that provides the coder with the ability to quickly produce
  * string representations of numeric values in a specific format.
- * 
+ *
  * @author Brian Norman (KID)
  * @version 1.0
  */
-public class Format {
+public final class Format {
 
    /**
     * A DecimalFormat object that formats given values with no decimals.
     */
-   public static final DecimalFormat NO_DEC    = new DecimalFormat("#0;-#0");
+   public static final DecimalFormat NO_DEC = new DecimalFormat("#0;-#0");
 
    /**
     * A DecimalFormat object that formats given values with one decimal.
     */
-   public static final DecimalFormat ONE_DEC   = new DecimalFormat("#0.0;-#0.0");
+   public static final DecimalFormat ONE_DEC = new DecimalFormat("#0.0;-#0.0");
 
    /**
     * A DecimalFormat object that formats given values with two decimals.
     */
-   public static final DecimalFormat TWO_DEC   = new DecimalFormat("#0.00;-#0.00");
+   public static final DecimalFormat TWO_DEC = new DecimalFormat("#0.00;-#0.00");
 
    /**
     * A DecimalFormat object that formats given values with three decimals.
@@ -39,7 +39,7 @@ public class Format {
 
    /**
     * Returns the specified double value formatted with the no decimals.
-    * 
+    *
     * @param n
     *           the double value to format.
     * @return the formatted string of the specified value.
@@ -50,7 +50,7 @@ public class Format {
 
    /**
     * Returns the specified double value formatted with the one decimal.
-    * 
+    *
     * @param n
     *           the double value to format.
     * @return the formatted string of the specified value.
@@ -61,7 +61,7 @@ public class Format {
 
    /**
     * Returns the specified double value formatted with the two decimals.
-    * 
+    *
     * @param n
     *           the double value to format.
     * @return the formatted string of the specified value.
@@ -72,7 +72,7 @@ public class Format {
 
    /**
     * Returns the specified double value formatted with the three decimals.
-    * 
+    *
     * @param n
     *           the double value to format.
     * @return the formatted string of the specified value.
@@ -84,7 +84,7 @@ public class Format {
    /**
     * Returns the specified double values formatted as a coordinate with no
     * decimals.
-    * 
+    *
     * @param x
     *           the double value of the x coordinate.
     * @param y
@@ -112,7 +112,7 @@ public class Format {
    /**
     * Returns the specified double values formatted as a coordinate with two
     * decimals.
-    * 
+    *
     * @param x
     *           the double value of the x coordinate.
     * @param y
@@ -126,7 +126,7 @@ public class Format {
    /**
     * Returns the specified double values formatted as a coordinate with three
     * decimals.
-    * 
+    *
     * @param x
     *           the double value of the x coordinate.
     * @param y
