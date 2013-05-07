@@ -1,4 +1,4 @@
-Robocode
+Robocode [![Build Status](https://travis-ci.org/bnorm/robocode.png?branch=master)](https://travis-ci.org/bnorm/robocode)
 ========
 
 This project contains source code for [Robocode](http://robocode.sourceforge.net/) robots by Brian Norman (a.k.a. KID
