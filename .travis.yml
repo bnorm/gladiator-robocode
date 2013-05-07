@@ -1,3 +1,6 @@
 language: java
+branches:
+  only:
+    - master
 notifications:
   email: false
