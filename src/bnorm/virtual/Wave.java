@@ -14,17 +14,7 @@ import bnorm.utils.Utils;
  * @author Brian Norman
  * @version 1.0
  */
-public abstract class AbstractWave implements IWave {
-
-   /**
-    * The starting x coordinate of the wave.
-    */
-   private double x;
-
-   /**
-    * The starting y coordinate of the wave.
-    */
-   private double y;
+public abstract class Wave extends Point implements IWave {
 
    /**
     * The speed of the wave in pixels/tick.
@@ -40,7 +30,7 @@ public abstract class AbstractWave implements IWave {
     * Creates a new blank wave. This wave is centered at negative infinity and has no speed and was created at time
     * <code>0</code>.
     */
-   public AbstractWave() {
+   public Wave() {
       this(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, 0.0, 0);
    }
 
@@ -52,9 +42,8 @@ public abstract class AbstractWave implements IWave {
     * @param velocity the speed of the wave in pixels/tick.
     * @param time the time the wave started.
     */
-   public AbstractWave(double x, double y, double velocity, long time) {
-      this.x = x;
-      this.y = y;
+   public Wave(double x, double y, double velocity, long time) {
+      super(x, y);
       this.velocity = velocity;
       this.time = time;
    }
@@ -64,18 +53,8 @@ public abstract class AbstractWave implements IWave {
     *
     * @param wave the wave to copy.
     */
-   protected AbstractWave(IWave wave) {
+   protected Wave(IWave wave) {
       this(wave.getX(), wave.getY(), wave.getVelocity(), wave.getTime());
-   }
-
-   @Override
-   public double getX() {
-      return x;
-   }
-
-   @Override
-   public double getY() {
-      return y;
    }
 
    @Override
@@ -90,8 +69,8 @@ public abstract class AbstractWave implements IWave {
 
    @Override
    public boolean isActive(long currentTime) {
-      return x >= 0 && y >= 0 && x <= Tank.MAX_BATTLEFIELD_WIDTH && y <= Tank.MAX_BATTLEFIELD_HEIGHT &&
-              distSq(currentTime) <= Tank.MAX_BATTLEFIELD_DIAGONAL;
+      return getX() >= 0 && getY() >= 0 && getX() <= Tank.MAX_BATTLEFIELD_WIDTH && getY() <= Tank.MAX_BATTLEFIELD_HEIGHT
+              && distSq(currentTime) <= Tank.MAX_BATTLEFIELD_DIAGONAL;
    }
 
    @Override
@@ -113,13 +92,14 @@ public abstract class AbstractWave implements IWave {
    public boolean equals(Object obj) {
       if (obj instanceof IWave) {
          IWave wave = (IWave) obj;
-         return wave.getX() == x && wave.getY() == y && wave.getVelocity() == velocity && wave.getTime() == time;
+         return wave.getX() == getX() && wave.getY() == getY() && wave.getVelocity() == velocity
+                 && wave.getTime() == time;
       }
       return super.equals(obj);
    }
 
    @Override
    public String toString() {
-      return this.getClass() + "[x=" + x + ", y=" + y + ", velocity=" + velocity + ", time" + time + "]";
+      return this.getClass() + "[x=" + getX() + ", y=" + getY() + ", velocity=" + velocity + ", time=" + time + "]";
    }
 }

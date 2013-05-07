@@ -9,23 +9,9 @@ import bnorm.robots.IRobot;
  * traveled.
  *
  * @author Brian Norman
- * @version 1.0
+ * @version 1.1
  */
-public interface IWave {
-
-   /**
-    * Returns the starting x coordinate of the wave.
-    *
-    * @return the starting x coordinate of the wave.
-    */
-   double getX();
-
-   /**
-    * Returns the starting y coordinate of the wave.
-    *
-    * @return the starting y coordinate of the wave.
-    */
-   double getY();
+public interface IWave extends IPoint {
 
    /**
     * Returns the speed of the wave in pixels/tick.
