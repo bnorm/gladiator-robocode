@@ -40,18 +40,6 @@ public class Point implements IPoint {
    }
 
    /**
-    * Returns the hashcode for this Point.
-    *
-    * @return a hash code for this Point.
-    */
-   @Override
-   public int hashCode() {
-      long bits = Double.doubleToLongBits(getX());
-      bits ^= Double.doubleToLongBits(getY()) * 31;
-      return (((int) bits) ^ ((int) (bits >> 32)));
-   }
-
-   /**
     * Returns a String that represents the value of this Point.
     *
     * @return a string representation of this Point.
@@ -71,6 +59,7 @@ public class Point implements IPoint {
     * @return <code>true</code> if the object to be compared is an instance of
     * Point and has the same values; <code>false</code> otherwise.
     */
+   @Override
    public boolean equals(Object obj) {
       if (obj instanceof Point) {
          Point p = (Point) obj;
