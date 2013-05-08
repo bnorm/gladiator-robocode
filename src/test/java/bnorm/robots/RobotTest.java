@@ -1,28 +1,31 @@
 package bnorm.robots;
 
-import org.junit.Test;
-
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
- * Test class for {@link AbstractRobot}.
+ * Test class for {@link Robot}.
  *
  * @author Brian Norman
- * @version 1.2
+ * @version 1.3
  */
-public class AbstractRobotTest {
+public class RobotTest {
 
    /**
-    * Test method for {@link AbstractRobot#AbstractRobot()}.
+    * Test method for {@link Robot#Robot()}.
     */
    @Test
-   public void testAbstractRobot() {
-      AbstractRobot r = new AbstractRobot() {
-      };
+   public void testRobot() {
+      Robot r = new Robot();
 
       // Testing snapshot assumptions
       assertNotNull("Snapshot should not be null.", r.getSnapshot());
@@ -117,12 +120,11 @@ public class AbstractRobotTest {
    }
 
    /**
-    * Test method for {@link AbstractRobot#AbstractRobot(String)}.
+    * Test method for {@link Robot#Robot(String)}.
     */
    @Test
-   public void testAbstractRobotString() {
-      AbstractRobot r = new AbstractRobot("Name") {
-      };
+   public void testRobotString() {
+      Robot r = new Robot("Name");
 
       // Testing snapshot assumptions
       assertNotNull("Snapshot should not be null.", r.getSnapshot());
@@ -217,13 +219,12 @@ public class AbstractRobotTest {
    }
 
    /**
-    * Test method for {@link AbstractRobot#AbstractRobot(IRobot)}.
+    * Test method for {@link Robot#Robot(IRobot)}.
     */
    @Test
-   public void testAbstractRobotIRobot() {
+   public void testRobotIRobot() {
       String name = "Name";
-      AbstractRobot r = new AbstractRobot(name) {
-      };
+      Robot r = new Robot(name);
 
       RobotSnapshot s1 = new RobotSnapshot(name, 0, 0, 0, 0, 0, 1, 0);
       RobotSnapshot s4 = new RobotSnapshot(name, 0, 0, 0, 0, 0, 4, 0);
@@ -237,8 +238,7 @@ public class AbstractRobotTest {
       r.add(s4);
       r.add(s3);
 
-      AbstractRobot copy = new AbstractRobot(r) {
-      };
+      Robot copy = new Robot(r);
 
       assertEquals("The name of the robot should be " + name + ".", name, r.getName());
 
@@ -276,18 +276,17 @@ public class AbstractRobotTest {
    }
 
    /**
-    * Test method for {@link AbstractRobot#getName()}.
+    * Test method for {@link Robot#getName()}.
     */
    @Test
    public void testGetName() {
-      AbstractRobot r = new AbstractRobot("Name") {
-      };
+      Robot r = new Robot("Name");
 
       assertEquals("The name of the robot should be Name.", "Name", r.getName());
    }
 
    /**
-    * Test method for {@link AbstractRobot#add(IRobotSnapshot)}.
+    * Test method for {@link Robot#add(IRobotSnapshot)}.
     */
    @Test
    public void testAdd() {
@@ -297,8 +296,7 @@ public class AbstractRobotTest {
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
       RobotSnapshot s8 = new RobotSnapshot("", 0, 0, 0, 0, 0, 8, 0);
 
-      AbstractRobot r = new AbstractRobot() {
-      };
+      Robot r = new Robot();
       r.add(s4);
       r.add(s1);
       r.add(s8);
@@ -341,7 +339,7 @@ public class AbstractRobotTest {
    }
 
    /**
-    * Test method for {@link AbstractRobot#getSnapshot()}.
+    * Test method for {@link Robot#getSnapshot()}.
     */
    @Test
    public void testGetSnapshot() {
@@ -351,8 +349,7 @@ public class AbstractRobotTest {
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
       RobotSnapshot s8 = new RobotSnapshot("", 0, 0, 0, 0, 0, 8, 0);
 
-      AbstractRobot r = new AbstractRobot() {
-      };
+      Robot r = new Robot();
 
       r.add(s4);
       assertEquals("Most recent snapshot should be s4.", s4, r.getSnapshot());
@@ -371,7 +368,7 @@ public class AbstractRobotTest {
    }
 
    /**
-    * Test method for {@link AbstractRobot#getSnapshot(long)}.
+    * Test method for {@link Robot#getSnapshot(long)}.
     */
    @Test
    public void testGetSnapshotLong() {
@@ -381,8 +378,7 @@ public class AbstractRobotTest {
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
       RobotSnapshot s8 = new RobotSnapshot("", 0, 0, 0, 0, 0, 8, 0);
 
-      AbstractRobot r = new AbstractRobot() {
-      };
+      Robot r = new Robot();
       r.add(s1);
       r.add(s2);
       r.add(s4);
@@ -403,7 +399,7 @@ public class AbstractRobotTest {
    }
 
    /**
-    * Test method for {@link AbstractRobot#getSnapshot(long, int)}.
+    * Test method for {@link Robot#getSnapshot(long, int)}.
     */
    @Test
    public void testGetSnapshotLongInt() {
@@ -415,8 +411,7 @@ public class AbstractRobotTest {
 
       RobotSnapshot s3 = new RobotSnapshot("", 0, 0, 0, 0, 0, 3, 2);
 
-      AbstractRobot r = new AbstractRobot() {
-      };
+      Robot r = new Robot();
       r.add(s1);
       r.add(s2);
       r.add(s5);
@@ -457,7 +452,7 @@ public class AbstractRobotTest {
    }
 
    /**
-    * Test method for {@link AbstractRobot#getMovie()}.
+    * Test method for {@link Robot#getMovie()}.
     */
    @Test
    public void testGetMovie() {
@@ -467,8 +462,7 @@ public class AbstractRobotTest {
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
       RobotSnapshot s8 = new RobotSnapshot("", 0, 0, 0, 0, 0, 8, 0);
 
-      AbstractRobot r = new AbstractRobot() {
-      };
+      Robot r = new Robot();
 
       r.add(s1);
       r.add(s2);
@@ -490,7 +484,7 @@ public class AbstractRobotTest {
    }
 
    /**
-    * Test method for {@link AbstractRobot#getMovie(long)}.
+    * Test method for {@link Robot#getMovie(long)}.
     */
    @Test
    public void testGetMovieLong() {
@@ -499,8 +493,7 @@ public class AbstractRobotTest {
       RobotSnapshot s4 = new RobotSnapshot("", 0, 0, 0, 0, 0, 4, 0);
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 0);
 
-      AbstractRobot r = new AbstractRobot() {
-      };
+      Robot r = new Robot();
 
       r.add(s1);
       r.add(s2);
@@ -598,7 +591,7 @@ public class AbstractRobotTest {
    }
 
    /**
-    * Test method for {@link AbstractRobot#getMovie(long, int)}.
+    * Test method for {@link Robot#getMovie(long, int)}.
     */
    @Test
    public void testGetMovieLongInt() {
@@ -608,8 +601,7 @@ public class AbstractRobotTest {
       RobotSnapshot s2 = new RobotSnapshot("", 0, 0, 0, 0, 0, 2, 1);
       RobotSnapshot s4 = new RobotSnapshot("", 0, 0, 0, 0, 0, 4, 1);
 
-      AbstractRobot r = new AbstractRobot() {
-      };
+      Robot r = new Robot();
 
       r.add(s1);
       r.add(s3);
@@ -737,7 +729,7 @@ public class AbstractRobotTest {
    }
 
    /**
-    * Test method for {@link AbstractRobot#getRounds()}.
+    * Test method for {@link Robot#getRounds()}.
     */
    @Test
    public void testGetRounds() {
@@ -749,8 +741,7 @@ public class AbstractRobotTest {
 
       RobotSnapshot s5 = new RobotSnapshot("", 0, 0, 0, 0, 0, 5, 3);
 
-      AbstractRobot r = new AbstractRobot() {
-      };
+      Robot r = new Robot();
 
       r.add(s1);
 
@@ -799,7 +790,7 @@ public class AbstractRobotTest {
    }
 
    /**
-    * Test method for {@link AbstractRobot#getIndex(java.util.List, long)}.
+    * Test method for {@link Robot#getIndex(java.util.List, long)}.
     */
    @Test
    public void testGetIndex() {
@@ -812,7 +803,7 @@ public class AbstractRobotTest {
 
       int[] indexes = new int[11];
       for (int i = 0; i < indexes.length; i++) {
-         indexes[i] = AbstractRobot.getIndex(list, i);
+         indexes[i] = Robot.getIndex(list, i);
       }
 
       assertEquals("Index returned for time=0 should be -1.", -1, indexes[0]);
@@ -828,21 +819,21 @@ public class AbstractRobotTest {
       assertEquals("Index returned for time=10 should be 4.", 4, indexes[10]);
 
       try {
-         AbstractRobot.getIndex(null, 0);
+         Robot.getIndex(null, 0);
          fail("getIndex should throw an error.");
       } catch (Exception e) {
          assertTrue("getIndex should throw an NullPointerException.", e instanceof NullPointerException);
       }
 
       try {
-         AbstractRobot.getIndex(null, -1);
+         Robot.getIndex(null, -1);
          fail("getIndex should throw an error.");
       } catch (Exception e) {
          assertTrue("getIndex should throw an NullPointerException.", e instanceof NullPointerException);
       }
 
       try {
-         AbstractRobot.getIndex(list, -1);
+         Robot.getIndex(list, -1);
          fail("getIndex should throw an error.");
       } catch (Exception e) {
          assertTrue("getIndex should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
@@ -850,7 +841,7 @@ public class AbstractRobotTest {
    }
 
    /**
-    * Test method for {@link AbstractRobot#getMovie(java.util.List, long)}.
+    * Test method for {@link Robot#getMovie(java.util.List, long)}.
     */
    @Test
    public void testGetMovieListOfTLong() {
@@ -870,7 +861,7 @@ public class AbstractRobotTest {
       @SuppressWarnings("rawtypes")
       ListIterator[] iters = new ListIterator[11];
       for (int i = 0; i < iters.length; i++) {
-         iters[i] = AbstractRobot.getMovie(list, i);
+         iters[i] = Robot.getMovie(list, i);
       }
 
       assertEquals("ListIterator returned for time=0 should start at s1.", s1, iters[0].next());
@@ -886,7 +877,7 @@ public class AbstractRobotTest {
       assertFalse("ListIterator returned for time=10 should start at the end.", iters[10].hasNext());
 
       try {
-         AbstractRobot.getMovie(null, -1);
+         Robot.getMovie(null, -1);
          fail("getMovie should throw an error.");
       } catch (Exception e) {
          assertTrue("getMovie should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);
@@ -894,7 +885,7 @@ public class AbstractRobotTest {
    }
 
    /**
-    * Test method for {@link AbstractRobot#getSnapshot(java.util.List, long)}.
+    * Test method for {@link Robot#getSnapshot(java.util.List, long)}.
     */
    @Test
    public void testGetSnapshotListOfTLong() {
@@ -913,7 +904,7 @@ public class AbstractRobotTest {
 
       IRobotSnapshot[] snaps = new RobotSnapshot[11];
       for (int i = 0; i < snaps.length; i++) {
-         snaps[i] = AbstractRobot.getSnapshot(list, i);
+         snaps[i] = Robot.getSnapshot(list, i);
       }
 
       assertEquals("Snapshot returned for time=0 should be s1.", s1, snaps[0]);
@@ -929,7 +920,7 @@ public class AbstractRobotTest {
       assertEquals("Snapshot returned for time=10 should be s8.", s8, snaps[10]);
 
       try {
-         AbstractRobot.getSnapshot(null, -1);
+         Robot.getSnapshot(null, -1);
          fail("getSnapshot should throw an error.");
       } catch (Exception e) {
          assertTrue("getSnapshot should throw an IllegalArgumentException.", e instanceof IllegalArgumentException);

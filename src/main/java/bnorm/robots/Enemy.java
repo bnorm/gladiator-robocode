@@ -7,7 +7,7 @@ package bnorm.robots;
  * @author Brian Norman (KID)
  * @version 1.1
  */
-public class Enemy extends AbstractRobot {
+public class Enemy extends Robot {
 
    /**
     * Creates a new enemy robot.

@@ -7,7 +7,7 @@ package bnorm.robots;
  * @author Brian Norman (KID)
  * @version 1.1
  */
-public class Teammate extends AbstractRobot {
+public class Teammate extends Robot {
 
    /**
     * Creates a new teammate robot.

@@ -18,9 +18,9 @@ import robocode.Rules;
  * See {@link IRobot} for details of the requirements of a robot.
  *
  * @author Brian Norman
- * @version 1.2_01
+ * @version 1.3
  */
-abstract class AbstractRobot implements IRobot {
+class Robot implements IRobot {
 
    /**
     * The name of the robot.
@@ -51,7 +51,7 @@ abstract class AbstractRobot implements IRobot {
    /**
     * Creates a new robot.
     */
-   public AbstractRobot() {
+   public Robot() {
       this("");
    }
 
@@ -61,7 +61,7 @@ abstract class AbstractRobot implements IRobot {
     * @param name
     *           the name of the robot.
     */
-   public AbstractRobot(String name) {
+   public Robot(String name) {
       this.name = name;
       this.rounds = new Hashtable<Integer, List<IRobotSnapshot>>();
       this.movie = new LinkedList<IRobotSnapshot>();
@@ -76,7 +76,7 @@ abstract class AbstractRobot implements IRobot {
     * @param robot
     *           the robot to copy.
     */
-   protected AbstractRobot(IRobot robot) {
+   protected Robot(IRobot robot) {
       this(robot.getName());
 
       for (Integer i : robot.getRounds()) {
@@ -140,6 +140,8 @@ abstract class AbstractRobot implements IRobot {
          double velocityDiff = snapshot.getVelocity() - prev.getVelocity();
          if (timeDiff == 1 && energyDiff <= -Rules.MIN_BULLET_POWER && energyDiff >= -Rules.MAX_BULLET_POWER
                  && velocityDiff >= -Rules.DECELERATION) {
+            // is it ramming someone?
+            // has the inactive timer expired
             notify(new RobotFiredEvent(getName(), snapshot.getTime() - 1, Math.abs(energyDiff)));
          }
       }
