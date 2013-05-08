@@ -14,11 +14,10 @@ import robocode.Rules;
 /**
  * An abstract representation of a Robocode robot. Provides base functionality
  * to build upon.
- * <p>
+ * <p />
  * See {@link IRobot} for details of the requirements of a robot.
  *
  * @author Brian Norman
- * @version 1.3
  */
 class Robot implements IRobot {
 
@@ -58,8 +57,7 @@ class Robot implements IRobot {
    /**
     * Creates a new robot with the specified name.
     *
-    * @param name
-    *           the name of the robot.
+    * @param name the name of the robot.
     */
    public Robot(String name) {
       this.name = name;
@@ -73,8 +71,7 @@ class Robot implements IRobot {
    /**
     * Creates a new robot that is a copy of the specified robot.
     *
-    * @param robot
-    *           the robot to copy.
+    * @param robot the robot to copy.
     */
    protected Robot(IRobot robot) {
       this(robot.getName());
@@ -93,9 +90,6 @@ class Robot implements IRobot {
       }
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public String getName() {
       return name;
@@ -104,19 +98,18 @@ class Robot implements IRobot {
    /**
     * {@inheritDoc}
     *
-    * @throws NullPointerException
-    *            if <code>snapshot</code> is null.
-    * @throws IllegalArgumentException
-    *            if the name of <code>snapshot</code> does not match the name of
-    *            the robot.
+    * @throws NullPointerException if <code>snapshot</code> is null.
+    * @throws IllegalArgumentException if the name of <code>snapshot</code>
+    * does not match the name of the robot.
     */
    @Override
    public boolean add(IRobotSnapshot snapshot) {
       if (snapshot == null) {
          throw new NullPointerException("IRobotSnapshot must not be null.");
       } else if (!snapshot.getName().equals(name)) {
-         throw new IllegalArgumentException("Name of snapshot must match the name of the robot (" + recent.getName()
-               + " != " + snapshot.getName() + ").");
+         throw new IllegalArgumentException(
+                 "Name of snapshot must match the name of the robot (" + recent.getName() + " != " + snapshot.getName()
+                         + ").");
       }
 
       movie = rounds.get(snapshot.getRound());
@@ -142,16 +135,13 @@ class Robot implements IRobot {
                  && velocityDiff >= -Rules.DECELERATION) {
             // is it ramming someone?
             // has the inactive timer expired
-            notify(new RobotFiredEvent(getName(), snapshot.getTime() - 1, Math.abs(energyDiff)));
+            notify(new RobotFiredEvent(prev, Math.abs(energyDiff)));
          }
       }
 
       return true;
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public IRobotSnapshot getSnapshot() {
       return recent;
@@ -160,8 +150,7 @@ class Robot implements IRobot {
    /**
     * {@inheritDoc}
     *
-    * @throws IllegalArgumentException
-    *            if <code>time</code> is less than zero.
+    * @throws IllegalArgumentException if <code>time</code> is less than zero.
     */
    @Override
    public IRobotSnapshot getSnapshot(long time) {
@@ -175,10 +164,8 @@ class Robot implements IRobot {
    /**
     * {@inheritDoc}
     *
-    * @throws IllegalArgumentException
-    *            if <code>time</code> is less than zero.
-    * @throws IllegalArgumentException
-    *            if <code>round</code> is less than zero.
+    * @throws IllegalArgumentException if <code>time</code> is less than zero
+    * or if <code>round</code> is less than zero.
     */
    @Override
    public IRobotSnapshot getSnapshot(long time, int round) {
@@ -191,9 +178,6 @@ class Robot implements IRobot {
       return getSnapshot(rounds.get(round), time);
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public ListIterator<IRobotSnapshot> getMovie() {
       return getMovie(movie, 0);
@@ -202,8 +186,7 @@ class Robot implements IRobot {
    /**
     * {@inheritDoc}
     *
-    * @throws IllegalArgumentException
-    *            if <code>time</code> is less than zero.
+    * @throws IllegalArgumentException if <code>time</code> is less than zero.
     */
    @Override
    public ListIterator<IRobotSnapshot> getMovie(long time) {
@@ -217,10 +200,8 @@ class Robot implements IRobot {
    /**
     * {@inheritDoc}
     *
-    * @throws IllegalArgumentException
-    *            if <code>time</code> is less than zero.
-    * @throws IllegalArgumentException
-    *            if <code>round</code> is less than zero.
+    * @throws IllegalArgumentException if <code>time</code> is less than zero
+    * or if <code>round</code> is less than zero.
     */
    @Override
    public ListIterator<IRobotSnapshot> getMovie(long time, int round) {
@@ -233,25 +214,16 @@ class Robot implements IRobot {
       return getMovie(rounds.get(round), time);
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public Set<Integer> getRounds() {
       return rounds.keySet();
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public void addListener(RobotFiredEventListener listener) {
       robotFiredEventListeners.add(listener);
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public void removeListener(RobotFiredEventListener listener) {
       robotFiredEventListeners.remove(listener);
@@ -271,28 +243,23 @@ class Robot implements IRobot {
    /**
     * Returns the index of the snapshot that matches the specified time in the
     * specified series. The series is assumed to be sorted. If the exact time
-    * does not appear in the series, then the index of the greatest time that is
-    * still less than the specified time is return.
+    * does not appear in the series, then the index of the greatest time that
+    * is still less than the specified time is return.
     * <p>
     * Properties:<br>
-    * 1) If <code>getIndex(movie,time=t)</code> returns a snapshot for which the
-    * time is equal to <code>t</code>, then the snapshot at index
+    * 1) If <code>getIndex(movie,time=t)</code> returns a snapshot for which
+    * the time is equal to <code>t</code>, then the snapshot at index
     * <code>getIndex(movie,time=t-1)+1</code> will be the same snapshot.<br>
-    * 2) If <code>getIndex(movie,time=t)</code> returns a snapshot for which the
-    * time is less than <code>t</code>, then the snapshot at index
+    * 2) If <code>getIndex(movie,time=t)</code> returns a snapshot for which
+    * the time is less than <code>t</code>, then the snapshot at index
     * <code>getIndex(movie,time=t-1)+1</code> will be the snapshot with the
     * smallest time that is still greater than the time <code>t</code>.
     *
-    * @param movie
-    *           the series to search.
-    * @param time
-    *           the time to search for.
+    * @param movie the series to search.
+    * @param time the time to search for.
     * @return the index of the time, rounding down.
-    *
-    * @throws IllegalArgumentException
-    *            if <code>movie</code> is null.
-    * @throws IllegalArgumentException
-    *            if <code>time</code> is less than zero.
+    * @throws IllegalArgumentException if <code>movie</code> is null or if
+    * <code>time</code> is less than zero.
     */
    protected static int getIndex(List<IRobotSnapshot> movie, long time) {
       if (movie == null) {
@@ -326,19 +293,16 @@ class Robot implements IRobot {
 
    /**
     * Returns an iterator over the specified list starting at the specified
-    * time. If the specified list is <code>null</code> then an empty iterator is
-    * returned. If the exact time does not appear in the series, then the index
-    * of the greatest time that is still less than the specified time is used.
+    * time. If the specified list is <code>null</code> then an empty iterator
+    * is returned. If the exact time does not appear in the series, then the
+    * index of the greatest time that is still less than the specified time is
+    * used.
     *
-    * @param movie
-    *           the list series to be played as a movie.
-    * @param time
-    *           the time when the movie starts.
+    * @param movie the list series to be played as a movie.
+    * @param time the time when the movie starts.
     * @return an iterator over the specified list starting at the specified
     *         time.
-    *
-    * @throws IllegalArgumentException
-    *            if <code>time</code> is less than zero.
+    * @throws IllegalArgumentException if <code>time</code> is less than zero.
     */
    protected static ListIterator<IRobotSnapshot> getMovie(List<IRobotSnapshot> movie, long time) {
       if (time < 0) {
@@ -357,21 +321,17 @@ class Robot implements IRobot {
    }
 
    /**
-    * Returns the snapshot at the specified time from the specified list. If the
-    * specified list is empty or <code>null</code> then a blank robot snapshot
-    * is returned. If the exact time does not appear in the series, then the
-    * snapshot of the greatest time that is still less than the specified time
-    * is returned. If a time before all snapshots in the series is specified,
-    * then the first snapshot in the series is returned.
+    * Returns the snapshot at the specified time from the specified list. If
+    * the specified list is empty or <code>null</code> then a blank robot
+    * snapshot is returned. If the exact time does not appear in the series,
+    * then the snapshot of the greatest time that is still less than the
+    * specified time is returned. If a time before all snapshots in the series
+    * is specified, then the first snapshot in the series is returned.
     *
-    * @param movie
-    *           the series to search.
-    * @param time
-    *           the time to search for.
+    * @param movie the series to search.
+    * @param time the time to search for.
     * @return the snapshot at the specified time from the specified list.
-    *
-    * @throws IllegalArgumentException
-    *            if <code>time</code> is less than zero.
+    * @throws IllegalArgumentException if <code>time</code> is less than zero.
     */
    protected static IRobotSnapshot getSnapshot(List<IRobotSnapshot> movie, long time) {
       if (time < 0) {
