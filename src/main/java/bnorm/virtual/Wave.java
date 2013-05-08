@@ -1,8 +1,6 @@
 package bnorm.virtual;
 
 import bnorm.base.Tank;
-import bnorm.robots.IRobot;
-import bnorm.utils.Robots;
 import bnorm.utils.Utils;
 
 /**
@@ -12,7 +10,6 @@ import bnorm.utils.Utils;
  * traveled.
  *
  * @author Brian Norman
- * @version 1.0
  */
 public abstract class Wave extends Point implements IWave {
 
@@ -74,8 +71,8 @@ public abstract class Wave extends Point implements IWave {
    }
 
    @Override
-   public boolean isActive(long currentTime, IRobot target) {
-      return isActive(currentTime) && distSq(currentTime) < Robots.distSq(target.getSnapshot(), getX(), getY());
+   public boolean isActive(long currentTime, IPoint target) {
+      return isActive(currentTime) && distSq(currentTime) < Points.distSq(this, target);
    }
 
    @Override

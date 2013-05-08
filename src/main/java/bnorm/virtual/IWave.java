@@ -1,7 +1,5 @@
 package bnorm.virtual;
 
-import bnorm.robots.IRobot;
-
 /**
  * Interface for a wave that exists on the Robocode battlefield. This wave has
  * a starting coordinate, a speed, and a starting time. Given a specified time,
@@ -9,7 +7,6 @@ import bnorm.robots.IRobot;
  * traveled.
  *
  * @author Brian Norman
- * @version 1.1
  */
 public interface IWave extends IPoint {
 
@@ -43,7 +40,7 @@ public interface IWave extends IPoint {
     * @param target the target of the wave.
     * @return if the wave is active.
     */
-   public boolean isActive(long currentTime, IRobot target);
+   public boolean isActive(long currentTime, IPoint target);
 
    /**
     * Returns the distance the wave has traveled from where it started as of
