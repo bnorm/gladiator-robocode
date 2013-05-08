@@ -1,5 +1,7 @@
 package bnorm.robots;
 
+import bnorm.virtual.Vector;
+
 import static bnorm.utils.Format.coordinateDec0;
 import static bnorm.utils.Format.dec0;
 import static bnorm.utils.Format.dec1;
@@ -11,7 +13,7 @@ import static bnorm.utils.Format.dec3;
  * @author Brian Norman
  * @version 1.3
  */
-class RobotSnapshot implements IRobotSnapshot {
+class RobotSnapshot extends Vector implements IRobotSnapshot {
 
    /**
     * Determines if a deserialized file is compatible with this class.
@@ -26,29 +28,9 @@ class RobotSnapshot implements IRobotSnapshot {
    private String name;
 
    /**
-    * The x coordinate of the robot.
-    */
-   private double x;
-
-   /**
-    * The y coordinate of the robot.
-    */
-   private double y;
-
-   /**
     * The energy of the robot.
     */
    private double energy;
-
-   /**
-    * The heading in radians of the robot.
-    */
-   private double heading;
-
-   /**
-    * The speed in pixels per tick of the robot.
-    */
-   private double velocity;
 
    /**
     * The round time the information of the robot was updated.
@@ -82,12 +64,10 @@ class RobotSnapshot implements IRobotSnapshot {
     */
    protected RobotSnapshot(String name, double x, double y, double energy, double heading, double velocity, long time,
                            int round) {
+      super(x, y, heading, velocity);
+
       this.name = name;
-      this.x = x;
-      this.y = y;
       this.energy = energy;
-      this.heading = heading;
-      this.velocity = velocity;
       this.time = time;
       this.round = round;
    }
@@ -108,28 +88,8 @@ class RobotSnapshot implements IRobotSnapshot {
    }
 
    @Override
-   public double getX() {
-      return x;
-   }
-
-   @Override
-   public double getY() {
-      return y;
-   }
-
-   @Override
    public double getEnergy() {
       return energy;
-   }
-
-   @Override
-   public double getHeading() {
-      return heading;
-   }
-
-   @Override
-   public double getVelocity() {
-      return velocity;
    }
 
    @Override
