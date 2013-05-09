@@ -45,7 +45,7 @@ public final class RobotDraw {
             g.setColor(Color.getHSBColor((float) (norEngDif / 240.0), 1.0F,
                                          0.25F + 0.75F * Math.abs(Utils.signZ(engDif))));
 
-            g.fillOval((int) older.getX() - 2, (int) older.getY() - 2, 4, 4);
+            Draw.point(g, older, 2.0);
             newer = older;
          }
       }
@@ -72,8 +72,7 @@ public final class RobotDraw {
    private static void drawBoxUnchecked(Graphics2D g, IRobot robot) {
       if (robot.getSnapshot().getEnergy() >= 0.0) {
          g.setColor(Color.GRAY);
-         g.drawRect((int) robot.getSnapshot().getX() - 18, (int) robot.getSnapshot().getY() - 18, 36, 36);
+         Draw.box(g, robot.getSnapshot(), 36);
       }
    }
-
 }
