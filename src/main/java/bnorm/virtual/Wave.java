@@ -11,7 +11,7 @@ import bnorm.utils.Utils;
  *
  * @author Brian Norman
  */
-public abstract class Wave extends Point implements IWave {
+public class Wave extends Point implements IWave {
 
    /**
     * The speed of the wave in pixels/tick.
