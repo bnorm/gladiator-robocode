@@ -6,7 +6,7 @@ import java.util.Collection;
 
 import bnorm.virtual.IWave;
 
-public class WaveDraw {
+public final class WaveDraw {
 
    private WaveDraw() {
    }

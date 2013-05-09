@@ -9,7 +9,7 @@ import bnorm.robots.IRobot;
 import bnorm.robots.IRobotSnapshot;
 import bnorm.utils.Utils;
 
-public class RobotDraw {
+public final class RobotDraw {
 
    private RobotDraw() {
    }

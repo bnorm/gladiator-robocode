@@ -22,9 +22,8 @@ import robocode.RobocodeFileWriter;
  * control what a robot draws to the screen.
  * 
  * @author Brian Norman
- * @version 1.2
  */
-public class DrawMenu {
+public final class DrawMenu {
 
    private DrawMenu() {
    }
@@ -364,7 +363,6 @@ public class DrawMenu {
     * items that store the values.
     * 
     * @author Brian Norman
-    * @version 1.0
     */
    private static class Menu {
 
