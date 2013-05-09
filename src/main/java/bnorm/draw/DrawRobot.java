@@ -9,12 +9,12 @@ import bnorm.robots.IRobot;
 import bnorm.robots.IRobotSnapshot;
 import bnorm.utils.Utils;
 
-public final class RobotDraw {
+public final class DrawRobot {
 
-   private RobotDraw() {
+   private DrawRobot() {
    }
 
-   public static void drawPath(Graphics2D g, IRobot robot) {
+   public static void path(Graphics2D g, IRobot robot) {
       if (!DrawMenu.getValue("Robots", "History", true)) {
          return;
       }
@@ -22,7 +22,7 @@ public final class RobotDraw {
       drawPathUnchecked(g, robot);
    }
 
-   public static void drawPaths(Graphics2D g, Collection<IRobot> robots) {
+   public static void paths(Graphics2D g, Collection<IRobot> robots) {
       if (!DrawMenu.getValue("Robots", "History", true)) {
          return;
       }
@@ -51,7 +51,7 @@ public final class RobotDraw {
       }
    }
 
-   public static void drawBox(Graphics2D g, IRobot robot) {
+   public static void box(Graphics2D g, IRobot robot) {
       if (!DrawMenu.getValue("Robots", "Box", true)) {
          return;
       }
@@ -59,7 +59,7 @@ public final class RobotDraw {
       drawBoxUnchecked(g, robot);
    }
 
-   public static void drawBoxes(Graphics2D g, Collection<IRobot> robots) {
+   public static void boxes(Graphics2D g, Collection<IRobot> robots) {
       if (!DrawMenu.getValue("Robots", "Box", true)) {
          return;
       }

@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 import bnorm.virtual.IPoint;
 import bnorm.virtual.IVector;
+import bnorm.virtual.IVectorWave;
 import bnorm.virtual.IWave;
 
 public final class Draw {
@@ -49,8 +50,17 @@ public final class Draw {
       g.drawOval((int) (wave.getX() - dist), (int) (wave.getY() - dist), 2 * dist, 2 * dist);
    }
 
-   public static void waves(Graphics2D g, Iterable<? extends IWave> waves, long time) {
-      for (IWave w : waves) {
+   public static void wave(Graphics2D g, IVectorWave wave, long time) {
+      int dist = (int) wave.dist(time);
+      long dt = time - wave.getTime();
+      int dx = (int) (wave.getDeltaX() * dt);
+      int dy = (int) (wave.getDeltaY() * dt);
+      g.drawOval((int) (wave.getX() - dist), (int) (wave.getY() - dist), 2 * dist, 2 * dist);
+      g.drawLine((int) wave.getX(), (int) wave.getY(), dx, dy);
+   }
+
+   public static <W extends IWave> void waves(Graphics2D g, Iterable<W> waves, long time) {
+      for (W w : waves) {
          wave(g, w, time);
       }
    }
