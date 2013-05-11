@@ -44,4 +44,8 @@ public final class Robots {
    public static double distSq(IRobotSnapshot snapshot, double x, double y) {
       return distSq(snapshot.getX(), snapshot.getY(), x, y);
    }
+
+   public static double distSq(IRobotSnapshot snapshot1, IRobotSnapshot snapshot2) {
+      return distSq(snapshot1, snapshot2.getX(), snapshot2.getY());
+   }
 }
