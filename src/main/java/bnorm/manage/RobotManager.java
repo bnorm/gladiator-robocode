@@ -25,16 +25,15 @@ import robocode.ScannedRobotEvent;
  * represent all the robots in the battle. The {@link RobotManager} does not distinguish between
  * friend and foe so all the robots are stored together. Robots can be accessed by their name and a
  * collection of all the robots can also be returned.
- * 
+ *
  * @author Brian Norman
- * @version 1.1
  */
 public class RobotManager implements EventHandler, MessageHandler {
 
    /**
     * The {@link Robot} <code>class</code> that created the {@link RobotManager} instance.
     */
-   protected Robot                   robot_;
+   protected Robot robot_;
 
    /**
     * A list of all known robots mapped against their name.
@@ -44,41 +43,35 @@ public class RobotManager implements EventHandler, MessageHandler {
    /**
     * The robot factory used for creating new robot objects.
     */
-   protected IRobotFactory           robotFactory_;
+   protected IRobotFactory robotFactory_;
 
    /**
     * The robot snapshot factory used for creating new robot snapshots.
     */
-   protected IRobotSnapshotFactory   snapshotFactory_;
+   protected IRobotSnapshotFactory snapshotFactory_;
 
    /**
     * Returns an instance of the {@link RobotManager} <code>class</code>.
-    * 
-    * @param robot
-    *           the {@link Robot} object that is requesting the robot manager object.
-    * @param robotFactory
-    *           the {@link RobotFactory} used by the robot manager for creating robot objects.
-    * @param snapshotFactory
-    *           the {@link RobotSnapshotFactory} used by the robot manager for creating robot
-    *           snapshots.
+    *
+    * @param robot the {@link Robot} object that is requesting the robot manager object.
+    * @param robotFactory the {@link RobotFactory} used by the robot manager for creating robot objects.
+    * @param snapshotFactory the {@link RobotSnapshotFactory} used by the robot manager for creating robot
+    * snapshots.
     * @return an instance.
-    * 
     * @see #RobotManager(Robot, IRobotFactory, IRobotSnapshotFactory)
     */
-   public static RobotManager getInstance(Robot robot, IRobotFactory robotFactory, IRobotSnapshotFactory snapshotFactory) {
+   public static RobotManager getInstance(Robot robot, IRobotFactory robotFactory,
+                                          IRobotSnapshotFactory snapshotFactory) {
       return new RobotManager(robot, robotFactory, snapshotFactory);
    }
 
    /**
     * Creates an instance of a {@link RobotManager} with the specified arguments.
-    * 
-    * @param robot
-    *           the {@link Robot} object that is requesting the robot manager object.
-    * @param robotFactory
-    *           the {@link RobotFactory} used by the robot manager for creating robot objects.
-    * @param snapshotFactory
-    *           the {@link RobotSnapshotFactory} used by the robot manager for creating robot
-    *           snapshots.
+    *
+    * @param robot the {@link Robot} object that is requesting the robot manager object.
+    * @param robotFactory the {@link RobotFactory} used by the robot manager for creating robot objects.
+    * @param snapshotFactory the {@link RobotSnapshotFactory} used by the robot manager for creating robot
+    * snapshots.
     */
    private RobotManager(Robot robot, IRobotFactory robotFactory, IRobotSnapshotFactory snapshotFactory) {
       this.robot_ = robot;
@@ -87,9 +80,6 @@ public class RobotManager implements EventHandler, MessageHandler {
       this.snapshotFactory_ = snapshotFactory;
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public void inEvent(Event event) {
       if (event instanceof ScannedRobotEvent) {
@@ -99,9 +89,6 @@ public class RobotManager implements EventHandler, MessageHandler {
       }
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public void inEvents(Iterable<Event> events) {
       for (Event e : events) {
@@ -109,9 +96,6 @@ public class RobotManager implements EventHandler, MessageHandler {
       }
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public void inMessage(Message message) {
       if (message instanceof RobotSnapshotMessage) {
@@ -119,9 +103,6 @@ public class RobotManager implements EventHandler, MessageHandler {
       }
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    public void inMessages(Iterable<Message> messages) {
       for (Message m : messages) {
@@ -133,12 +114,10 @@ public class RobotManager implements EventHandler, MessageHandler {
     * Processes any {@link ScannedRobotEvent}s that are passed to the {@link RobotManager}. Events
     * are delegated to the method {@link #handleRobotSnapshot(IRobotSnapshot)}. If the specified
     * event is <code>null</code> then a {@link NullPointerException} is thrown.
-    * 
-    * @param event
-    *           the event to handle.
+    *
+    * @param event the event to handle.
+    * @throws NullPointerException if <code>event</code> is <code>null</code>.
     * @see #handleRobotSnapshot(IRobotSnapshot)
-    * @throws NullPointerException
-    *            if <code>event</code> is <code>null</code>.
     */
    private void handleScannedRobotEvent(ScannedRobotEvent event) {
       if (event == null) {
@@ -151,11 +130,9 @@ public class RobotManager implements EventHandler, MessageHandler {
    /**
     * Processes any {@link RobotDeathEvent}s that are passed to the {@link RobotManager}. If the
     * specified event is <code>null</code> then a {@link NullPointerException} is thrown.
-    * 
-    * @param event
-    *           the event to handle.
-    * @throws NullPointerException
-    *            if <code>event</code> is <code>null</code>.
+    *
+    * @param event the event to handle.
+    * @throws NullPointerException if <code>event</code> is <code>null</code>.
     */
    private void handleRobotDeathEvent(RobotDeathEvent event) {
       if (event == null) {
@@ -172,12 +149,10 @@ public class RobotManager implements EventHandler, MessageHandler {
     * Processes any {@link RobotSnapshotMessage}s that are passed to the {@link RobotManager}.
     * Events are delegated to the method {@link #handleRobotSnapshot(IRobotSnapshot)}. If the
     * specified message is <code>null</code> then a {@link NullPointerException} is thrown.
-    * 
-    * @param message
-    *           the message to handle.
+    *
+    * @param message the message to handle.
+    * @throws NullPointerException if <code>message</code> is <code>null</code>.
     * @see #handleRobotSnapshot(IRobotSnapshot)
-    * @throws NullPointerException
-    *            if <code>message</code> is <code>null</code>.
     */
    private void handleRobotSnapshotMessage(RobotSnapshotMessage message) {
       if (message == null) {
@@ -191,11 +166,9 @@ public class RobotManager implements EventHandler, MessageHandler {
     * Processes the specified {@link IRobotSnapshot}. If the specified snapshot is <code>null</code>
     * then a {@link NullPointerException} is thrown. If the snapshot has the same name as the robot
     * that is processing the snapshot then the snapshot is skipped and not processed.
-    * 
-    * @param snapshot
-    *           the robot snapshot to handle.
-    * @throws NullPointerException
-    *            if <code>snapshot</code> is <code>null</code>.
+    *
+    * @param snapshot the robot snapshot to handle.
+    * @throws NullPointerException if <code>snapshot</code> is <code>null</code>.
     */
    private void handleRobotSnapshot(IRobotSnapshot snapshot) {
       if (snapshot == null) {
@@ -216,9 +189,8 @@ public class RobotManager implements EventHandler, MessageHandler {
    /**
     * Returns the robot with the specified name. If the manager does not contain the specified name
     * then a blank enemy is return. This blank enemy is died and has everything set to defaults.
-    * 
-    * @param name
-    *           the name of the robot to find.
+    *
+    * @param name the name of the robot to find.
     * @return the robot with the specified name.
     */
    public IRobot getRobot(String name) {
@@ -233,7 +205,7 @@ public class RobotManager implements EventHandler, MessageHandler {
     * Returns all the robots this manager contains. This is returned as a collection. There is no
     * distinction between teammate and enemy and no guarantee about their position in the
     * collection.
-    * 
+    *
     * @return all the robots.
     */
    public Collection<IRobot> getRobots() {
@@ -243,11 +215,10 @@ public class RobotManager implements EventHandler, MessageHandler {
    /**
     * Returns the the robot that is the least of all the robots using the comparator. The comparator
     * should be designed to provide some tolerance towards the robot that was chosen last time.
-    * <p>
+    * <p/>
     * Note: If two robots are equal, the robot that is earlier in the list is chosen.
-    * 
-    * @param comparator
-    *           the comparator used to find the "smallest" robot.
+    *
+    * @param comparator the comparator used to find the "smallest" robot.
     * @return the "smallest" robot.
     */
    public IRobot getRobot(Comparator<IRobot> comparator) {
@@ -265,5 +236,4 @@ public class RobotManager implements EventHandler, MessageHandler {
       }
       return r;
    }
-
 }
