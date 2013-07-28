@@ -3,7 +3,7 @@ package bnorm.manage;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Objects;
 
 import bnorm.events.EventHandler;
 import bnorm.messages.Message;
@@ -28,27 +28,27 @@ import robocode.ScannedRobotEvent;
  *
  * @author Brian Norman
  */
-public class RobotManager implements EventHandler, MessageHandler {
+public final class RobotManager implements EventHandler, MessageHandler {
 
    /**
     * The {@link Robot} <code>class</code> that created the {@link RobotManager} instance.
     */
-   protected Robot robot_;
+   private final Robot robot_;
 
    /**
     * A list of all known robots mapped against their name.
     */
-   protected HashMap<String, IRobot> allRobots_;
+   private final HashMap<String, IRobot> allRobots_;
 
    /**
     * The robot factory used for creating new robot objects.
     */
-   protected IRobotFactory robotFactory_;
+   private final IRobotFactory robotFactory_;
 
    /**
     * The robot snapshot factory used for creating new robot snapshots.
     */
-   protected IRobotSnapshotFactory snapshotFactory_;
+   private final IRobotSnapshotFactory snapshotFactory_;
 
    /**
     * Returns an instance of the {@link RobotManager} <code>class</code>.
@@ -60,8 +60,7 @@ public class RobotManager implements EventHandler, MessageHandler {
     * @return an instance.
     * @see #RobotManager(Robot, IRobotFactory, IRobotSnapshotFactory)
     */
-   public static RobotManager getInstance(Robot robot, IRobotFactory robotFactory,
-                                          IRobotSnapshotFactory snapshotFactory) {
+   public static RobotManager create(Robot robot, IRobotFactory robotFactory, IRobotSnapshotFactory snapshotFactory) {
       return new RobotManager(robot, robotFactory, snapshotFactory);
    }
 
@@ -120,9 +119,7 @@ public class RobotManager implements EventHandler, MessageHandler {
     * @see #handleRobotSnapshot(IRobotSnapshot)
     */
    private void handleScannedRobotEvent(ScannedRobotEvent event) {
-      if (event == null) {
-         throw new NullPointerException("ScannedRobotEvent must not be null.");
-      }
+      Objects.requireNonNull(event, "ScannedRobotEvent must not be null.");
 
       handleRobotSnapshot(snapshotFactory_.create(event, robot_));
    }
@@ -135,9 +132,7 @@ public class RobotManager implements EventHandler, MessageHandler {
     * @throws NullPointerException if <code>event</code> is <code>null</code>.
     */
    private void handleRobotDeathEvent(RobotDeathEvent event) {
-      if (event == null) {
-         throw new NullPointerException("RobotDeathEvent must not be null.");
-      }
+      Objects.requireNonNull(event, "RobotDeathEvent must not be null.");
 
       IRobot r = allRobots_.get(event.getName());
       if (r != null) {
@@ -155,9 +150,7 @@ public class RobotManager implements EventHandler, MessageHandler {
     * @see #handleRobotSnapshot(IRobotSnapshot)
     */
    private void handleRobotSnapshotMessage(RobotSnapshotMessage message) {
-      if (message == null) {
-         throw new NullPointerException("RobotSnapshotMessage must not be null.");
-      }
+      Objects.requireNonNull(message, "RobotSnapshotMessage must not be null.");
 
       handleRobotSnapshot(message.getSnapshot());
    }
@@ -171,10 +164,9 @@ public class RobotManager implements EventHandler, MessageHandler {
     * @throws NullPointerException if <code>snapshot</code> is <code>null</code>.
     */
    private void handleRobotSnapshot(IRobotSnapshot snapshot) {
-      if (snapshot == null) {
-         throw new NullPointerException("IRobotSnapshot must not be null.");
-      } else if (snapshot.getName().equals(robot_.getName())) {
-         // Skip snapshot of me
+      Objects.requireNonNull(snapshot, "IRobotSnapshot must not be null.");
+      if (snapshot.getName().equals(robot_.getName())) {
+         // Skip snapshot of myself
          return;
       }
 
@@ -222,18 +214,12 @@ public class RobotManager implements EventHandler, MessageHandler {
     * @return the "smallest" robot.
     */
    public IRobot getRobot(Comparator<IRobot> comparator) {
-      if (allRobots_.isEmpty()) {
-         return robotFactory_.createEnemy();
-      }
-
-      Iterator<IRobot> iter = getRobots().iterator();
-      IRobot r = iter.next();
-      while (iter.hasNext()) {
-         IRobot temp = iter.next();
-         if (comparator.compare(r, temp) > 0) {
+      IRobot r = null;
+      for (IRobot temp : getRobots()) {
+         if (r == null || comparator.compare(r, temp) > 0) {
             r = temp;
          }
       }
-      return r;
+      return r != null ? r : robotFactory_.createEnemy();
    }
 }
