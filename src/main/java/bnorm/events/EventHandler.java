@@ -25,10 +25,10 @@ public interface EventHandler {
     * one of the events specified than it is ignored. The easiest way to
     * implement this method is to call {@link #inEvent(Event)} for every event
     * in the collection.
-    * 
+    *
     * @param events
     *           the collection of events for the handler.
     */
-   public void inEvents(Iterable<Event> events);
+   public void inEvents(Iterable<? extends Event> events);
 
 }
