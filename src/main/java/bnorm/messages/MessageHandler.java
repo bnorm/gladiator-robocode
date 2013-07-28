@@ -23,10 +23,10 @@ public interface MessageHandler {
     * need one of the messages specified than it is ignored. The easiest way to
     * implement this method is to call {@link #inMessage(Message)} for every
     * message in the collection.
-    * 
+    *
     * @param messages
     *           the collection of messages for the handler.
     */
-   public void inMessages(Iterable<Message> messages);
+   public void inMessages(Iterable<? extends Message> messages);
 
 }

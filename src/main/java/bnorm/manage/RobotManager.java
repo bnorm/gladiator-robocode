@@ -104,7 +104,7 @@ public class RobotManager implements EventHandler, MessageHandler {
    }
 
    @Override
-   public void inMessages(Iterable<Message> messages) {
+   public void inMessages(Iterable<? extends Message> messages) {
       for (Message m : messages) {
          inMessage(m);
       }
