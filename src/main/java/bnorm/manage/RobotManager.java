@@ -3,9 +3,13 @@ package bnorm.manage;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Objects;
 
 import bnorm.events.EventHandler;
+import bnorm.events.RobotFoundEvent;
+import bnorm.events.RobotFoundListener;
+import bnorm.events.RobotFoundSender;
 import bnorm.messages.Message;
 import bnorm.messages.MessageHandler;
 import bnorm.messages.RobotSnapshotMessage;
@@ -28,7 +32,7 @@ import robocode.ScannedRobotEvent;
  *
  * @author Brian Norman
  */
-public final class RobotManager implements EventHandler, MessageHandler {
+public final class RobotManager implements EventHandler, MessageHandler, RobotFoundSender {
 
    /**
     * The {@link Robot} <code>class</code> that created the {@link RobotManager} instance.
@@ -49,6 +53,11 @@ public final class RobotManager implements EventHandler, MessageHandler {
     * The robot snapshot factory used for creating new robot snapshots.
     */
    private final IRobotSnapshotFactory snapshotFactory_;
+
+   /**
+    * The collection of listeners to notify if a new robot is found.
+    */
+   private final Collection<RobotFoundListener> robotFoundListeners;
 
    /**
     * Returns an instance of the {@link RobotManager} <code>class</code>.
@@ -77,6 +86,7 @@ public final class RobotManager implements EventHandler, MessageHandler {
       this.allRobots_ = new HashMap<String, IRobot>();
       this.robotFactory_ = robotFactory;
       this.snapshotFactory_ = snapshotFactory;
+      this.robotFoundListeners = new LinkedList<RobotFoundListener>();
    }
 
    @Override
@@ -175,6 +185,7 @@ public final class RobotManager implements EventHandler, MessageHandler {
          allRobots_.get(name).add(snapshot);
       } else {
          allRobots_.put(name, robotFactory_.create(snapshot, robot_));
+         notifyRobotFound(new RobotFoundEvent(allRobots_.get(name)));
       }
    }
 
@@ -207,7 +218,7 @@ public final class RobotManager implements EventHandler, MessageHandler {
    /**
     * Returns the the robot that is the least of all the robots using the comparator. The comparator
     * should be designed to provide some tolerance towards the robot that was chosen last time.
-    * <p/>
+    * <p>
     * Note: If two robots are equal, the robot that is earlier in the list is chosen.
     *
     * @param comparator the comparator used to find the "smallest" robot.
@@ -221,5 +232,21 @@ public final class RobotManager implements EventHandler, MessageHandler {
          }
       }
       return r != null ? r : robotFactory_.createEnemy();
+   }
+
+   @Override
+   public void addListener(RobotFoundListener listener) {
+      robotFoundListeners.add(listener);
+   }
+
+   @Override
+   public void removeListener(RobotFoundListener listener) {
+      robotFoundListeners.remove(listener);
+   }
+
+   private void notifyRobotFound(RobotFoundEvent e) {
+      for (RobotFoundListener l : robotFoundListeners) {
+         l.handleRobotFound(e);
+      }
    }
 }
