@@ -3,7 +3,7 @@ package bnorm.robots;
 import java.util.ListIterator;
 import java.util.Set;
 
-import bnorm.events.RobotFiredEventSender;
+import bnorm.events.RobotFiredSender;
 
 /**
  * Represents a Robocode robot. The basic representation of a robot is a map of
@@ -17,7 +17,7 @@ import bnorm.events.RobotFiredEventSender;
  * @author Brian Norman (KID)
  * @version 1.2
  */
-public interface IRobot extends RobotFiredEventSender {
+public interface IRobot extends RobotFiredSender {
 
    /**
     * Returns the name of the robot.

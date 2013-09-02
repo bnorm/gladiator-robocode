@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import bnorm.events.RobotFiredEvent;
-import bnorm.events.RobotFiredEventListener;
+import bnorm.events.RobotFiredListener;
 import robocode.Rules;
 
 /**
@@ -45,7 +45,7 @@ class Robot implements IRobot {
    /**
     * All the listeners to {@link RobotFiredEvent}s.
     */
-   private List<RobotFiredEventListener> robotFiredEventListeners;
+   private List<RobotFiredListener> robotFiredListeners;
 
    /**
     * Creates a new robot.
@@ -65,7 +65,7 @@ class Robot implements IRobot {
       this.movie = new LinkedList<IRobotSnapshot>();
       this.recent = new RobotSnapshot();
 
-      this.robotFiredEventListeners = new LinkedList<RobotFiredEventListener>();
+      this.robotFiredListeners = new LinkedList<RobotFiredListener>();
    }
 
    /**
@@ -220,13 +220,13 @@ class Robot implements IRobot {
    }
 
    @Override
-   public void addListener(RobotFiredEventListener listener) {
-      robotFiredEventListeners.add(listener);
+   public void addRobotFiredListener(RobotFiredListener listener) {
+      robotFiredListeners.add(listener);
    }
 
    @Override
-   public void removeListener(RobotFiredEventListener listener) {
-      robotFiredEventListeners.remove(listener);
+   public void removeRobotFiredListener(RobotFiredListener listener) {
+      robotFiredListeners.remove(listener);
    }
 
    /**
@@ -235,8 +235,8 @@ class Robot implements IRobot {
     * @param event the RobotFiredEvent.
     */
    protected void notify(RobotFiredEvent event) {
-      for (RobotFiredEventListener l : robotFiredEventListeners) {
-         l.handle(event);
+      for (RobotFiredListener l : robotFiredListeners) {
+         l.handleRobotFired(event);
       }
    }
 
