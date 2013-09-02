@@ -235,12 +235,12 @@ public final class RobotManager implements EventHandler, MessageHandler, RobotFo
    }
 
    @Override
-   public void addListener(RobotFoundListener listener) {
+   public void addRobotFoundListener(RobotFoundListener listener) {
       robotFoundListeners.add(listener);
    }
 
    @Override
-   public void removeListener(RobotFoundListener listener) {
+   public void removeRobotFoundListener(RobotFoundListener listener) {
       robotFoundListeners.remove(listener);
    }
 

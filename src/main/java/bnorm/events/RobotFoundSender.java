@@ -2,8 +2,8 @@ package bnorm.events;
 
 public interface RobotFoundSender {
 
-   void addListener(RobotFoundListener listener);
+   void addRobotFoundListener(RobotFoundListener listener);
 
-   void removeListener(RobotFoundListener listener);
+   void removeRobotFoundListener(RobotFoundListener listener);
 
 }
