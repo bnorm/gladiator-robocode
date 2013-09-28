@@ -61,8 +61,8 @@ public class Point implements IPoint {
     */
    @Override
    public boolean equals(Object obj) {
-      if (obj instanceof Point) {
-         Point p = (Point) obj;
+      if (obj instanceof IPoint) {
+         IPoint p = (IPoint) obj;
          return (getX() == p.getX()) && (getY() == p.getY());
       }
       return super.equals(obj);
