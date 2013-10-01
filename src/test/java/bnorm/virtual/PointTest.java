@@ -41,10 +41,10 @@ public class PointTest {
     */
    @Test
    public void testToString() {
-      Assert.assertEquals("Point[0.0, 0.0]", new Point(0.0, 0.0).toString());
-      Assert.assertEquals("Point[3.33, -0.0]", new Point(3.33, -0.0).toString());
-      Assert.assertEquals("Point[-42.0, 365.0]", new Point(-42.0, 365.0).toString());
-      Assert.assertEquals("Point[365.25, -3.14159]", new Point(365.25, -3.14159).toString());
+      Assert.assertEquals("Point[x=0.0, y=0.0]", new Point(0.0, 0.0).toString());
+      Assert.assertEquals("Point[x=3.33, y=-0.0]", new Point(3.33, -0.0).toString());
+      Assert.assertEquals("Point[x=-42.0, y=365.0]", new Point(-42.0, 365.0).toString());
+      Assert.assertEquals("Point[x=365.25, y=-3.14159]", new Point(365.25, -3.14159).toString());
    }
 
    /**

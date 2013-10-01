@@ -9,20 +9,20 @@ package bnorm.virtual;
 public class Point implements IPoint {
 
    /**
-    * The <code>x</code> coordinate of this Point.
+    * The {@code x} coordinate of this Point.
     */
    private final double x;
 
    /**
-    * The <code>y</code> coordinate of this Point.
+    * The {@code y} coordinate of this Point.
     */
    private final double y;
 
    /**
-    * Creates a new Point with the specified <code>(x,y)</code> coordinates.
+    * Creates a new Point with the specified {@code (x,y)} coordinates.
     *
-    * @param x the <code>x</code> coordinate.
-    * @param y the <code>y</code> coordinate.
+    * @param x the {@code x} coordinate.
+    * @param y the {@code y} coordinate.
     */
    public Point(double x, double y) {
       this.x = x;
@@ -46,18 +46,17 @@ public class Point implements IPoint {
     */
    @Override
    public String toString() {
-      return "Point[" + getX() + ", " + getY() + "]";
+      return getClass().getSimpleName() + "[x=" + getX() + ", y=" + getY() + "]";
    }
 
    /**
     * Determines whether or not two points are equal. Two instances of Point
-    * are equal if the values of their <code>x</code> and <code>y</code> member
-    * fields, representing their position in the coordinate space, are the
-    * same.
+    * are equal if the values of their {@code x} and {@code y} member fields,
+    * representing their position in the coordinate space, are the same.
     *
     * @param obj an object to be compared with this Point.
-    * @return <code>true</code> if the object to be compared is an instance of
-    * Point and has the same values; <code>false</code> otherwise.
+    * @return {@code true} if the object to be compared is an instance of
+    * Point and has the same values; {@code false} otherwise.
     */
    @Override
    public boolean equals(Object obj) {
@@ -65,6 +64,6 @@ public class Point implements IPoint {
          IPoint p = (IPoint) obj;
          return (getX() == p.getX()) && (getY() == p.getY());
       }
-      return super.equals(obj);
+      return false;
    }
 }
