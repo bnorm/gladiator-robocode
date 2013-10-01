@@ -15,6 +15,19 @@ public final class Utils {
    }
 
    /**
+    * Returns the limited value specified.  The minimum and maximum values specified will be
+    * returned if the specified value is less than or greater than the limits.
+    *
+    * @param min the minimum limit.
+    * @param n the value that will be limited.
+    * @param max the maximum limit.
+    * @return the limited value.
+    */
+   public static double limit(double min, double n, double max) {
+      return Math.max(Math.min(n, max), min);
+   }
+
+   /**
     * Normalizes an angle to an absolute angle. The normalized angle will be in the range from
     * <code>0</code> to <code>2*PI</code>, where <code>2*PI</code> itself is not included.
     *
@@ -36,6 +49,54 @@ public final class Utils {
     */
    public static double relative(double angle) {
       return robocode.util.Utils.normalRelativeAngle(angle);
+   }
+
+   /**
+    * Returns true if the two specified angles are equal.  The specified epsilon value will be used
+    * as a maximum difference between the two angles for them to be considered equal.
+    *
+    * @param angle1 the first angle.
+    * @param angle2 the second angle.
+    * @param epsilon the maximum difference between the angles.
+    * @return if the two angles are equal.
+    */
+   public static boolean equalAngle(double angle1, double angle2, double epsilon) {
+      return Math.abs(absolute(angle1) - absolute(angle2)) <= epsilon;
+   }
+
+   /**
+    * Returns true if the two specified angles are equal.
+    *
+    * @param angle1 the first angle.
+    * @param angle2 the second angle.
+    * @return if the two angles are equal.
+    */
+   public static boolean equalAngle(double angle1, double angle2) {
+      return equalAngle(angle1, angle2, 1.0E-10);
+   }
+
+   /**
+    * Returns true if the two specified doubles are equal.  The specified epsilon value will be used
+    * as a maximum difference between the two doubles for them to be considered equal.
+    *
+    * @param n1 the first double.
+    * @param n2 the second double.
+    * @param epsilon the maximum difference between the angles.
+    * @return if the two angles are equal.
+    */
+   public static boolean equal(double n1, double n2, double epsilon) {
+      return Math.abs(n1 - n2) <= epsilon;
+   }
+
+   /**
+    * Returns true if the two specified doubles are equal.
+    *
+    * @param n1 the first double.
+    * @param n2 the second double.
+    * @return if the two angles are equal.
+    */
+   public static boolean equal(double n1, double n2) {
+      return equal(n1, n2, 1.0E-10);
    }
 
    /**
