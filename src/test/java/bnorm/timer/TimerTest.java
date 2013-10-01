@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.powermock.api.mockito.PowerMockito;
 
-import com.dell.compellent.test.libs.timer.TimerIntf.TimerState;
+import bnorm.timer.ITimer.TimerState;
 
 /**
  * A group of unit tests for {@link Timer}.
