@@ -1,0 +1,8 @@
+#Robocode Robot Team
+#Mon Jun 05 12:04:50 CDT 2006
+robocode.version=1.0.7
+team.webpage=http\://robowiki.net/cgi-bin/robowiki?DeltaSquad
+team.version=.1
+team.description=Delta Squad, Lock and Load\!
+team.author.name=KID
+team.members=kid.DeltaSquad.Boss [.1],kid.DeltaSquad.Fixer [.1],kid.DeltaSquad.Sev [.1],kid.DeltaSquad.Scorch [.1]
