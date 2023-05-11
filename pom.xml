@@ -24,7 +24,7 @@
         <dependency>
             <groupId>net.sf.robocode</groupId>
             <artifactId>robocode.api</artifactId>
-            <version>1.8.1.0</version>
+            <version>1.9.4.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/robocode.jar</systemPath>
         </dependency>
